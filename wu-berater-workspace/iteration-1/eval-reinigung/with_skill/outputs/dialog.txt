@@ -1,0 +1,302 @@
+==============================================================
+WU-BERATER DIALOG: Reinigungsdienstleistung LogZBw Erfurt
+Datum: 15.04.2026
+Bearbeiter/-in: Thomas Krüger
+Template: Template Dokumentation Dienstleistung.xlsm
+==============================================================
+
+──────────────────────────────────────────────────────────────
+SCHRITT 1: BEARBEITER UND SACHVERHALT
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Hallo, ich bin Wuki, dein WU-Buddy! Wie ist Ihr Vor- und Nachname?
+(Sie können den Namen auch später manuell im Dokument eintragen.)
+
+THOMAS KRÜGER:
+Mein Name ist Thomas Krüger.
+
+WUKI:
+Hallo Thomas Krüger! Ich habe Ihren Sachverhalt aufgenommen:
+  - Reinigungsdienstleistung für Verwaltungsgebäude, ca. 800 qm
+  - Dienststelle: Logistikzentrum Bundeswehr (LogZBw), Erfurt
+  - Aktuell: Eigenreinigung durch BW-Personal (0,5 VZÄ E3)
+  - Frage: Externe Vergabe wirtschaftlicher?
+
+──────────────────────────────────────────────────────────────
+SCHRITT 2: WU-TYP-BESTIMMUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Ich klassifiziere diesen Fall als DIENSTLEISTUNGS-WU:
+Es handelt sich um die Inanspruchnahme einer externen Leistungserbringung
+(Gebäudereinigung) — einmalig, innerhalb eines Haushaltsjahres.
+Passendes Template: Template Dokumentation Dienstleistung.xlsm
+
+Bestätigen Sie diese Klassifikation?
+
+THOMAS KRÜGER:
+Ja, das ist korrekt.
+
+──────────────────────────────────────────────────────────────
+C1 — BEDARFSFORDERUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Mein Vorschlag für die Bedarfsforderung:
+
+  Bezeichnung: „Unterhaltsreinigung Verwaltungsgebäude LogZBw Erfurt"
+
+  Beschreibung und Zielsetzung:
+  „Für das Verwaltungsgebäude des Logistikzentrums Bundeswehr (LogZBw) am
+  Standort Erfurt ist die regelmäßige Unterhaltsreinigung von ca. 800 qm
+  Büro- und Verkehrsfläche sicherzustellen. Die Reinigung umfasst alle
+  Büroräume, Flure, Treppenhäuser und Sanitäreinrichtungen und ist an
+  5 Arbeitstagen pro Woche durchzuführen. Ziel ist die Aufrechterhaltung
+  eines hygienisch einwandfreien und arbeitssicheren Umfelds für alle
+  Beschäftigten der Dienststelle."
+
+Übernehmen Sie diesen Vorschlag?
+
+THOMAS KRÜGER:
+Ja, passt so.
+
+──────────────────────────────────────────────────────────────
+C2 — MASSNAHMENZEITRAUM
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Mein Vorschlag: Beginn 01.07.2026, Ende 31.12.2026 (6 Monate, Haushaltsjahr 2026).
+Die Maßnahme bleibt damit unterjährig — das Dienstleistungs-Template ist geeignet.
+
+THOMAS KRÜGER:
+Genau so.
+
+──────────────────────────────────────────────────────────────
+C3 — RAHMENBEDINGUNGEN
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Gibt es rechtliche, organisatorische, zeitliche oder sonstige Bedingungen,
+die bestimmte Optionen von vornherein ausschließen?
+
+THOMAS KRÜGER:
+Nein, keine besonderen Einschränkungen. Die Reinigung ist nicht sicherheitskritisch.
+
+WUKI:
+Verstanden. Keine optionsausschließenden Rahmenbedingungen vorhanden.
+Abschnitt 1.2 bleibt leer.
+
+──────────────────────────────────────────────────────────────
+C4 — AUSGANGSLAGE
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Mein Vorschlag für die Ausgangslage:
+
+  „Die Unterhaltsreinigung des Verwaltungsgebäudes des LogZBw am Standort
+  Erfurt wird derzeit durch eigenes Bundespersonal (TVöD, EG 3) im Umfang
+  von 0,5 Vollzeitäquivalenten (VZÄ) erbracht. Die Aufgabe umfasst die
+  tägliche Reinigung aller Büroräume, Flure und Sanitäreinrichtungen an
+  5 Arbeitstagen pro Woche. Die anfallenden Vollkosten belaufen sich auf
+  Basis des Personalstrukturkatalogs (PSK 2024) auf ca. 35.900 EUR/Jahr
+  (0,5 VZÄ × 71.726 EUR/VZÄ/Jahr)."
+
+THOMAS KRÜGER:
+Stimmt so, danke.
+
+──────────────────────────────────────────────────────────────
+C5 — OPTIONEN UND AUSSONDERUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Ich prüfe die vier Standardoptionen:
+
+  Option 1 — Eigene Dienststelle (Eigenbetrieb):
+  Grundsätzlich möglich — wird aktuell so praktiziert.
+  → GEEIGNET, verbleibt im Vergleich.
+
+  Option 2 — Andere bundeswehrinterne Dienststellen:
+  Eine BW-interne Dienststelle, die Reinigungsleistungen für Dritte
+  erbringt, ist nicht bekannt und am Standort Erfurt nicht verfügbar.
+  → AUSGESONDERT: nicht bedarfsdeckend, weil keine bundeswehrinterne
+    Dienststelle diese Leistung anbietet.
+
+  Option 3 — Inhousegesellschaft / anderes Ressort:
+  Keine für Gebäudereinigung zuständige Inhousegesellschaft der Bundeswehr
+  verfügbar; eine Vergabe an eine Gesellschaft eines anderen Ressorts ist
+  nicht vorgesehen.
+  → AUSGESONDERT: nicht bedarfsdeckend, weil keine geeignete
+    Inhousegesellschaft für Reinigungsleistungen existiert.
+
+  Option 4 — Externer Dienstleister:
+  Auf dem Markt sind zahlreiche zertifizierte Gebäudereinigungs-
+  unternehmen in Erfurt verfügbar (Marktrecherche durchgeführt).
+  → GEEIGNET, verbleibt im Vergleich.
+
+THOMAS KRÜGER:
+Ja, das ist korrekt.
+
+──────────────────────────────────────────────────────────────
+C6 — KOSTENDARSTELLUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Ich recherchiere die Marktpreise für externe Reinigung in Erfurt...
+
+MARKTRECHERCHE (Websuche, 15.04.2026):
+  Unterhaltsreinigung Büro, Erfurt/Mitteldeutschland:
+  ca. 2,40–2,60 EUR/qm/Monat (netto) für regelmäßige Unterhaltsreinigung
+  Quellen: mmcompact.de (Dresden, 2026), listando.de (Marktübersicht)
+  Ansatz: 2,50 EUR/qm/Monat × 800 qm = 2.000 EUR/Monat netto
+  → 6 Monate: 12.000 EUR netto (Anlage Marktrecherche, Nr. 1–2)
+
+KOSTENDARSTELLUNG:
+
+Option 1 — Eigenbetrieb (eigene Dienststelle):
+  - Bw-Personal (0,5 VZÄ E3, 6 Monate):  18.000 EUR
+    (PSK 2024: 71.726 EUR/VZÄ/Jahr × 0,5 × 6/12)
+  - Bw-Material (Reinigungsmittel, Geräte): 500 EUR
+  - Sonstige DL: 0 EUR
+  GESAMT Option 1: 18.500 EUR
+
+Option 4 — Externer Dienstleister:
+  - Externe Dienstleistung (Reinigung):   12.000 EUR
+    (2,50 EUR/qm/Monat × 800 qm × 6 Monate, netto)
+  - Bw-Personal: 0 EUR
+  - Bw-Material: 0 EUR
+  GESAMT Option 4: 12.000 EUR
+
+THOMAS KRÜGER:
+Gut, die Preise klingen realistisch.
+
+──────────────────────────────────────────────────────────────
+C7 — RISIKOBERÜCKSICHTIGUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Risikoberücksichtigung für die verbleibenden Optionen:
+
+  Risiko 1 — Ausfall des Leistungserbringers (Option 4):
+  Insolvenz oder Kündigung des Reinigungsunternehmens → Ersatzbeschaffung
+  erforderlich, Übergangsphase mit Mehraufwand.
+  Schadenshöhe: ca. 2.000 EUR (Mehrkosten Übergangslösung 1 Monat)
+  Eintrittswahrscheinlichkeit: 5 %
+  Risikowert: 100 EUR
+
+  Risiko 2 — Ausfall der Leistungserbringung (Option 4):
+  Krankheitsausfall beim DL-Personal ohne Vertretungsregelung.
+  Schadenshöhe: 500 EUR (einmalige Reinigungsdurchführung in Eigenregie)
+  Eintrittswahrscheinlichkeit: 15 %
+  Risikowert: 75 EUR
+
+THOMAS KRÜGER:
+Einverstanden.
+
+──────────────────────────────────────────────────────────────
+C8 — ENTSCHEIDUNGSVORSCHLAG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Entscheidungsvorschlag:
+
+  „Die wirtschaftlichste Option, die den Bedarf deckt und alle Rahmen-
+  bedingungen erfüllt, ist Option 4 (Leistungserbringung durch einen
+  externen Dienstleister). Die Gesamtkosten betragen 12.175 EUR
+  (12.000 EUR + Risikowert 175 EUR). Gegenüber dem Eigenbetrieb (Option 1:
+  18.500 EUR) ergibt sich eine Einsparung von 6.325 EUR bzw. ca. 34 %.
+  Empfohlen wird die Vergabe an ein zertifiziertes Reinigungsunternehmen
+  im Wege einer Verhandlungsvergabe nach § 12 UVgO."
+
+THOMAS KRÜGER:
+Perfekt, so kann ich das übernehmen.
+
+==============================================================
+WU_DATA (Python-Dict für Export):
+==============================================================
+
+wu_data = {
+    'meta': {
+        'dienststelle':               'Logistikzentrum Bundeswehr (LogZBw), Erfurt',
+        'massnahmenverantwortlicher': '',
+        'bearbeiter':                 'Thomas Krüger',
+        'datum':                      '15.04.2026',
+        'beginn_massnahme':           '01.07.2026',
+        'ende_massnahme':             '31.12.2026',
+        'schutz':                     'offen',
+        'version':                    '1',
+    },
+    'bedarf': {
+        'bezeichnung':              'Unterhaltsreinigung Verwaltungsgebäude LogZBw Erfurt',
+        'beschreibung_zielsetzung': (
+            'Für das Verwaltungsgebäude des Logistikzentrums Bundeswehr (LogZBw) am '
+            'Standort Erfurt ist die regelmäßige Unterhaltsreinigung von ca. 800 qm '
+            'Büro- und Verkehrsfläche sicherzustellen. Die Reinigung umfasst alle '
+            'Büroräume, Flure, Treppenhäuser und Sanitäreinrichtungen und ist an '
+            '5 Arbeitstagen pro Woche durchzuführen. Ziel ist die Aufrechterhaltung '
+            'eines hygienisch einwandfreien und arbeitssicheren Umfelds.'
+        ),
+    },
+    'rahmenbedingungen': [],
+    'ausgangslage': (
+        'Die Unterhaltsreinigung des Verwaltungsgebäudes wird derzeit durch eigenes '
+        'Bundespersonal (TVöD EG 3) im Umfang von 0,5 VZÄ erbracht. Die Vollkosten '
+        'belaufen sich auf ca. 35.900 EUR/Jahr (PSK 2024).'
+    ),
+    'optionen': {
+        'opt1_ausgesondert':  False,
+        'opt1_begruendung':   '',
+        'opt2_ausgesondert':  True,
+        'opt2_begruendung':   'nicht bedarfsdeckend, weil: keine bundeswehrinterne Dienststelle für Reinigungsleistungen verfügbar',
+        'opt3_ausgesondert':  True,
+        'opt3_begruendung':   'nicht bedarfsdeckend, weil: keine geeignete Inhousegesellschaft für Reinigungsleistungen vorhanden',
+        'opt4_ausgesondert':  False,
+        'opt4_begruendung':   '',
+    },
+    'kosten': {
+        'opt1': {
+            'tagegeld':          0,
+            'personal_eur':      18000,
+            'material_eur':      500,
+            'infrastruktur_eur': 0,
+            'dl_extern_eur':     0,
+            'dl_wartung_eur':    0,
+            'dl_sonstiges_eur':  0,
+        },
+        'opt4': {
+            'tagegeld':          0,
+            'personal_eur':      0,
+            'material_eur':      0,
+            'infrastruktur_eur': 0,
+            'dl_extern_eur':     12000,
+            'dl_wartung_eur':    0,
+            'dl_sonstiges_eur':  0,
+        },
+    },
+    'risiko': {
+        'kein_risiko':     False,
+        'risiko1_schaden': 2000,
+        'risiko1_wahrsch': 5,
+        'risiko2_schaden': 500,
+        'risiko2_wahrsch': 15,
+    },
+    'entscheidung': {
+        'option_bezeichnung': 'Option 4: Leistungserbringung durch einen externen Dienstleister',
+        'begruendung': (
+            'Die wirtschaftlichste Option ist Option 4 mit Gesamtkosten von 12.175 EUR '
+            '(inkl. Risikowert). Gegenüber dem Eigenbetrieb (18.500 EUR) ergibt sich '
+            'eine Einsparung von 6.325 EUR (ca. 34 %). Vergabe als Verhandlungsvergabe '
+            'nach § 12 UVgO empfohlen.'
+        ),
+    },
+    'anlage': [
+        {'nr': '1', 'produkt': 'Büroreinigung Kosten 2026 (mmcompact.de)',
+         'preis': 'ca. 2,40–2,60 EUR/qm/Monat',
+         'url': 'https://mmcompact.de/reinigung/bueroreinigung-kosten/',
+         'bemerkung': 'Marktrecherche, 15.04.2026'},
+        {'nr': '2', 'produkt': 'Was kostet Büroreinigung (listando.de)',
+         'preis': 'ca. 2,37–2,92 EUR/qm/Monat (Mittelstädte)',
+         'url': 'https://www.listando.de/p/was-kostet-eine-buroreinigung/',
+         'bemerkung': 'Marktrecherche, 15.04.2026'},
+    ],
+}

@@ -1,0 +1,305 @@
+==============================================================
+WU-BERATER DIALOG: Bewachungsdienstleistung TrÜbPlDst Leer
+Datum: 15.04.2026
+Bearbeiter/-in: (kein Name)
+Template: Template Dokumentation Dienstleistung.xlsm
+==============================================================
+
+──────────────────────────────────────────────────────────────
+SCHRITT 1: BEARBEITER UND SACHVERHALT
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Hallo, ich bin Wuki, dein WU-Buddy! Wie ist Ihr Vor- und Nachname?
+(Sie können den Namen auch später manuell im Dokument eintragen.)
+
+NUTZER:
+Kein Name nötig.
+
+WUKI:
+Verstanden. Der Bearbeiternamen kann nachträglich manuell eingetragen werden.
+
+Sachverhalt aufgenommen:
+  - 24/7 Torwache an Kaserne Leer (Truppenübungsplatz-Dienststelle)
+  - Aktuell: 3 Soldaten (A9m) im Schichtbetrieb
+  - Personalmangel → Prüfung externe Bewachung
+  - Zeitraum: 01.07.2026–31.12.2026
+
+──────────────────────────────────────────────────────────────
+SCHRITT 2: WU-TYP-BESTIMMUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Ich klassifiziere: DIENSTLEISTUNGS-WU.
+Der Zeitraum 01.07.2026–31.12.2026 ist unterjährig (6 Monate im HHJ 2026).
+Template: Template Dokumentation Dienstleistung.xlsm ✓
+
+──────────────────────────────────────────────────────────────
+C1 — BEDARFSFORDERUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Mein Vorschlag — funktional und lösungsneutral formuliert:
+
+  Bezeichnung: „Sicherung und Zugangskontrolle Kaserne Leer"
+
+  Beschreibung und Zielsetzung:
+  „Für die Liegenschaft der Truppenübungsplatz-Dienststelle Leer (Niedersachsen)
+  ist die Sicherung des Hauptzugangs sowie die Zugangskontrolle zum
+  Kasernengelände rund um die Uhr (24/7) an 7 Tagen pro Woche sicherzustellen.
+  Die Leistung umfasst die Kontrolle und Protokollierung des Personen- und
+  Fahrzeugverkehrs sowie die Überwachung des Zugangsbereichs. Ziel ist die
+  Aufrechterhaltung der Liegenschaftssicherheit und der Schutz von Personal,
+  Material und Infrastruktur. Die eingesetzten Kräfte müssen die Voraussetzungen
+  für eine Sicherheitsüberprüfung (Ü1) erfüllen."
+
+NUTZER:
+Ja, passt. Gut dass Sie die Ü1-Anforderung direkt berücksichtigt haben.
+
+──────────────────────────────────────────────────────────────
+C2 — MASSNAHMENZEITRAUM
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Beginn: 01.07.2026 | Ende: 31.12.2026 (6 Monate, unterjährig ✓)
+
+NUTZER:
+Genau so.
+
+──────────────────────────────────────────────────────────────
+C3 — RAHMENBEDINGUNGEN
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Ich prüfe: Die Sicherheitsüberprüfung Ü1 betrifft das eingesetzte Personal
+aller Optionen — sie schließt keine Option grundsätzlich aus, sondern stellt
+eine Anforderung dar, die jeder Anbieter erfüllen muss.
+
+→ Rahmenbedingung: „Die eingesetzten Bewachungskräfte müssen vor
+  Dienstantritt die Sicherheitsüberprüfung nach Ü1 (§ 9 SÜG) erfüllen."
+  Diese Bedingung gilt für Option 1 und Option 4 gleichermaßen.
+
+Da sie beide Optionen gleichermaßen betrifft, wird sie NOT als
+differenzierende Rahmenbedingung aufgeführt — sondern als allgemeine
+Anforderung in der Bedarfsforderung.
+
+NUTZER:
+Verstanden.
+
+──────────────────────────────────────────────────────────────
+C4 — AUSGANGSLAGE
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Vorschlag:
+
+  „Die Bewachung und Zugangskontrolle der Liegenschaft TrÜbPlDst Leer
+  wird derzeit durch eigene Soldaten der Dienststelle im Wachdienst
+  (3 Dienstposten, A-Besoldung mittlerer Dienst / A9m) im 3-Schicht-Betrieb
+  rund um die Uhr wahrgenommen. Die Vollkosten belaufen sich nach PSK 2024
+  auf 91.618 EUR/VZÄ/Jahr × 3 VZÄ = 274.854 EUR/Jahr bzw. 137.427 EUR
+  für 6 Monate. Aufgrund eines erheblichen Personalengpasses kann die
+  Aufgabe durch eigene Kräfte mittelfristig nicht mehr in vollem Umfang
+  wahrgenommen werden."
+
+NUTZER:
+Stimmt so.
+
+──────────────────────────────────────────────────────────────
+C5 — OPTIONEN UND AUSSONDERUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Prüfung der vier Standardoptionen:
+
+  Option 1 — Eigene Dienststelle:
+  Aktuell so durchgeführt. Trotz Personalengpass formal möglich, aber
+  operationell kritisch.
+  → GEEIGNET (Vergleichsoption, auch wenn operationell problematisch).
+
+  Option 2 — Andere bundeswehrinterne Dienststellen:
+  Keine BW-interne Dienststelle erbringt Wach- und Sicherheitsdienstleistungen
+  für Dritte. Regionale BW-Dienststellen haben selbst Personalmangel.
+  → AUSGESONDERT: nicht bedarfsdeckend, weil keine bundeswehrinterne
+    Dienststelle für Bewachungsleistungen verfügbar.
+
+  Option 3 — Inhousegesellschaft / anderes Ressort:
+  Keine Inhousegesellschaft der Bundeswehr bietet Bewachungsleistungen an.
+  → AUSGESONDERT: nicht bedarfsdeckend, weil keine geeignete
+    Inhousegesellschaft existiert.
+
+  Option 4 — Externer Dienstleister:
+  Zertifizierte Sicherheitsdienstleister in Niedersachsen mit BW-Erfahrung
+  und Ü1-Eignung verfügbar (Recherche: Sicherheit Nord GmbH, Securitas).
+  → GEEIGNET.
+
+NUTZER:
+Korrekt.
+
+──────────────────────────────────────────────────────────────
+C6 — KOSTENDARSTELLUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Marktrecherche Bewachung militärisches Objekt Niedersachsen, 24/7 (15.04.2026):
+
+  Tarifvertrag militärische Bewachung Niedersachsen 2026 (BDSW/ver.di):
+  Arbeitnehmer-Stundenlohn: ca. 14,92–15,15 EUR/h
+  Verrechnungssatz Kunden (militärische Objekte, Ü1): ca. 32–35 EUR/h
+  Ansatz: 33,00 EUR/h (Anlage Marktrecherche, Nr. 1–2)
+
+  24/7-Bewachung 1 Posten, 01.07.–31.12.2026:
+  184 Tage × 24 h = 4.416 Bewachungsstunden
+  4.416 h × 33,00 EUR = 145.728 EUR
+
+KOSTENDARSTELLUNG:
+
+Option 1 — Eigenbetrieb (eigene Soldaten):
+  - Bw-Personal (3 VZÄ A9m, 6 Monate):  137.400 EUR
+    (PSK 2024: 91.618 EUR/VZÄ/Jahr × 3 × 6/12)
+  GESAMT Option 1: 137.400 EUR
+
+Option 4 — Externer Dienstleister:
+  - Externe Dienstleistung (Bewachung):  145.728 EUR
+    (4.416 h × 33,00 EUR/h, Anlage Nr. 1)
+  GESAMT Option 4: 145.728 EUR
+
+NUTZER:
+Gut. Die PSK-Kosten für eigene Soldaten sind deutlich höher als die bloße
+Besoldung — das macht Sinn, die Vollkosten sind höher.
+
+──────────────────────────────────────────────────────────────
+C7 — RISIKOBERÜCKSICHTIGUNG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Risikoberücksichtigung:
+
+  Risiko 1 — Ausfall des Leistungserbringers (Option 4):
+  Personalfluktuation oder Insolvenz des Sicherheitsdienstleisters;
+  Übergangszeitraum mit unbesetztem Posten oder teurem Kurzfristersatz.
+  Schadenshöhe: 10.000 EUR (1 Monat Übergang + Mehrkosten)
+  Eintrittswahrscheinlichkeit: 5 %
+  Risikowert: 500 EUR
+
+  Risiko 2 — Ausfall der Leistungserbringung (Option 4):
+  Krankheitsbedingte Lücken im Schichtplan des externen DL.
+  Schadenshöhe: 3.000 EUR (unbesetzte Schichten)
+  Eintrittswahrscheinlichkeit: 15 %
+  Risikowert: 450 EUR
+
+NUTZER:
+Ja, das ist realistisch.
+
+──────────────────────────────────────────────────────────────
+C8 — ENTSCHEIDUNGSVORSCHLAG
+──────────────────────────────────────────────────────────────
+
+WUKI:
+Entscheidungsvorschlag:
+
+  „Die wirtschaftlichste Option, die den Bedarf deckt und alle Rahmen-
+  bedingungen erfüllt, ist Option 1 (Eigenbetrieb) mit 137.400 EUR.
+  Option 4 (externer Dienstleister) ist mit 146.678 EUR (inkl. Risikowert
+  950 EUR) um ca. 9.278 EUR teurer.
+
+  Aufgrund des dokumentierten Personalengpasses ist Option 1 jedoch
+  operationell nicht dauerhaft aufrechtzuerhalten. Sofern der Personal-
+  engpass fortbesteht, ist Option 4 die einzig realisierbare Alternative.
+  In diesem Fall wird empfohlen, den Vergabewettbewerb nach UVgO zu nutzen,
+  um den Preis in Richtung des Eigenbetriebswertes zu senken (Zielkorridor:
+  ≤ 31,10 EUR/h entspricht Break-Even)."
+
+NUTZER:
+Sehr gut — der Hinweis auf den Break-Even-Stundensatz ist hilfreich.
+
+==============================================================
+WU_DATA (Python-Dict für Export):
+==============================================================
+
+wu_data = {
+    'meta': {
+        'dienststelle':               'TrÜbPlDst Leer, Niedersachsen',
+        'massnahmenverantwortlicher': '',
+        'bearbeiter':                 '',
+        'datum':                      '15.04.2026',
+        'beginn_massnahme':           '01.07.2026',
+        'ende_massnahme':             '31.12.2026',
+        'schutz':                     'offen',
+        'version':                    '1',
+    },
+    'bedarf': {
+        'bezeichnung':              'Sicherung und Zugangskontrolle Kaserne Leer',
+        'beschreibung_zielsetzung': (
+            'Für die Liegenschaft der TrÜbPlDst Leer ist die Sicherung des '
+            'Hauptzugangs sowie die Zugangskontrolle rund um die Uhr (24/7) '
+            'sicherzustellen. Die Leistung umfasst Personen- und Fahrzeugkontrolle '
+            'sowie Geländeüberwachung. Eingesetzte Kräfte müssen die Voraussetzungen '
+            'für Sicherheitsüberprüfung Ü1 erfüllen.'
+        ),
+    },
+    'rahmenbedingungen': [],
+    'ausgangslage': (
+        'Bewachung wird aktuell durch eigene Soldaten (3 VZÄ A9m) im Schichtbetrieb '
+        'wahrgenommen. PSK-Vollkosten: 137.400 EUR für 6 Monate. Wegen erheblichem '
+        'Personalengpass ist Fortführung in Eigenregie gefährdet.'
+    ),
+    'optionen': {
+        'opt1_ausgesondert':  False,
+        'opt1_begruendung':   '',
+        'opt2_ausgesondert':  True,
+        'opt2_begruendung':   'nicht bedarfsdeckend, weil: keine bundeswehrinterne Dienststelle für Bewachungsleistungen verfügbar',
+        'opt3_ausgesondert':  True,
+        'opt3_begruendung':   'nicht bedarfsdeckend, weil: keine geeignete Inhousegesellschaft für Bewachungsleistungen vorhanden',
+        'opt4_ausgesondert':  False,
+        'opt4_begruendung':   '',
+    },
+    'kosten': {
+        'opt1': {
+            'tagegeld':          0,
+            'personal_eur':      137400,
+            'material_eur':      0,
+            'infrastruktur_eur': 0,
+            'dl_extern_eur':     0,
+            'dl_wartung_eur':    0,
+            'dl_sonstiges_eur':  0,
+        },
+        'opt4': {
+            'tagegeld':          0,
+            'personal_eur':      0,
+            'material_eur':      0,
+            'infrastruktur_eur': 0,
+            'dl_extern_eur':     145728,
+            'dl_wartung_eur':    0,
+            'dl_sonstiges_eur':  0,
+        },
+    },
+    'risiko': {
+        'kein_risiko':     False,
+        'risiko1_schaden': 10000,
+        'risiko1_wahrsch': 5,
+        'risiko2_schaden': 3000,
+        'risiko2_wahrsch': 15,
+    },
+    'entscheidung': {
+        'option_bezeichnung': (
+            'Option 1 (Eigenbetrieb) wirtschaftlich günstiger; '
+            'Option 4 bei fortbestehendem Personalengpass alternativlos'
+        ),
+        'begruendung': (
+            'Option 1 mit 137.400 EUR um 9.278 EUR günstiger als Option 4 '
+            '(146.678 EUR inkl. Risiko). Bei Personalengpass: Vergabe Option 4 '
+            'mit Zielkorridor ≤ 31,10 EUR/h (Break-Even).'
+        ),
+    },
+    'anlage': [
+        {'nr': '1', 'produkt': 'Tariflöhne Sicherheitsmitarbeiter 2026 (coredinate.de)',
+         'preis': '14,92–15,15 EUR/h Arbeitnehmertarif; Kundensatz 32–35 EUR/h',
+         'url': 'https://coredinate.de/ressourcen/sicherheitsmitarbeiter/tarifloehne-sicherheitsmitarbeiter',
+         'bemerkung': 'Marktrecherche, 15.04.2026'},
+        {'nr': '2', 'produkt': 'Sicherheit Nord GmbH – Bundeswehrliegenschaften',
+         'preis': 'auf Anfrage (spezialisiert auf BW-Objekte)',
+         'url': 'https://www.sicherheit-nord.de/leistungen/personelle-sicherheit/bundeswehrliegenschaften/',
+         'bemerkung': 'Anbieterrecherche, 15.04.2026'},
+    ],
+}

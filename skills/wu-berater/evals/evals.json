@@ -1,0 +1,29 @@
+{
+  "skill_name": "wu-berater",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "unterjahrig-mit-reisen",
+      "prompt": "Ich möchte eine unterjährige WU für Inspektiontouren mit dem Dienstwagen erstellen. Sachverhalt: Eine Dienststelle führt Inspektionen an 5 bundesweit verteilten Standorten durch, insgesamt 10 Inspektionstage pro Jahr erforderlich. Bitte führe mich durch die WU.",
+      "expected_output": "WU-Dokument mit erkannten Reisekosten (Wegstreckenentschädigung 400km default, Tagegeld für Reisetage), integriert in Personalausgaben",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 2,
+      "eval_name": "uberjahrig-ohne-reisen",
+      "prompt": "Ich möchte eine überjährige WU für IT-Beschaffung erstellen. Sachverhalt: Anschaffung eines neuen Serversystems für das Rechenzentrum vor Ort, keine Fahrtätigkeiten erforderlich. Schnelldurchlauf bitte.",
+      "expected_output": "WU-Dokument ohne Reisekosten-Abfrage, da keine Fahrtätigkeiten erkannt",
+      "files": [],
+      "assertions": []
+    },
+    {
+      "id": 3,
+      "eval_name": "dienstleistung-mit-reisen",
+      "prompt": "Ich möchte eine Dienstleistungs-WU erstellen. Sachverhalt: Vergleich zwischen Eigenbetrieb und externer Reinigungskraft für die Unterhaltsreinigung von 15 Bundeswehr-Liegenschaften bundesweit verteilt. Die Reinigungskraft muss zwischen den Standorten fahren.",
+      "expected_output": "WU-Dokument mit erkannten Reisekosten für Eigenbetrieb-Option (Fahrtätigkeiten), Dialog fragt nach Anzahl Einsatztage und Entfernung mit Vorschlägen",
+      "files": [],
+      "assertions": []
+    }
+  ]
+}

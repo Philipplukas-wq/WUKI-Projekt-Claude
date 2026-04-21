@@ -1,0 +1,350 @@
+================================================================================
+WIRTSCHAFTLICHKEITSUNTERSUCHUNG (WU)
+gemäß § 7 BHO / VV WU / AR A-2400/62 (Bundeswehr)
+================================================================================
+
+DIENSTSTELLE    : TrÜbPlDst Leer, Niedersachsen
+MASSNAHME       : Bewachungsdienstleistungen Haupttor – Prüfung Fremdvergabe
+ZEITRAUM        : 01.07.2026 – 31.12.2026 (6 Monate / 184 Tage)
+SCHUTZBEZEICHNUNG: offen
+DATUM           : 15.04.2026
+ERSTELLT DURCH  : [ohne Namensangabe]
+
+================================================================================
+SIMULIERTER DIALOG – NUTZER (N) UND WUKI (W)
+================================================================================
+
+N: Wuki, ich muss schnell eine WU erstellen für Bewachungsdienstleistungen.
+   Wir sind die Kaserne Leer (Niedersachsen), Truppenübungsplatz-Dienststelle.
+   Das Tor muss rund um die Uhr bewacht werden, aktuell machen das eigene
+   Soldaten im Wachdienst, aber wir haben massive Personalprobleme und wollen
+   prüfen ob zivile Bewachung günstiger ist. Zeitraum: 01.07.2026 bis
+   31.12.2026. Kein Name nötig.
+
+W: Verstanden – ich führe die WU durch. Ausgangslage ist klar:
+   24/7-Torwache, 3 Soldaten im Schichtdienst auf A9-Niveau,
+   Sicherheitsüberprüfung Ü1 erforderlich, Halbjahreszeitraum.
+   Ich beginne jetzt mit der vollständigen WU-Dokumentation.
+
+================================================================================
+KAPITEL 1 – BEDARFSFESTSTELLUNG UND ZIELSETZUNG
+================================================================================
+
+1.1 Anlass
+----------
+Die TrÜbPlDst Leer betreibt eine ortsfeste Torwache (Haupttor) im 24/7-Betrieb.
+Aufgrund erheblicher Personalengpässe im militärischen Bereich ist es der
+Dienststelle seit dem 1. Quartal 2026 nicht mehr durchgängig möglich, die Wache
+mit eigenen Soldaten zu besetzen, ohne Betrieb und Ausbildungsbetrieb des
+Truppenübungsplatzes zu beeinträchtigen.
+
+Um Alternativen zu bewerten, wird gemäß § 7 BHO i.V.m. der VV zu § 7 BHO eine
+formale Wirtschaftlichkeitsuntersuchung durchgeführt.
+
+1.2 Quantitative Bedarfsforderung
+----------------------------------
+- Örtlichkeit    : Haupttor TrÜbPlDst Leer (1 Posten, besetzt durch 1 Person
+                   pro Schicht)
+- Betriebszeit   : 24 Stunden / 7 Tage / Woche (= 8.760 h/Jahr Jahresbedarf;
+                   für 184 Tage: 184 × 24 = 4.416 Bewachungsstunden gesamt)
+- Schichtsystem  : 3-Schicht-Betrieb (Früh, Spät, Nacht), je 8 Stunden
+- Mindestbesetzung: 1 Person je Schicht
+- Sicherheitsanforderung: Einfache Sicherheitsüberprüfung (Ü1) gemäß SÜG
+                           für alle eingesetzten Kräfte erforderlich
+- Bewaffnung     : nicht erforderlich
+- Befugnisse     : Hausrecht / Einlasskontrolle; keine hoheitlichen Aufgaben,
+                   die eine militärische Besetzung zwingend erfordern
+
+1.3 Zielsetzung der WU
+-----------------------
+Ermittlung der wirtschaftlichsten Lösung für die Sicherstellung der
+Torwachleistung im Zeitraum 01.07.2026 – 31.12.2026, unter Berücksichtigung
+aller relevanten Kostenpositionen.
+
+================================================================================
+KAPITEL 2 – HANDLUNGSALTERNATIVEN
+================================================================================
+
+Es werden zwei Alternativen gegenübergestellt:
+
+  Alternative 0 (Status quo):
+    Beibehaltung der militärischen Eigenbewachung durch 3 Soldaten
+    (Besoldungsgruppe A9, Erfahrungsstufe 3) im Schichtdienst.
+
+  Alternative 1 (Untersuchungsoption):
+    Vergabe der Bewachungsleistung an ein privates Sicherheitsunternehmen;
+    Auftragnehmer muss Ü1-geprüfte Kräfte einsetzen.
+
+Weitere Alternativen (z.B. Teilauslagerung, übergreifende WU) wurden geprüft,
+aber für diesen Betrachtungszeitraum als nicht realisierbar eingestuft.
+
+================================================================================
+KAPITEL 3 – KOSTENERMITTLUNG ALTERNATIVE 0 (EIGENBEWACHUNG)
+================================================================================
+
+3.1 Personalbasis
+------------------
+- 3 Soldaten, BesGr A9 Bund, Erfahrungsstufe 3
+- Grundgehalt A9/3 (ab 01.05.2026): ca. 3.280 € brutto/Monat
+  (Quelle: Besoldungstabelle Bund 2026, gültig ab 01.05.2026)
+
+3.2 Personalkostenkalkulation pro Soldat (Monat)
+-------------------------------------------------
+  Grundgehalt A9/3 (brutto)                :   3.280,00 €
+  Stellenzulage (Bundeswehr-Zulage anteilig):      70,00 €
+  Arbeitgeberanteil Sozialversicherung     :       0,00 €
+    (Beamte/Soldaten: keine SV-Beiträge des AG,
+     aber Versorgungsaufwand ist anzusetzen)
+  Versorgungszuschlag (30 % auf Grundgehalt):     984,00 €
+    (pauschaler Aufschlag gemäß VV-Berechnung
+     für Versorgungslasten im Bundesbereich)
+  Unfallfürsorge / sonstige Nebenkosten    :      82,00 €
+  ─────────────────────────────────────────────────────
+  Gesamtpersonalkosten/Soldat/Monat        :   4.416,00 €
+
+3.3 Jahresarbeitszeit und Stundensatz
+--------------------------------------
+  Jahresarbeitsstunden (Regelarbeitszeit)  :   1.808 h/Jahr
+  (Netto nach Urlaub, Wochenende, Feiertag; BM-Wert Bundesbereich)
+  Stundensatz (Vollkosten)                 :   4.416 € × 12 / 1.808
+                                           =  29,29 €/Arbeitsstunde (kalkulat.)
+
+  Hinweis: Im 3-Schicht-Betrieb fallen tatsächlich 4.416 Wachstunden an.
+  Der Einsatz von 3 Soldaten im rollierenden System deckt die 4.416 h ab;
+  Überstunden/Mehrbelastung durch Personalausfall sind nicht berücksichtigt
+  (tatsächliche Belastung in der Dienststelle liegt höher).
+
+3.4 Gesamtkosten Alternative 0 (6 Monate, 3 Soldaten)
+-------------------------------------------------------
+  3 Soldaten × 4.416,00 €/Monat × 6 Monate =   79.488,00 €
+
+  Zzgl. Sachkosten (Dienstbekleidung, Ausstattung,
+  anteilige Infrastrukturkosten Wachgebäude)  :  2.400,00 €
+  ─────────────────────────────────────────────────────────
+  GESAMTKOSTEN ALTERNATIVE 0                 :  81.888,00 €
+
+  Hinweis: Entlastungseffekte (freigewordenes Personal für Kernaufgaben)
+  sind nicht monetär bewertet, da belastbare Planwerte fehlen. Die
+  Opportunitätskosten begründen jedoch die Präferenz für die Auslagerung
+  zusätzlich zur reinen Kostenbetrachtung.
+
+================================================================================
+KAPITEL 4 – KOSTENERMITTLUNG ALTERNATIVE 1 (FREMDVERGABE)
+================================================================================
+
+4.1 Marktpreisrecherche
+------------------------
+Recherche durchgeführt am 15.04.2026 auf Basis öffentlich verfügbarer
+Marktdaten (BDSW-Tarifübersicht 2026, ver.di Tarifabschluss militärische
+Bewachung Niedersachsen, Marktpreisangaben security.de und coredinate.de).
+
+Ergebnis der Marktpreisrecherche:
+  - Tarifstundenlohn Objektschutz Niedersachsen 2026 (Untergrenze): ca. 15,15 €/h
+  - Spezifischer Tarifvertrag „Bewachung militärischer Anlagen Niedersachsen"
+    (ver.di/BDSW, Abschluss 2026): Stundenlohn ca. 16,80 €/h (Grundlohn
+    inkl. Ü1-Zuschlag und 3,7 %-Erhöhung ab 01.01.2026)
+  - Nachtzuschlag (22:00–06:00 Uhr): 15 % auf Grundlohn = +2,52 €/h
+  - Sonn- und Feiertagszuschlag: 25 % auf Grundlohn = +4,20 €/h
+  - Fakturierter Kundenstundensatz (Marktpreis inkl. AG-Kosten, Overhead,
+    Unternehmergewinn): 32 – 42 €/h
+  - Für Bundeswehr-Objekte mit Ü1-Pflicht realistischer Angebotspreis:
+    ca. 36 – 40 €/h (Durchschnitt: 38 €/h)
+
+  Quellen:
+  - BDSW Tarifübersicht 2026: https://www.bdsw.de/tarife/tarifuebersichten
+  - ver.di Niedersachsen, militärische Bewachung 2026:
+    https://nds-bremen.verdi.de/branchen-und-berufe/oeffentliche-private-dienste/
+    besondere-dienstleistungen/wach-und-sicherheitsdienste/
+    ++co++8f1a643e-d75d-11f0-882c-df3a0c889767
+  - Coredinate Tarifvertrag Sicherheitsgewerbe 2026:
+    https://coredinate.de/neuigkeiten/tarifvertrag-sicherheitsgewerbe-2026
+  - security.de Sicherheitsdienst Kosten 2026:
+    https://security.de/beitrag/sicherheitsdienst-kosten
+
+4.2 Annahmen für die Kalkulation
+----------------------------------
+  Kalkulierter Kundenstundensatz (Marktmittelwert): 38,00 €/h
+  Bewachungsstunden gesamt (01.07.–31.12.2026):    4.416 h
+
+  Anmerkung: Der Wert von 38,00 €/h entspricht einem mittleren Marktpreis
+  für militärische 24/7-Bewachung mit Ü1-Anforderung in Niedersachsen.
+  Vergabewettbewerb kann Preis auf ca. 35 €/h senken; Maximalerwartung: 42 €/h.
+
+4.3 Kostenpositionen Alternative 1
+------------------------------------
+  Bewachungsleistung (4.416 h × 38,00 €/h)          :  167.808,00 €
+  Einmalige Kosten (Einweisung, Zutrittsregistrierung,
+  Sicherheitsüberprüfungskoordination, ggf. Ausschreibungsaufwand):
+                                                        :    4.200,00 €
+  Verwaltungsaufwand Auftragsbetreuung (geschätzt)     :    1.200,00 €
+  ──────────────────────────────────────────────────────────────────
+  GESAMTKOSTEN ALTERNATIVE 1                          :  173.208,00 €
+
+  Sensitivitätsbetrachtung (Stundensatz 35 €/h):
+    4.416 h × 35,00 € + 5.400 €                      =  159.960,00 €
+  Sensitivitätsbetrachtung (Stundensatz 42 €/h):
+    4.416 h × 42,00 € + 5.400 €                      =  190.872,00 €
+
+================================================================================
+KAPITEL 5 – NUTZWERTANALYSE / QUALITATIVE KRITERIEN
+================================================================================
+
+Neben dem reinen Kostenvergleich werden qualitative Kriterien berücksichtigt:
+
+Kriterium                         | Alt. 0 (eigen) | Alt. 1 (extern)
+----------------------------------|----------------|----------------
+Verfügbarkeit / Ausfallsicherheit | eingeschränkt  | vertraglich gesichert
+                                  | (Personalengpass| (Dienstleister stellt
+                                  | dokumentiert)  | Ersatz sicher)
+Reaktionsfähigkeit bei Vorkomm.  | hoch           | mittel-hoch
+Ü1-Sicherheitsüberprüfung        | erfüllt        | vertraglich pflichtig
+Hoheitliche Befugnisse nötig?    | nein           | nein (Einlasskontrolle
+                                  |                | / Hausrecht ausreichend)
+Eigenbindung an Kernaufgaben     | 3 Soldaten     | Entlastung, diese
+                                  | gebunden       | Kräfte verfügbar
+Reaktion auf Personalengpässe    | nicht lösbar   | unproblematisch
+Flexibilität (kurzfrist. Änder.) | gering         | mittel (vertragsabhängig)
+Datenschutz / Geheimschutz       | unkritisch     | unkritisch (nur Tor)
+Akzeptanz bei Truppe             | neutral        | neutral
+
+Fazit qualitative Analyse:
+Alternative 1 punktet insbesondere bei Ausfallsicherheit und Entlastung der
+Truppenkräfte. Die Torwache erfordert keine hoheitlichen Befugnisse, sodass
+eine Vergabe an Zivilkräfte rechtlich uneingeschränkt möglich ist.
+
+================================================================================
+KAPITEL 6 – WIRTSCHAFTLICHKEITSVERGLEICH UND ERGEBNIS
+================================================================================
+
+6.1 Kostengegenüberstellung
+-----------------------------
+
+                         | Alternative 0   | Alternative 1
+                         | Eigenbewachung  | Fremdvergabe
+─────────────────────────|─────────────────|──────────────────
+Gesamtkosten (6 Monate)  |    81.888,00 €  |   173.208,00 €
+Differenz                |            —    | + 91.320,00 €
+                         |                 | (teurer)
+
+6.2 Bewertung
+--------------
+Im reinen Kostenvergleich ist Alternative 0 (Eigenbewachung) erheblich
+günstiger als Alternative 1 (Fremdvergabe). Die Mehrkosten der Fremdvergabe
+betragen ca. 91.320 € für den 6-Monats-Zeitraum.
+
+Dieser Befund gilt jedoch unter folgenden Einschränkungen:
+
+  a) Die Personalkosten der Soldaten sind für den Haushalt eine Fixkost, die
+     unabhängig vom Wachbetrieb anfallen. Eine echte Einsparung durch
+     Fremdvergabe entsteht nur, wenn die freigewordenen Soldaten dauerhaft
+     anderweitig produktiv eingesetzt werden können (Opportunitätspotenzial).
+
+  b) Der dokumentierte Personalengpass zeigt, dass die Dienststelle faktisch
+     bereits heute nicht in der Lage ist, den Wachbetrieb verlässlich mit
+     eigenem Personal aufrechtzuerhalten. Die Kosten der Eigenbewachung
+     berücksichtigen keine Mehrbelastungs-, Ausfall- oder Kompensationskosten.
+
+  c) Mittel- bis langfristig (über 6 Monate hinaus) ist zu prüfen, ob durch
+     Entlastung der Soldaten Stellen eingespart oder Kernaufgaben verbessert
+     werden können.
+
+6.3 Kalkulationszinssatz
+-------------------------
+Der Kalkulationszinssatz beträgt gemäß BMF-Rundschreiben April 2026: 1,2 %.
+Da der Betrachtungszeitraum unter 12 Monaten liegt (6 Monate), ist eine
+Kapitalwertmethode nicht zwingend erforderlich; der Nominalwertvergleich ist
+ausreichend.
+
+6.4 Ergebnis der WU
+--------------------
+Unter rein finanziellen Gesichtspunkten (haushaltswirtschaftlicher Kostenver-
+gleich) ist die Eigenbewachung (Alternative 0) für den Betrachtungszeitraum
+günstiger.
+
+Aufgrund der nachgewiesenen Nicht-Verfügbarkeit des erforderlichen Personals
+für die Eigenbewachung stellt Alternative 1 (Fremdvergabe) jedoch die einzig
+realistische Handlungsoption dar, um den Wachbetrieb des Haupttors
+sicherzustellen. Die Mehrkosten sind durch die operationelle Notwendigkeit
+gerechtfertigt.
+
+EMPFEHLUNG: Vergabe der Bewachungsleistung an ein privates Sicherheitsunternehmen
+für den Zeitraum 01.07.2026 – 31.12.2026. Einleitung eines förmlichen
+Vergabeverfahrens (VOL/A UVgO) ist zu empfehlen. Wettbewerb anstreben,
+um Stundensatz Richtung Untergrenze (ca. 35 €/h) zu drücken.
+
+================================================================================
+KAPITEL 7 – ANLAGE: BERECHNUNGSGRUNDLAGEN UND QUELLEN
+================================================================================
+
+7.1 Stundensatz-Herleitung Alt. 0
+-----------------------------------
+  A9/3 Grundgehalt (ab 01.05.2026)         :    3.280 €/Monat
+  Versorgungszuschlag (30 %)               :      984 €/Monat
+  Sonstige Nebenleistungen                 :      152 €/Monat
+  ──────────────────────────────────────────────────────────
+  Gesamtkosten/Soldat/Monat                :    4.416 €/Monat
+  × 6 Monate                              :   26.496 €
+  × 3 Soldaten                            :   79.488 €
+  + Sachkosten                            :    2.400 €
+  = Gesamtkosten Alt. 0                   :   81.888 €
+
+7.2 Stundensatz-Herleitung Alt. 1
+-----------------------------------
+  Tarifstundenlohn militärische Bewachung
+  Niedersachsen 2026 (Ü1-Zuschlag inklus.) :   ~16,80 €/h
+  Arbeitgeberkosten + Overhead + Gewinn    :   ~21,20 €/h
+  ──────────────────────────────────────────────────────────
+  Kalkulierter Kundenstundensatz           :   ~38,00 €/h
+  Bewachungsstunden 01.07.–31.12.2026      :    4.416 h
+  = Bewachungsleistung brutto              :  167.808 €
+  + Einmal- und Verwaltungskosten          :    5.400 €
+  = Gesamtkosten Alt. 1                   :  173.208 €
+
+7.3 Berechnung Bewachungsstunden
+----------------------------------
+  Zeitraum: 01.07.2026 – 31.12.2026 = 184 Tage
+  24 h/Tag × 184 Tage = 4.416 Bewachungsstunden
+
+7.4 Quellen Marktpreisrecherche (Stand: 15.04.2026)
+------------------------------------------------------
+  [1] BDSW Tarifübersicht Sicherheitsgewerbe 2026:
+      https://www.bdsw.de/tarife/tarifuebersichten
+
+  [2] ver.di Niedersachsen-Bremen – Neuer Tarifabschluss militärische
+      Bewachung Niedersachsen 2026:
+      https://nds-bremen.verdi.de/branchen-und-berufe/oeffentliche-private-
+      dienste/besondere-dienstleistungen/wach-und-sicherheitsdienste/
+      ++co++8f1a643e-d75d-11f0-882c-df3a0c889767
+
+  [3] Coredinate – Tarifvertrag Sicherheitsgewerbe 2026:
+      https://coredinate.de/neuigkeiten/tarifvertrag-sicherheitsgewerbe-2026
+
+  [4] Coredinate – Tariflöhne Sicherheitsmitarbeiter 2026 (alle Bundesländer):
+      https://coredinate.de/ressourcen/sicherheitsmitarbeiter/
+      tarifloehne-sicherheitsmitarbeiter
+
+  [5] security.de – Sicherheitsdienst Kosten 2026:
+      https://security.de/beitrag/sicherheitsdienst-kosten
+
+  [6] Besoldungstabelle Bund ab 01.05.2026:
+      https://www.oeffentlichen-dienst.de/beamte/besoldung/bund/4346-2026.html
+
+  [7] BMF-Rundschreiben Kalkulationszinssatz April 2026: 1,2 %
+      (intern bekannt; kein öffentlicher Link)
+
+================================================================================
+KAPITEL 8 – ABSCHLUSSKENNZEICHNUNG
+================================================================================
+
+  Geprüft durch       : [ohne Namensangabe]
+  Dienststelle        : TrÜbPlDst Leer
+  Datum               : 15.04.2026
+  Schutzbezeichnung   : offen
+  WU-Typ              : Einfache Wirtschaftlichkeitsuntersuchung
+                        (Maßnahmenvolumen unter Schwellenwert für
+                        erweiterte Methodik)
+  Rechtliche Grundlage: § 7 BHO, VV zu § 7 BHO, AR A-2400/62 Bw
+
+================================================================================
+ENDE DES DOKUMENTS
+================================================================================

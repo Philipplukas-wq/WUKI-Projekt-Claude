@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5f5f5;
+  --foreground: #1a1a1a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Bundeswehr-Farbschema */
+  --color-anthracite: #2d3142;
+  --color-anthracite-dark: #1e2235;
+  --color-bundesgrau: #4a4e69;
+  --color-olivgruen: #4a5c3c;
+  --color-olivgruen-dark: #3a4a2e;
+  --color-hellgrau: #f5f5f5;
+  --color-mittelgrau: #e0e0e0;
+  --color-akzent: #c8a84b;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+/* Schreibmaschinen-Cursor */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.typing-cursor::after {
+  content: "|";
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+/* Einblend-Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* Sprechblase Pop-in */
+@keyframes popIn {
+  0% { opacity: 0; transform: scale(0.7); }
+  80% { transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.animate-pop-in {
+  animation: popIn 0.4s ease-out forwards;
+}
+
+/* SVG-Linien-Zeichner */
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+.animate-draw {
+  stroke-dasharray: 1000;
+  animation: drawLine 2.5s ease-out forwards;
+}
+
+/* Chat smooth scroll */
+.chat-messages {
+  scroll-behavior: smooth;
+}

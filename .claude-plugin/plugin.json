@@ -1,0 +1,9 @@
+{
+  "name": "wu-berater",
+  "description": "WU-Berater für unterjährige Wirtschaftlichkeitsuntersuchungen in der deutschen Bundesverwaltung gemäß § 7 BHO und VV WU. Führt strukturiert durch alle 9 Pflichtgliederungspunkte, berechnet Personalkosten nach PSK-Sätzen 2024 und generiert rechtssichere WU-Dokumente.",
+  "author": {
+    "name": "WUKI Projekt",
+    "email": ""
+  },
+  "version": "1.0.0"
+}

@@ -1,0 +1,31 @@
+BwDLZ-Leitung
+├─ Stabsstellen
+│  ├─ Arbeitssicherheit
+│  ├─ Controlling / KLR
+│  ├─ Datenmanagement
+│  ├─ Gleichstellung
+│  ├─ Personalrat
+│  └─ Schwerbehindertenvertretung
+├─ Personalmanagement
+│  ├─ Personalbetreuung
+│  ├─ Aus- und Fortbildung
+│  └─ Wohnungsfürsorge / soziale Angelegenheiten
+├─ Finanzen / Interne Dienste
+│  ├─ Haushalt
+│  ├─ Kasse / Rechnungswesen
+│  └─ interne Verwaltungsprozesse
+├─ Facility Management
+│  ├─ Liegenschaften
+│  ├─ Gebäude- und Anlagenbetrieb
+│  └─ Instandhaltung / Störungsmanagement
+├─ Beschaffung / Materialwirtschaft
+│  ├─ Bedarfsermittlung
+│  ├─ Beschaffung
+│  └─ Materialverwaltung
+├─ Verpflegung
+│  ├─ Truppenküchen
+│  └─ Verpflegungsplanung
+└─ Standortservice / sonstige Services
+   ├─ Empfang / Auskunft
+   ├─ Schlüssel- und Servicefragen
+   └─ Standortunterstützung

@@ -1,0 +1,425 @@
+================================================================================
+WIRTSCHAFTLICHKEITSUNTERSUCHUNG (WU)
+gemäß § 7 BHO / AR A-2400/62
+================================================================================
+
+Gesprächsprotokoll und WU-Dokumentation
+Erstellt am: 15.04.2026
+Bearbeiterin: Sarah Müller, BAIUDBw Bonn
+Schutzbezeichnung: offen
+
+================================================================================
+DIALOG — BERATUNGSGESPRÄCH ZUR WU-ERSTELLUNG
+================================================================================
+
+BERATERIN:
+Guten Tag, Frau Müller. Sie möchten eine Wirtschaftlichkeitsuntersuchung für
+den IT-Helpdesk-Support Ihrer Dienststelle erstellen. Können Sie mir zunächst
+die Ausgangssituation schildern?
+
+SARAH MÜLLER (Antragstellerin, BAIUDBw Bonn):
+Ja, gerne. Wir sind die BAIUDBw in Bonn mit etwa 50 Arbeitsplätzen. Vor zwei
+Jahren haben wir unseren eigenen IT-Support outgesourct und seitdem läuft ein
+Vertrag mit der Firma Bechtle. Der Vertrag endet zum 30.06.2026 und wir müssen
+jetzt entscheiden, wie wir den IT-Helpdesk-Support ab dem 01.07.2026 sichern.
+Der aktuelle Vertrag kostet uns 4.200 Euro pro Monat.
+
+BERATERIN:
+Verstanden. Haben Sie konkrete Alternativen im Blick oder sind alle Optionen
+noch offen?
+
+SARAH MÜLLER:
+Wir haben gehört, dass die BWI GmbH als bundeswehreigene Inhouse-Gesellschaft
+auch solche Leistungen anbieten kann. Das wäre zu prüfen. Außerdem könnte man
+natürlich den Vertrag mit Bechtle verlängern oder wieder eigenes Personal
+aufbauen, aber das erscheint mir kurzfristig unrealistisch.
+
+BERATERIN:
+Gut, dann nehmen wir drei Alternativen in die Untersuchung auf: Fortführung
+mit Bechtle, Übergang zur BWI GmbH und — der Vollständigkeit halber —
+den Aufbau von eigenem Personal. Gehen wir nun die WU-Kapitel gemeinsam durch.
+
+================================================================================
+WIRTSCHAFTLICHKEITSUNTERSUCHUNG
+IT-HELPDESK-SUPPORT BAIUDBw BONN
+================================================================================
+
+DIENSTSTELLE:  Bundesamt für Infrastruktur, Umweltschutz und Dienstleistungen
+               der Bundeswehr (BAIUDBw), Standort Bonn
+MASSNAHME:     IT-Helpdesk-Support für ca. 50 Arbeitsplätze
+ZEITRAUM:      01.07.2026 – 31.12.2026 (6 Monate)
+BEARBEITUNG:   Sarah Müller
+DATUM:         15.04.2026
+AKTENZEICHEN:  BAIUDBw-Bonn/IT/WU-2026-001
+
+--------------------------------------------------------------------------------
+1. ANLASS UND ZIELSETZUNG
+--------------------------------------------------------------------------------
+
+1.1 Anlass
+
+Der bestehende Dienstleistungsvertrag mit der Firma Bechtle AG über
+IT-Helpdesk-Support für die Dienststelle BAIUDBw, Standort Bonn, läuft zum
+30.06.2026 aus. Eine automatische Verlängerungsklausel besteht nicht. Die
+Dienststelle betreibt ca. 50 IT-Arbeitsplätze und hat seit der Auslagerung
+vor zwei Jahren keinen eigenen IT-Support mehr. Zur Sicherstellung der IT-
+Betriebsfähigkeit ab dem 01.07.2026 ist eine neue Bedarfsentscheidung
+erforderlich.
+
+Gemäß § 7 BHO sind finanzwirksame Maßnahmen einer Wirtschaftlichkeits-
+untersuchung zu unterziehen. Die vorliegende WU dient der Entscheidungsvorberei-
+tung und Dokumentation der wirtschaftlichsten Alternative für den Zeitraum
+01.07.2026 bis 31.12.2026.
+
+1.2 Zielsetzung
+
+Ziel der Maßnahme ist die lückenlose und qualitätsgesicherte Bereitstellung von
+IT-Helpdesk-Support für alle ca. 50 Arbeitsplätze der BAIUDBw Bonn. Der
+Support umfasst:
+- First-Level-Support (Störungsannahme, Remote-Diagnose, Standardlösungen)
+- Second-Level-Support (vor Ort, Hardware/Software-Fehler)
+- Ticket-Management und Dokumentation
+- Reaktionszeit max. 4 Stunden für kritische Störungen (P1)
+- Betriebszeiten: Mo–Fr, 07:00–17:00 Uhr
+
+1.3 Bedarfsgrundlage
+
+Quantitativer Bedarf: IT-Helpdesk-Support für 50 Arbeitsplätze über 6 Monate
+(Gesamtlaufzeit 01.07.2026 – 31.12.2026).
+
+Die Notwendigkeit ergibt sich aus dem dienstlichen Betrieb: Ohne funktionsfähigen
+IT-Support können Arbeitsunterbrechungen bei IT-Störungen nicht zeitnah behoben
+werden. Dies beeinträchtigt die Aufgabenerfüllung der Dienststelle unmittelbar.
+Ein Verzicht auf die Maßnahme ist daher keine tragfähige Option (Nullvariante
+ausgeschlossen).
+
+--------------------------------------------------------------------------------
+2. BESCHREIBUNG DER ALTERNATIVEN
+--------------------------------------------------------------------------------
+
+BERATERIN:
+Frau Müller, ich schlage vor, drei Varianten zu untersuchen. Die Nullvariante —
+also kein IT-Support — schließen wir aus, da die Dienststelle ohne Betrieb nicht
+arbeitsfähig wäre. Wir prüfen:
+
+  Variante A: Vertragsverlängerung mit Bechtle AG (Status quo)
+  Variante B: Übergang zu BWI GmbH (Bundeswehr-Inhouse)
+  Variante C: Wiederaufbau eigenen Personals (Eigenleistung)
+
+SARAH MÜLLER:
+Variante C erscheint mir unrealistisch — innerhalb von zweieinhalb Monaten
+Stellen auszuschreiben, jemanden einzustellen und einzuarbeiten ist nicht
+machbar. Aber wir sollten sie der Vollständigkeit halber trotzdem aufführen.
+
+BERATERIN:
+Korrekt — wir nehmen sie auf, bewerten sie jedoch als nicht umsetzbar innerhalb
+des Vorlaufzeitraums. Sie dient als argumentative Abgrenzung.
+
+2.1 Variante A: Fortführung des Vertrags mit Bechtle AG
+
+Beschreibung:
+Der bestehende Dienstleistungsvertrag mit der Bechtle AG wird um 6 Monate
+verlängert (01.07.2026 – 31.12.2026) zu den bestehenden Konditionen.
+Bechtle erbringt First- und Second-Level-Support für 50 Arbeitsplätze.
+
+Leistungsumfang (bestehend):
+- Helpdesk-Hotline Mo–Fr, 07:00–17:00 Uhr
+- Remote-Support und Vor-Ort-Support
+- Ticket-System und monatliches Reporting
+- Reaktionszeit P1: < 4 Stunden, P2: < 8 Stunden
+
+Preis (aus laufendem Vertrag): 4.200 €/Monat (inkl. MwSt.)
+Entspricht: 84 €/Arbeitsplatz/Monat — marktüblich für Standard-Support-Paket
+(Markt: 80–150 €/AP/Monat laut aktueller Benchmarks, Stand April 2026)
+
+Vorteile:
++ Kein Übergangsaufwand, nahtlose Weiterführung
++ Bekannte Ansprechpartner und etablierte Prozesse
++ Kein Ausschreibungsrisiko bei kurzer Vertragslaufzeit (UVgO-Schwellenwert)
+
+Nachteile:
+- Keine Kostenoptimierung
+- Externe Abhängigkeit bleibt bestehen
+- Keine Bundeswehr-spezifische Integration (z. B. BAAINBw-Standards)
+
+2.2 Variante B: Übergang zur BWI GmbH
+
+Beschreibung:
+Die BWI GmbH ist das IT-Systemhaus der Bundeswehr und als Inhouse-Gesellschaft
+des Bundes gemäß § 108 GWB grundsätzlich ohne wettbewerbliches Vergabe-
+verfahren beauftragbar (Inhouse-Vergabe), sofern die gesetzlichen Voraussetzungen
+erfüllt sind. Die BWI betreibt den User Help Desk (UHD) für die Bundeswehr
+bundesweit mit ca. 200 Mitarbeitenden und betreut über 140.000 Nutzer
+(24/7-Betrieb, Erreichbarkeit innerhalb 30 Sekunden bei 95 % Zufriedenheit).
+
+Leistungsumfang:
+- Nutzung des zentralen User Help Desk der Bundeswehr (Telefon + Ticketsystem)
+- Einbindung in bestehende HERKULES-Folgevertrag-Infrastruktur (HFP bis 2027)
+- Vor-Ort-Support über regionale BWI-Servicestützpunkte
+- Bundeswehr-konforme Sicherheitsstandards und Geheimschutzanforderungen
+
+Angenommener Preis:
+Auf Basis marktüblicher Benchmark-Werte und der BWI-Kostenstruktur wird für
+50 Arbeitsplätze ein vergleichbarer oder leicht reduzierter Preis gegenüber
+dem Markt angesetzt. Für Behörden- und Bundeswehrkunden schätzt die BWI
+typischerweise Kosten zwischen 70–90 €/AP/Monat für Standard-UHD-Leistungen.
+
+Angenommener Preis: 75 €/Arbeitsplatz/Monat = 3.750 €/Monat
+(Schätzwert; verbindlich nach Anfrage bei BWI)
+
+HINWEIS: Eine formale Anfrage bei der BWI GmbH ist vor Beauftragung erforderlich,
+um ein verbindliches Angebot zu erhalten und die Inhouse-Vergabe-Voraussetzungen
+zu bestätigen.
+
+Vorteile:
++ Bundeswehr-interne Lösung, sicherheitskonforme IT-Integration
++ Keine externe Abhängigkeit von privatwirtschaftlichem Anbieter
++ Synergieeffekte mit bestehender Bundeswehr-IT-Infrastruktur
++ Potenzielle Kostenersparnis gegenüber Variante A
++ Vergaberechtliche Vereinfachung (Inhouse-Vergabe möglich)
+
+Nachteile:
+- Übergangszeitraum und Onboarding erforderlich (ca. 4–6 Wochen)
+- Abstimmungsaufwand zwischen BAIUDBw und BWI für Übergabe
+- Leistungsumfang muss exakt auf Dienststelle zugeschnitten werden
+
+2.3 Variante C: Aufbau eigenen IT-Personals (Eigenleistung)
+
+Beschreibung:
+Wiederaufbau eines eigenen IT-Support-Teams mit min. 1–2 IT-Fachkräften
+(z. B. Systemadministrator/in, Helpdesk-Mitarbeiter/in) im öffentlichen Dienst.
+
+Einschätzung:
+Diese Variante ist innerhalb des Vorlaufs bis 01.07.2026 (ca. 2,5 Monate)
+nicht realisierbar. Stellenausschreibung, Auswahlverfahren, Einstellung und
+Einarbeitung erfordern in der Regel 4–9 Monate. Zudem entstehen dauerhaft
+höhere Personalkosten (Besoldung/Entgelt, Sozialabgaben, Weiterbildung).
+
+Monatliche Personalkosten (TVöD E9a, Stufe 3, 2026):
+  1 Vollzeit-IT-Mitarbeiter: ca. 4.100 € brutto + AG-Anteile (ca. 900 €)
+  = ca. 5.000 €/Monat pro Person (inkl. Lohnnebenkosten)
+  Für bedarfsgerechte Abdeckung: mind. 1,5 VZÄ = ca. 7.500 €/Monat
+
+Zusätzliche Anlaufkosten (einmalig):
+  Ausstattung, Einarbeitung, Schulung: ca. 3.000–5.000 €
+
+Variante C wird im weiteren Verfahren ausgeschlossen.
+Begründung: Nicht innerhalb des Bedarfszeitraums realisierbar; dauerhaft höhere
+Kosten; nicht wirtschaftlich für den befristeten Zeitraum von 6 Monaten.
+
+--------------------------------------------------------------------------------
+3. KOSTEN- UND WIRTSCHAFTLICHKEITSVERGLEICH
+--------------------------------------------------------------------------------
+
+BERATERIN:
+Frau Müller, lassen Sie mich die Kosten für den 6-monatigen Betrachtungszeitraum
+gegenüberstellen.
+
+SARAH MÜLLER:
+Ja, das wäre hilfreich. Bitte beziehen Sie auch einmalige Übergangskosten mit ein.
+
+3.1 Kostenübersicht (Betrachtungszeitraum 01.07.2026 – 31.12.2026)
+
+VARIANTE A — Bechtle AG (Vertragsverlängerung)
+-------------------------------------------------------
+Laufende Kosten:     4.200 €/Monat x 6 Monate  = 25.200 €
+Einmalige Kosten:    0 € (nahtlose Verlängerung)
+-------------------------------------------------------
+GESAMTKOSTEN:        25.200 €
+
+Kosten pro Arbeitsplatz gesamt: 504 € (6 Monate)
+Kosten pro Arbeitsplatz/Monat: 84 €
+
+
+VARIANTE B — BWI GmbH (Inhouse-Übergang)
+-------------------------------------------------------
+Laufende Kosten:     3.750 €/Monat x 6 Monate  = 22.500 €
+Einmalige Kosten:    Übergangsaufwand (Abstimmung,
+                     Onboarding, Datenmigration)
+                     Schätzansatz:               ca. 1.500 €
+                     (intern: 3 Arbeitstage Koordination
+                      + BWI-seitig abgedeckt im Vertrag)
+-------------------------------------------------------
+GESAMTKOSTEN:        24.000 €
+
+Kosten pro Arbeitsplatz gesamt: 480 € (6 Monate)
+Kosten pro Arbeitsplatz/Monat: 80 € (zzgl. einmaliger Übergang)
+Ersparnis ggü. Variante A:     1.200 € im Betrachtungszeitraum
+
+
+VARIANTE C — Eigenpersonal
+-------------------------------------------------------
+Laufende Kosten:     7.500 €/Monat x 6 Monate  = 45.000 €
+Einmalige Kosten:    ca. 4.000 €
+-------------------------------------------------------
+GESAMTKOSTEN:        49.000 €
+
+=> Variante C: ausgeschieden (nicht realisierbar und nicht wirtschaftlich)
+
+3.2 Qualitative Bewertungsmatrix
+
+Kriterium                     | Gewichtung | Variante A | Variante B
+------------------------------|------------|------------|------------
+Kosten (6 Monate)             | 30 %       | 3 (84€/AP) | 4 (80€/AP)
+Nahtlosigkeit/Umsetzbarkeit   | 25 %       | 5          | 3
+Sicherheitskonformität (Bw)   | 20 %       | 3          | 5
+Strategische Ausrichtung      | 15 %       | 2          | 5
+Aufwand/Risiko Übergang       | 10 %       | 5          | 3
+------------------------------|------------|------------|------------
+Gewichteter Score (max. 5,0)  |            | 3,40       | 4,05
+
+Bewertungsskala: 1 = sehr schlecht, 5 = sehr gut
+
+3.3 Kalkulationszinssatz
+
+Da der Betrachtungszeitraum unter einem Jahr liegt (6 Monate), entfällt eine
+Kapitalwertberechnung mit Diskontierung. Der aktuell gültige Kalkulationszinssatz
+von 1,2 % (BMF, April 2026) wäre bei mehrjährigen Maßnahmen anzuwenden.
+
+--------------------------------------------------------------------------------
+4. RISIKOBEWERTUNG
+--------------------------------------------------------------------------------
+
+BERATERIN:
+Frau Müller, welche Risiken sehen Sie bei den jeweiligen Varianten?
+
+SARAH MÜLLER:
+Bei Bechtle wäre mein Hauptrisiko, dass die kurze Verlängerung in 6 Monaten
+schon wieder endet und wir dann erneut entscheiden müssen — unter noch mehr
+Zeitdruck. Bei der BWI bin ich unsicher, ob die Übergabe bis zum 01.07. klappt.
+
+BERATERIN:
+Das sind berechtigte Punkte. Ich empfehle, diese als Risiken zu dokumentieren.
+
+Variante A — Bechtle AG:
+  R1: Kurze Laufzeit erfordert erneute WU/Vergabe ab spätestens Oktober 2026
+      (Wahrscheinlichkeit: hoch; Auswirkung: mittel)
+  R2: Preiserhöhung bei Verlängerungsverhandlung möglich
+      (Wahrscheinlichkeit: mittel; Auswirkung: gering)
+
+Variante B — BWI GmbH:
+  R1: Zeitdruck beim Übergang — Beauftragung muss bis spätestens 15.05.2026
+      erfolgen, um Onboarding bis 01.07.2026 zu sichern
+      (Wahrscheinlichkeit: mittel; Auswirkung: hoch)
+  R2: Verbindliches BWI-Angebot noch nicht vorliegend; Kostenschätzung basiert
+      auf Benchmarkwerten
+      (Wahrscheinlichkeit: mittel; Auswirkung: mittel)
+  Maßnahme: Sofortige Anfrage bei BWI GmbH erforderlich (bis 22.04.2026)
+
+--------------------------------------------------------------------------------
+5. EMPFEHLUNG UND ENTSCHEIDUNG
+--------------------------------------------------------------------------------
+
+BERATERIN:
+Frau Müller, auf Basis der Kosten- und Nutzwertanalyse lautet die Empfehlung:
+
+Empfohlene Variante: VARIANTE B — Übergang zur BWI GmbH
+
+Begründung:
+1. Wirtschaftlichkeit: Variante B ist bei Betrachtung des Gesamtzeitraums
+   1.200 € günstiger als Variante A (25.200 € vs. 24.000 €).
+
+2. Strategische Eignung: Die BWI GmbH ist das IT-Systemhaus der Bundeswehr.
+   Eine Integration in bundeswehreigene IT-Strukturen entspricht der
+   strategischen Ausrichtung der Digitalisierung der Bundeswehr. Insbesondere
+   Sicherheitsanforderungen, Geheimschutz und Schnittstellen zu anderen
+   Bundeswehr-IT-Systemen werden besser abgedeckt.
+
+3. Vergaberechtliche Effizienz: Die Beauftragung als Inhouse-Vergabe gemäß
+   § 108 GWB ist möglich und vermeidet einen zeitintensiven Vergabeprozess.
+
+4. Langfristperspektive: Im Gegensatz zu Variante A (erneutes Ende der
+   Vertragslaufzeit nach 6 Monaten) bietet die BWI-Integration eine tragfähigere
+   Basis für eine mittelfristige Lösung über 2026 hinaus.
+
+EINSCHRÄNKUNG:
+Die Empfehlung steht unter dem Vorbehalt, dass die BWI GmbH bis zum 30.04.2026
+ein verbindliches Angebot vorlegt und die Inhouse-Vergabe-Voraussetzungen
+bestätigt werden. Sofern dies nicht gelingt, ist auf Variante A (Bechtle AG)
+zurückzugreifen, um die Betriebskontinuität zu sichern.
+
+SARAH MÜLLER:
+Das klingt nachvollziehbar. Ich werde noch diese Woche Kontakt zur BWI GmbH
+aufnehmen. Wenn das verbindliche Angebot bis Ende April vorliegt, können wir
+die WU abschließen und die Beauftragung einleiten.
+
+BERATERIN:
+Genau. Bitte dokumentieren Sie das BWI-Angebot und hängen Sie es als Anlage
+an diese WU an. Die Entscheidung ist dann von der Dienststellenleitung zu
+bestätigen.
+
+--------------------------------------------------------------------------------
+6. ZEITPLAN UND NÄCHSTE SCHRITTE
+--------------------------------------------------------------------------------
+
+Bis 22.04.2026:  Anfrage bei BWI GmbH mit Leistungsbeschreibung (LB)
+Bis 30.04.2026:  Verbindliches Angebot BWI GmbH erwartet
+Bis 07.05.2026:  Abschluss WU, Genehmigung durch Dienststellenleitung
+Bis 15.05.2026:  Beauftragung BWI GmbH (oder Bechtle, falls Rückfallvariante)
+01.07.2026:      Beginn der Leistungserbringung durch neuen/verlängerten Anbieter
+31.12.2026:      Ende des Betrachtungszeitraums; Folge-WU für 2027 einleiten
+
+--------------------------------------------------------------------------------
+7. ANLAGEN
+--------------------------------------------------------------------------------
+
+Anlage 1: Leistungsbeschreibung IT-Helpdesk-Support BAIUDBw Bonn (in Erstellung)
+Anlage 2: Verbindliches Angebot BWI GmbH (ausstehend, wird nachgereicht)
+Anlage 3: Vertragsübersicht Bechtle AG (bestehendes Vertragsdokument)
+Anlage 4: Marktpreisrecherche IT-Helpdesk-Support (Stand April 2026)
+
+--------------------------------------------------------------------------------
+ANLAGE 4: MARKTPREISRECHERCHE IT-HELPDESK-SUPPORT (Stand April 2026)
+--------------------------------------------------------------------------------
+
+Rechercheergebnis (Quelle: öffentlich zugängliche Marktinformationen, 04/2026):
+
+Marktübliche Preise für IT-Helpdesk / Managed Workplace Service Deutschland:
+
+  Basis-Support (nur Remote-Helpdesk):        30 –  80 €/AP/Monat
+  Standard-Support (Remote + Vor-Ort):        80 – 150 €/AP/Monat
+  Premium-Support (inkl. Security, Cloud):   150 – 300 €/AP/Monat
+
+Einordnung der geprüften Angebote:
+
+  Bechtle AG (aktuell):     84 €/AP/Monat
+  => Liegt am unteren Ende des Standard-Segments; marktüblich und angemessen.
+
+  BWI GmbH (Schätzwert):    75 €/AP/Monat
+  => Leicht unterhalb Bechtle-Niveau; plausibel für bundeswehr-interne
+     Inhouse-Gesellschaft mit skalenbasiertem Großkundenmodell (140.000+ Nutzer).
+
+Fazit Marktpreisrecherche:
+Beide Angebote liegen im marktüblichen Korridor. Der aktuelle Bechtle-Preis von
+4.200 €/Monat (= 84 €/AP) ist weder überhöht noch besonders günstig.
+Ein Wechsel zur BWI könnte bei gleichem oder verbessertem Leistungsumfang zu
+einer Ersparnis von ca. 450 €/Monat führen.
+
+================================================================================
+ABSCHLUSS-BESTÄTIGUNG
+================================================================================
+
+Ich bestätige, dass diese Wirtschaftlichkeitsuntersuchung nach bestem Wissen
+und Gewissen auf Basis der zum Zeitpunkt der Erstellung verfügbaren Daten
+erstellt wurde und den Anforderungen des § 7 BHO entspricht.
+
+Name:          Sarah Müller
+Dienststelle:  BAIUDBw, Standort Bonn
+Datum:         15.04.2026
+Unterschrift:  [Handzeichen]
+
+Genehmigt durch Dienststellenleitung:
+Name:          [Name eintragen]
+Datum:         [Datum eintragen]
+Unterschrift:  [Handzeichen]
+
+================================================================================
+ENDE DER WIRTSCHAFTLICHKEITSUNTERSUCHUNG
+================================================================================
+
+Quellen Marktpreisrecherche:
+- https://www.juunit.com/blog/was-kostet-it-outsourcing
+- https://fox-romeo.de/blog/it-kosten-benchmark-arbeitsplatz/
+- https://baltaris.de/blog/was-kostet-ein-managed-it-service-provider
+- https://www.bwi.de/magazin/artikel/user-help-desk-hier-wird-dem-nutzer-geholfen
+- https://www.bwi.de/digitalisierungspartner-bundeswehr/it-infrastruktur-und-betrieb

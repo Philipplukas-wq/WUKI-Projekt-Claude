@@ -1,0 +1,16 @@
+{
+  "name": "local-wuki",
+  "description": "Lokale Plugins für das WUKI-Projekt",
+  "owner": {
+    "name": "WUKI Projekt",
+    "email": ""
+  },
+  "plugins": [
+    {
+      "name": "wu-berater",
+      "source": "./",
+      "description": "WU-Berater für unterjährige Wirtschaftlichkeitsuntersuchungen gemäß § 7 BHO und VV WU. Führt strukturiert durch alle 9 Pflichtgliederungspunkte und generiert rechtssichere WU-Dokumente.",
+      "version": "1.0.0"
+    }
+  ]
+}

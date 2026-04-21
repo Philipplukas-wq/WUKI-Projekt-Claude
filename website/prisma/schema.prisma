@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id                  String      @id @default(cuid())
+  email               String      @unique
+  passwordHash        String
+  name                String?
+  plan                Plan        @default(FREE)
+  wuSessionsThisMonth Int         @default(0)
+  monthResetDate      DateTime    @default(now())
+  departmentId        String?
+  department          Department? @relation(fields: [departmentId], references: [id])
+  isAdmin             Boolean     @default(false)
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+
+  @@index([email])
+  @@index([departmentId])
+}
+
+model Department {
+  id        String   @id @default(cuid())
+  name      String
+  inviteCode String  @unique
+  seats     Int
+  users     User[]
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Plan {
+  FREE
+  PRO
+  DEPARTMENT
+}

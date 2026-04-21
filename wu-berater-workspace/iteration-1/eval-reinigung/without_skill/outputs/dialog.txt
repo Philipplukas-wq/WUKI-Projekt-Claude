@@ -1,0 +1,430 @@
+================================================================================
+WIRTSCHAFTLICHKEITSUNTERSUCHUNG (WU)
+gemäß § 7 BHO / VV WU / AR A-2400/62
+================================================================================
+
+Titel:          Reinigungsdienstleistungen Verwaltungsgebäude LogZBw Erfurt
+Dienststelle:   Logistikzentrum Bundeswehr (LogZBw), Erfurt
+Bearbeiter:     Thomas Krüger
+Datum:          15.04.2026
+Schutzbezeichnung: offen
+Untersuchungszeitraum: 01.07.2026 – 31.12.2026
+
+================================================================================
+DIALOG-PROTOKOLL (Berater / Thomas Krüger)
+================================================================================
+
+--------------------------------------------------------------------------------
+ABSCHNITT 0 – EINSTIEG / AUFNAHME DES BEDARFS
+--------------------------------------------------------------------------------
+
+BERATER:
+Guten Tag, Herr Krüger. Sie möchten eine Wirtschaftlichkeitsuntersuchung für
+die Reinigung Ihres Verwaltungsgebäudes beim LogZBw in Erfurt durchführen.
+Bevor wir starten: Können Sie mir kurz den Anlass schildern?
+
+THOMAS KRÜGER:
+Ja, gerne. Wir haben im Verwaltungsgebäude ca. 800 qm Bürofläche, die aktuell
+von einem halben VZÄ (Vollzeitäquivalent) eigenem Personal der Entgeltgruppe E3
+TVöD gereinigt wird – also eine Teilzeitkraft mit 19,5 Stunden/Woche. Die
+Reinigung erfolgt an fünf Tagen pro Woche. Ich überlege, ob eine externe
+Vergabe günstiger wäre. Der Untersuchungszeitraum soll vom 01.07.2026 bis
+31.12.2026 gehen.
+
+BERATER:
+Verstanden. Dann führen wir jetzt strukturiert durch alle WU-Abschnitte.
+
+================================================================================
+1. UNTERSUCHUNGSGEGENSTAND UND ZIELSETZUNG
+================================================================================
+
+BERATER:
+Was ist konkret das Ziel dieser Untersuchung?
+
+THOMAS KRÜGER:
+Wir wollen herausfinden, ob die Eigenerbringung der Reinigungsleistung oder
+eine Fremdvergabe an einen externen Dienstleister wirtschaftlicher ist.
+
+--- TEXTBAUSTEIN (vom Berater vorgeschlagen, von Herrn Krüger bestätigt) ---
+
+Gegenstand dieser Wirtschaftlichkeitsuntersuchung ist die Entscheidung zwischen
+zwei Handlungsalternativen zur Sicherstellung der Unterhaltsreinigung im
+Verwaltungsgebäude des Logistikzentrums Bundeswehr (LogZBw) in Erfurt:
+
+  Alternative A (Status quo / Eigenerbringung):
+  Beibehaltung der Reinigung durch 0,5 VZÄ eigenes Reinigungspersonal
+  (Entgeltgruppe E3 TVöD Bund).
+
+  Alternative B (Fremdvergabe):
+  Beauftragung eines externen Gebäudereinigers im Rahmen einer öffentlichen
+  Ausschreibung (VOL/A bzw. UVgO) für die Unterhaltsreinigung der ca. 800 qm
+  Bürofläche, 5 Tage/Woche.
+
+Zielsetzung ist die Ermittlung der wirtschaftlichsten Lösung im Sinne des
+§ 7 BHO. Der Untersuchungszeitraum umfasst sechs Monate: 01.07.2026 bis
+31.12.2026. Eine überjährige Betrachtung ist nicht erforderlich, da der
+Kalkulationszinssatz (derzeit 1,2 % p.a., Stand April 2026, BMF) bei einem
+Untersuchungszeitraum unter einem Jahr keine Barwertabzinsung notwendig macht.
+
+================================================================================
+2. RAHMENBEDINGUNGEN UND AUSGANGSLAGE
+================================================================================
+
+BERATER:
+Können Sie mir die Rahmenbedingungen beschreiben – Fläche, Reinigungsintervall,
+aktuelles Personal?
+
+THOMAS KRÜGER:
+800 qm Bürofläche, Unterhaltsreinigung montags bis freitags. Das Personal ist
+eine Teilzeitkraft mit 0,5 VZÄ E3 TVöD Bund, Stufe 3 (schätze ich, die
+Mitarbeiterin ist seit ca. 4 Jahren dabei). Sachkosten für Reinigungsmittel
+und -geräte fallen zusätzlich an.
+
+--- TEXTBAUSTEIN ---
+
+2.1 Flächenbeschreibung
+Verwaltungsgebäude LogZBw Erfurt: ca. 800 qm Büro- und Nebennutzungsfläche
+(Flure, Sanitärbereiche eingeschlossen). Nutzungsintensität: normaler
+Bürobetrieb, keine erhöhten Verschmutzungsgrade.
+
+2.2 Reinigungsumfang
+Unterhaltsreinigung 5 Tage/Woche (Mo–Fr), ca. 52 Reinigungstage im
+Untersuchungszeitraum (26 Kalenderwochen x 5 Tage/Woche = 130 Reinigungstage;
+abzüglich bundesweite Feiertage Thüringen im Zeitraum Juli–Dezember 2026:
+ca. 6 Feiertage = 124 effektive Reinigungstage).
+
+2.3 Aktuelles Personal
+Reinigungskraft: 0,5 VZÄ, TVöD Bund E3, Erfahrungsstufe 3.
+Wochenarbeitszeit: 19,5 Stunden/Woche.
+
+================================================================================
+3. BEDARFSFESTSTELLUNG (QUANTITATIVE UND QUALITATIVE BEDARFSFORDERUNG)
+================================================================================
+
+BERATER:
+Was wird konkret benötigt – was sind die Mindestanforderungen an die
+Reinigungsleistung, egal ob eigen oder fremd?
+
+THOMAS KRÜGER:
+Die Bürofläche muss sauber und hygienisch gehalten werden, das ist
+vorgeschrieben. Standard-Unterhaltsreinigung reicht: Böden wischen, Müll
+leeren, Sanitäranlagen reinigen. Qualitativ muss es den allgemeinen
+Hygienestandards für Bürobetriebe entsprechen.
+
+--- TEXTBAUSTEIN ---
+
+3.1 Quantitativer Bedarf
+- Fläche: 800 qm Unterhaltsreinigung
+- Häufigkeit: 5 Reinigungen/Woche (Werktage Mo–Fr)
+- Zeitraum: 6 Monate (01.07.2026 – 31.12.2026)
+- Effektive Reinigungstage: ca. 124 Tage
+
+3.2 Qualitativer Bedarf (Mindestanforderungen)
+- Einhaltung allgemeiner Hygiene- und Reinlichkeitsstandards für Bürobetriebe
+- Unterhaltsreinigung gemäß DIN 77400 (Reinigungsdienstleistungen –
+  Schulgebäude – Anforderungen, sinngemäß angewandt auf Verwaltungsgebäude)
+  bzw. RAL-GZ 902 (Güte- und Prüfbestimmungen für das Gebäudereinigerhandwerk)
+- Tägliche Leistungen: Bodenreinigung (Saugen/Wischen), Papierkörbe leeren,
+  Oberflächen abwischen, Sanitäreinrichtungen reinigen und desinfizieren
+- Wöchentliche Leistungen: Spiegelreinigung, intensivere Bodenreinigung
+- Bereitstellung geeigneter Reinigungsmittel und -geräte durch den Leistenden
+
+================================================================================
+4. ERMITTLUNG DER KOSTEN (IST-ANALYSE UND ALTERNATIVEN)
+================================================================================
+
+BERATER:
+Jetzt zum Kern: Wir berechnen die Kosten beider Alternativen.
+Für die Eigenerbringung: Welche Kosten entstehen aktuell konkret?
+
+THOMAS KRÜGER:
+Das Bruttogehalt der Mitarbeiterin in E3 Stufe 3 liegt 2026 bei ca. 2.953 €/Monat
+für ein Vollzeit-VZÄ. Bei 0,5 VZÄ also ca. 1.477 €/Monat brutto.
+Dazu kommen noch Reinigungsmittel und Gerätekosten.
+
+--- TEXTBAUSTEIN ---
+
+4.1 ALTERNATIVE A – EIGENERBRINGUNG (Status quo)
+
+4.1.1 Personalkosten
+
+Grundlage: TVöD Bund, Entgeltgruppe E3, Erfahrungsstufe 3, gültig ab 01.05.2026
+(Tariferhöhung +2,8 %).
+
+  Bruttoentgelt E3 Stufe 3 (VZÄ):  ca. 3.040 €/Monat (inkl. Erhöhung Mai 2026)
+  Anteil 0,5 VZÄ:                   ca. 1.520 €/Monat brutto
+
+  Arbeitgeberanteile Sozialversicherung (ca. 20 % auf Brutto):
+    Rentenversicherung (9,3 %):        ca.   141 €/Monat
+    Krankenversicherung (ca. 7,9 %):   ca.   120 €/Monat
+    Pflegeversicherung (ca. 1,8 %):    ca.    27 €/Monat
+    Arbeitslosenversicherung (1,3 %):  ca.    20 €/Monat
+    Summe AG-Anteil SV:                ca.   308 €/Monat
+
+  Gesamtpersonalkosten/Monat:          ca. 1.828 €/Monat
+  Gesamtpersonalkosten 6 Monate:       ca. 10.968 €
+
+  Hinweis: Nicht berücksichtigt sind anteilige Kosten für Urlaub/
+  Vertretungsregelungen, da der Stellen-Anteil als bereits verplanter
+  Stellenanteil gilt.
+
+4.1.2 Sachkosten (Reinigungsmittel, Geräte)
+
+  Reinigungsmittel (800 qm, 5 Tage/Woche):
+    Erfahrungswert: ca. 0,05 €/qm/Woche
+    = 800 qm x 0,05 € x 26 Wochen = 1.040 €
+
+  Gerätekosten (anteilige Abschreibung Reinigungsmaschinen/-utensilien):
+    Pauschal: ca. 50 €/Monat = 300 €/6 Monate
+
+  Summe Sachkosten 6 Monate:           ca. 1.340 €
+
+4.1.3 Gemeinkosten / Verwaltungsaufwand (intern)
+  Nicht gesondert angesetzt (Personalverwaltung bereits in allgemeinem
+  Overhead enthalten).
+
+4.1.4 GESAMTKOSTEN ALTERNATIVE A (6 Monate):
+  Personalkosten:     10.968 €
+  Sachkosten:          1.340 €
+  ─────────────────────────────
+  GESAMT ALT. A:      12.308 €
+
+================================================================================
+
+BERATER:
+Jetzt für Alternative B. Ich habe aktuelle Marktpreise recherchiert:
+Der Quadratmeterpreis für gewerbliche Büroreinigung liegt 2026 in mittleren
+deutschen Städten (vergleichbar Erfurt) bei ca. 2,37–2,55 €/qm pro Monat
+(Quelle: Marktvergleich Großstädte 2026, z.B. Leipzig 2,37 €/qm).
+Für Erfurt als mittelgroße ostdeutsche Stadt nehmen wir ca. 2,20 €/qm/Monat
+als realistischen Marktpreis an.
+
+THOMAS KRÜGER:
+Das klingt plausibel. Und was kommen da für Kosten heraus?
+
+--- TEXTBAUSTEIN ---
+
+4.2 ALTERNATIVE B – FREMDVERGABE
+
+4.2.1 Marktpreisermittlung
+
+Recherchestand: April 2026 (Webrecherche aktueller Marktpreise)
+
+  Marktpreise gewerbliche Büroreinigung 2026 (Unterhaltsreinigung, 5 Tage/Woche):
+    - Hamburg:  ca. 2,70 €/qm/Monat
+    - München:  ca. 2,92 €/qm/Monat
+    - Frankfurt: ca. 2,80 €/qm/Monat
+    - Berlin:   ca. 2,55 €/qm/Monat
+    - Leipzig:  ca. 2,37 €/qm/Monat
+    Ansatz Erfurt (vergleichbar Leipzig/ostdeutscher Mittelwert):
+    ca. 2,20 €/qm/Monat (konservative Schätzung für Ausschreibungsergebnis)
+
+  Alternativ: Stundensatz-basierte Kalkulation
+    Marktüblicher Stundensatz Gebäudereinigung 2026: 30–35 €/Stunde netto
+    Reinigungszeit 800 qm bei Büroreinigung: ca. 3,5 Stunden/Tag
+    (Erfahrungswert: ca. 250 qm/Stunde bei Büroreinigung)
+    x 124 Reinigungstage = 434 Stunden
+    x 32,50 € (Mittelwert Stundensatz) = 14.105 €
+    ≈ 2.351 €/Monat = 2,94 €/qm/Monat → passt zu Plausibilitätsprüfung
+
+4.2.2 Kalkulierter Auftragswert
+
+  Ansatz qm-Preis: 800 qm x 2,20 €/qm/Monat x 6 Monate = 10.560 €
+  zzgl. gesetzliche MwSt. (19 %):                        +  2.006 €
+  Brutto-Auftragswert:                                    = 12.566 €
+
+  Hinweis: Bei der Bundeswehr/Bundesbehörden fällt USt an. Der Vergleich
+  erfolgt nachfolgend auf Bruttobasis, da auch die Eigenerbringung
+  Vollkosten (inkl. lohnbezogener Steuern) beinhaltet.
+
+  Netto-Vergleichswert (ohne MwSt., da diese als durchlaufender Posten
+  betrachtet werden kann und der Bundeshaushalt keine Vorsteuerabzugsberechtigung
+  hat):
+  Ansatz für Vergleich: 10.560 € netto
+
+4.2.3 Vergabebezogener Aufwand (einmalig, anteilig 6 Monate)
+  Ausschreibungsaufwand (Arbeitsstunden Vergabestelle, Ausschreibungsunterlagen):
+  Pauschal: ca. 400 € (entspricht ca. 4 Stunden Bearbeitung x mittl. Stundensatz
+  Verwaltung + Dokumentation)
+
+4.2.4 GESAMTKOSTEN ALTERNATIVE B (6 Monate, Netto-Vergleich):
+  Reinigungsleistung netto:   10.560 €
+  Vergabeaufwand (einmalig):     400 €
+  ─────────────────────────────────────
+  GESAMT ALT. B (netto):      10.960 €
+
+================================================================================
+5. KOSTENVERGLEICH UND WIRTSCHAFTLICHKEITSBEWERTUNG
+================================================================================
+
+BERATER:
+Jetzt der direkte Vergleich:
+
+--- TEXTBAUSTEIN ---
+
+5.1 Tabellarischer Kostenvergleich (Untersuchungszeitraum 6 Monate)
+
+┌──────────────────────────────────┬──────────────┬──────────────┐
+│ Kostenart                        │ Alt. A (Eigen)│ Alt. B (Fremd)│
+├──────────────────────────────────┼──────────────┼──────────────┤
+│ Personalkosten (inkl. AG-SV)     │  10.968 €    │       –      │
+│ Sachkosten (Mittel/Geräte)       │   1.340 €    │       –      │
+│ Externe Reinigungsleistung (netto)│      –       │  10.560 €    │
+│ Vergabeaufwand (einmalig)        │       –      │     400 €    │
+├──────────────────────────────────┼──────────────┼──────────────┤
+│ SUMME (netto)                    │  12.308 €    │  10.960 €    │
+└──────────────────────────────────┴──────────────┴──────────────┘
+
+Differenz (Alt. A – Alt. B):  1.348 € zugunsten Fremdvergabe
+Einsparung durch Fremdvergabe: ca. 11 % gegenüber Eigenerbringung
+
+Auf das Jahr hochgerechnet (Annualisierung):  ca. 2.696 €/Jahr
+
+5.2 Hinweis zur Barwertberechnung
+Da der Untersuchungszeitraum nur 6 Monate beträgt, ist eine Barwertabzinsung
+mit dem Kalkulationszinssatz (1,2 % p.a., BMF April 2026) nicht erforderlich.
+Die Nominalwerte sind maßgeblich.
+
+5.3 Sensitivitätsbetrachtung
+- Wenn der Marktpreis für die externe Reinigung auf 2,57 €/qm/Monat steigt
+  (entspricht dem Berliner Niveau), beträgt die externe Leistung 12.336 €
+  (netto) und die Alternativen liegen annähernd gleichauf (12.308 € vs. 12.736 €).
+- Bei Marktpreisen oberhalb von 2,55 €/qm/Monat ist die Eigenerbringung
+  wirtschaftlicher.
+- Kritischer Marktpreis (Break-even): ca. 2,45 €/qm/Monat netto
+  (= 12.308 € / (800 qm x 6 Monate))
+
+5.4 Nicht-monetäre Aspekte
+
+  Eigenerbringung (Alt. A):
+  (+) Direkter Zugriff auf Personal, flexible Reaktion auf Sonderbedarf
+  (+) Vertrautheit mit der Liegenschaft und dem Personal
+  (-) Fester Personalaufwand unabhängig von tatsächlichem Bedarf
+  (-) Keine Skalierbarkeit
+  (-) Risiko Ausfall/Krankheit ohne Vertretungsregelung
+
+  Fremdvergabe (Alt. B):
+  (+) Vertraglich garantierte Leistungsqualität, Nachweispflicht Auftragnehmer
+  (+) Kein Personalrisiko (Krankheit, Urlaub durch AN zu kompensieren)
+  (+) Fokussierung eigener Ressourcen auf Kernaufgaben
+  (-) Abhängigkeit vom Auftragnehmer, Vertragsbindung
+  (-) Einmalig höherer Aufwand durch Vergabeverfahren
+  (-) Qualitätsüberwachung erforderlich (Stichprobenkontrollen)
+
+================================================================================
+6. RISIKOBEWERTUNG
+================================================================================
+
+--- TEXTBAUSTEIN ---
+
+6.1 Risiken Alternative A (Eigenerbringung)
+- Krankheits-/Urlaubsvertretung: Bei 0,5 VZÄ besteht das Risiko längerer
+  Ausfallzeiten ohne geregelte Vertretung. Risikopotenzial: mittel.
+- Tarifsteigerungen: Weitere TVöD-Erhöhungen würden Personalkosten erhöhen.
+  Risikopotenzial: gering bis mittel.
+
+6.2 Risiken Alternative B (Fremdvergabe)
+- Preissteigerung nach Vertragslaufzeit: Bei Verlängerung oder Neuausschreibung
+  können Preise steigen. Risikopotenzial: mittel.
+- Qualitätsmängel: Externe Dienstleister können Qualitätsschwankungen aufweisen.
+  Risikominderung: Klare Leistungsbeschreibung, Kontrollmechanismen im Vertrag.
+  Risikopotenzial: gering bis mittel.
+- Vergaberechtliche Anforderungen: Unterschwellenvergabe (geschätzter Auftragswert
+  10.560 € netto < 25.000 €, Direktvergabe / Verhandlungsvergabe nach UVgO § 12
+  möglich). Kein komplexes Vergabeverfahren erforderlich.
+  Risikopotenzial: gering.
+
+================================================================================
+7. ERGEBNIS UND EMPFEHLUNG
+================================================================================
+
+BERATER:
+Auf Basis der Untersuchung empfehle ich:
+
+THOMAS KRÜGER:
+Was ist Ihr Fazit?
+
+--- TEXTBAUSTEIN ---
+
+7.1 Ergebnis
+
+Die Wirtschaftlichkeitsuntersuchung ergibt, dass die Fremdvergabe der
+Reinigungsleistung (Alternative B) für den Untersuchungszeitraum
+01.07.2026 bis 31.12.2026 wirtschaftlicher ist als die Eigenerbringung
+(Alternative A).
+
+Die externe Vergabe führt zu einer Netto-Kosteneinsparung von ca. 1.348 €
+(ca. 11 %) im Betrachtungszeitraum. Der Break-even-Preis liegt bei ca.
+2,45 €/qm/Monat – bei den aktuellen Marktpreisen in Erfurt (ca. 2,20 €/qm)
+ist ein merklicher Kostenvorteil der Fremdvergabe realistisch zu erwarten.
+
+7.2 Empfehlung
+
+Es wird empfohlen, die Unterhaltsreinigung der ca. 800 qm Bürofläche im
+Verwaltungsgebäude LogZBw Erfurt ab 01.07.2026 extern zu vergeben.
+
+Für die Vergabe wird eine Verhandlungsvergabe nach § 12 UVgO (Unterschwelle)
+empfohlen. Es sollten mindestens 3 Angebote eingeholt werden, um einen
+wettbewerblichen Preis sicherzustellen.
+
+Das freiwerdende 0,5-VZÄ-Stellenanteil sollte sorgfältig überprüft werden:
+Falls eine Umsetzung der betroffenen Mitarbeiterin auf andere Aufgaben
+möglich und sinnvoll ist, können Synergieeffekte erzielt werden. Alternativ
+ist bei Auslaufen oder Nichtbesetzung eine dauerhafte Entlastung des
+Stellenplans möglich.
+
+7.3 Vorbehalt
+Diese Empfehlung steht unter dem Vorbehalt des tatsächlichen Ausschreibungs-
+ergebnisses. Sollten im Angebotsverfahren Preise oberhalb von 2,45 €/qm/Monat
+erzielt werden, ist eine erneute Bewertung vorzunehmen.
+
+================================================================================
+8. FORMLOSES ANLAGE-BLATT (Erläuterung der Berechnungsgrundlagen)
+================================================================================
+
+Anlage 1 – Quellen und Berechnungsgrundlagen
+
+1. TVöD Bund Entgeltgruppe E3, Stufe 3, gültig ab 01.05.2026 (Tariferhöhung
+   +2,8 %): Bruttoentgelt ca. 3.040 €/Monat (Vollzeit).
+   Quelle: oeffentlichen-dienst.de/entgelttabelle/tvoed-bund.html
+
+2. Arbeitgeberanteil Sozialversicherung 2026: ca. 20 % auf Brutto.
+   Grundlage: Beitragssätze GKV (AG-Anteil ca. 7,9 % inkl. Zusatzbeitrag),
+   RV 9,3 %, PV ca. 1,8 %, ALV 1,3 %.
+
+3. Marktpreise Büroreinigung 2026 (Unterhaltsreinigung, 5 Tage/Woche):
+   - Großstädtevergleich 2026: Leipzig 2,37 €, Berlin 2,55 €, Hamburg 2,70 €,
+     Frankfurt 2,80 €, München 2,92 €/qm/Monat netto.
+   - Ansatz Erfurt: 2,20 €/qm/Monat (konservativ, unterhalb Leipzig-Niveau).
+   Quellen: mmcompact.de, franchisevergleich.eu, sol-cleaning.de (Recherche
+   April 2026).
+
+4. Stundensatz externe Gebäudereinigung 2026: 30–35 €/Stunde netto.
+   Quelle: immo-clean.de, cleanwhale.de (Recherche April 2026).
+
+5. Effektive Reinigungstage: 01.07.2026 – 31.12.2026 = 26 Kalenderwochen
+   x 5 Werktage = 130 Tage, abzgl. ca. 6 Feiertage (Thüringen) = 124 Tage.
+
+6. Kalkulationszinssatz: 1,2 % p.a. (BMF-Bekanntmachung April 2026).
+   Bei Untersuchungszeitraum < 1 Jahr: Barwertberechnung entfällt.
+
+7. Vergabeschwelle UVgO: Schätzwert 10.560 € netto < 25.000 € (Direktvergabe
+   möglich; aus Wettbewerbsgründen wird Verhandlungsvergabe mit mind. 3 Angeboten
+   empfohlen).
+
+Anlage 2 – Kostenspiegel (Zusammenfassung)
+
+  Alt. A (Eigenerbringung):   12.308 € (6 Monate, netto)
+  Alt. B (Fremdvergabe):      10.960 € (6 Monate, netto, inkl. Vergabeaufwand)
+  Vorteil Alt. B:              1.348 € (ca. 11 % Einsparung)
+
+================================================================================
+UNTERSCHRIFT / FREIGABE
+================================================================================
+
+Erstellt durch:   Thomas Krüger, LogZBw Erfurt
+Datum:            15.04.2026
+
+________________________________________________________________________________
+Ende der Wirtschaftlichkeitsuntersuchung
+================================================================================
