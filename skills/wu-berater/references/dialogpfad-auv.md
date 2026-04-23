@@ -284,7 +284,126 @@ def validate_phase4_grund(grund_enum, freitext_sonstiges=None):
     return errors
 ```
 
-**Nach Phase 4 → zu Phase 5 (Ausgaben/Kosten)**
+**Nach Phase 4 → zu Phase 4b (Wirtschaftlichkeits-Vergleich, nur für Anlagevermögen)**
+
+---
+
+## Phase 4b: Wirtschaftlichkeits-Vergleich (NUR für Anlagevermögen / Grund 3)
+
+**Kontext:** Diese Phase startet NUR, wenn User **Grund 3** (Anlagevermögen) gewählt hat.
+
+### Schritt 1: Entscheidung zur WebRecherche
+
+```
+SKILL: „Für Nichtverbrauchsgüter (wie Drucker, Fahrzeuge, Möbel) ist wichtig zu prüfen,
+        ob ein Kauf oder eine Miete/Dienstleistung wirtschaftlicher ist.
+
+Sollen wir das prüfen?
+
+[ ] ☐ Option A: Ja, bitte Mietpreise recherchieren und vergleichen
+           → Ich suche nach Mietoptionen und vergleiche die Kosten
+
+[ ] ☐ Option B: Nein, das ist nicht relevant, weil:
+           [Textfeld] z.B. „hierfür gibt es keinen Anbieter" oder „Miete ist nicht üblich"
+           → Wir gehen direkt zum Kauf über"
+```
+
+### Schritt 2a: WebRecherche & Wirtschaftlichkeits-Vergleich (wenn Option A)
+
+```python
+def wirtschaftlichkeitsvergleich_anlagevermogen(auv_data):
+    """
+    WebRecherche nach Mietpreisen + Vergleich Kauf vs. Miete/Dienstleistung.
+    NUR für Anlagevermögen (Grund 3).
+    """
+    
+    kaufpreis = auv_data['phase5']['ausgaben']  # z.B. 2.500 EUR
+    produkt = auv_data['phase1']['kaufbeschreibung']  # z.B. "Drucker"
+    
+    # SCHRITT 1: WebRecherche Mietpreise
+    print(f"🔍 Recherchiere Mietpreise für: {produkt}")
+    mietpreis_mittel = webrecherche_mietpreis(f"{produkt} miete tagesmiete")
+    # Ergebnis z.B.: 25 EUR/Tag
+    
+    if not mietpreis_mittel:
+        print("⚠️ Keine Mietpreise gefunden. Gehen wir zum Kauf über.")
+        return None
+    
+    # SCHRITT 2: Einsatztage/Jahr extrahieren (aus Bedarfsforderung, falls vorhanden)
+    einsatztage = extract_einsatztage_from_bedarf(auv_data['phase2']['bedarfsforderung'])
+    if not einsatztage:
+        einsatztage = input("Wie viele Einsatztage/Jahr ungefähr? (z.B. 220 für täglich): ")
+        einsatztage = int(einsatztage)
+    
+    # SCHRITT 3: Berechne jährliche Mietkosten
+    jährliche_mietkosten = mietpreis_mittel * einsatztage
+    
+    # SCHRITT 4: Break-even berechnen
+    breakeven_tage = kaufpreis / mietpreis_mittel
+    
+    print(f"""
+📊 WIRTSCHAFTLICHKEITS-VERGLEICH:
+
+Ihre Angaben:
+  • Kaufpreis: {kaufpreis:.2f} EUR
+  • Mietpreis (Tagesmiete): ca. {mietpreis_mittel:.2f} EUR/Tag
+  • Einsatztage/Jahr: {einsatztage} Tage
+
+Berechnung:
+  • Jährliche Mietkosten: {mietpreis_mittel:.2f} × {einsatztage} = {jährliche_mietkosten:.2f} EUR/Jahr
+  • Break-even: {kaufpreis:.2f} ÷ {mietpreis_mittel:.2f} = {breakeven_tage:.0f} Tage
+  
+Ergebnis:
+""")
+    
+    # SCHRITT 5: Entscheidungshilfe
+    if breakeven_tage < einsatztage:
+        print(f"  ✅ KAUF ist günstiger: Break-even nach {breakeven_tage:.0f} Tagen")
+        print(f"     Bei {einsatztage} Einsatztagen/Jahr amortisiert sich der Kauf schnell.")
+        return {'empfehlung': 'kauf', 'mietpreis': mietpreis_mittel, 'einsatztage': einsatztage}
+    else:
+        print(f"  ⚠️ MIETE ist günstiger: Break-even erst nach {breakeven_tage:.0f} Tagen")
+        print(f"     Bei nur {einsatztage} Einsatztagen/Jahr ist Miete sparsamer.")
+        print(f"     Jährliche Ersparnis: {jährliche_mietkosten - (kaufpreis / (breakeven_tage / einsatztage)):.2f} EUR")
+        return {'empfehlung': 'miete', 'mietpreis': mietpreis_mittel, 'einsatztage': einsatztage}
+```
+
+### Schritt 2b: User-Entscheidung (falls Miete günstiger)
+
+```
+Wenn das System feststellt, dass Miete günstiger ist:
+
+SKILL: „Die Recherche zeigt: Miete wäre günstiger als der Kauf.
+        
+        Kauf: 2.500 EUR (einmalig)
+        Miete: 5.500 EUR/Jahr → bei nur 220 Tagen/Jahr zu teuer
+        
+        Möchten Sie sich doch für Miete oder Dienstleistung entscheiden?
+        
+[ ] ☐ Ja, ich möchte die Miete-/Dienstleistungsoption prüfen
+        → Wechsel zu Dialogpfad D (Miete/DL-WU)
+        
+[ ] ☐ Nein, bleibe beim Kauf
+        → Weitermachen mit Phase 5 (AUV-Export)"
+```
+
+**Falls User zu Dialogpfad D wechselt:**
+```
+Nutzer-Daten an Dialogpfad D übergeben:
+  ✓ Phase 1: Metadaten (Dienststelle, Bearbeiter, Maßnahmenbeginn)
+  ✓ Phase 2: Bedarfsforderung (kann übernommen werden)
+  ✓ Recherche-Ergebnisse: Mietpreis + Einsatztage/Jahr
+  ✓ Hinweis: "WebRecherche zeigt Miete als wirtschaftlicher"
+```
+
+**Falls User beim Kauf bleibt:**
+```
+Dokumentation in Vermerk-Template:
+  • Zeile 18 wird gefüllt: "hierfür wurde eine Mietpreisrecherche durchgeführt..."
+  • Export zu AUV → Phase 5 weiter
+```
+
+**Nach Phase 4b → zu Phase 5 (Ausgaben/Kosten)**
 
 ---
 
@@ -553,6 +672,32 @@ Vor dem Versand prüfen:
 
 ---
 
+## Abbruch & Wechsel zu Dialogpfad D
+
+**Wann wird zu Dialogpfad D gewechselt?**
+
+Wenn User in Phase 4b (Wirtschaftlichkeits-Vergleich für Anlagevermögen):
+- WebRecherche durchführen lässt
+- System zeigt: **Miete/Dienstleistung ist günstiger**
+- User entscheidet sich: "Ja, ich möchte die Miete-Option prüfen"
+
+**Was passiert beim Wechsel?**
+
+```
+Dialogpfad AUV wird UNTERBROCHEN
+    ↓
+User-Daten werden an Dialogpfad D übergeben:
+  ✓ Dienststelle, Bearbeiter, Maßnahmenbeginn
+  ✓ Bedarfsforderung
+  ✓ Recherche-Ergebnisse (Mietpreis, Einsatztage/Jahr)
+    ↓
+Dialogpfad D startet: WU für Miete/Leasing/Dienstleistung
+```
+
+**Hinweis:** Dialogpfad D wird separat dokumentiert (noch zu erstellen).
+
+---
+
 ## Zusammenfassung: Dialogpfad AUV (Vermerk-Template) — Struktur-Übersicht
 
 **UNTERSCHIEDE von Dialogpfad A:**
@@ -578,6 +723,9 @@ Dialogpfad AUV:
   ├─ Phase 2: Bedarfsforderung (kompakt, 20–150 Zeichen)
   ├─ Phase 3: Bisherige Bedarfsdeckung (Checkboxen)
   ├─ Phase 4: Unterjährigkeit-Begründung (Checkboxen + Guard Check)
+  ├─ Phase 4b: Wirtschaftlichkeits-Vergleich (NUR für Anlagevermögen/Grund 3)
+  │           ├─ WebRecherche nach Mietpreisen (optional)
+  │           └─ Ggfs. Wechsel zu Dialogpfad D
   ├─ Phase 5: Ausgaben / Kaufpreis (Validierung)
   ├─ Phase 6: Hinweis Folgeausgaben (Info-Box)
   └─ Phase 7: Export zum Vermerk-Template
@@ -590,11 +738,15 @@ Phase 1:       2–3 Min (5 Felder eingeben + validieren)
 Phase 2:       2–3 Min (Bedarfsforderung tippen)
 Phase 3:       1 Min   (Checkbox auswählen)
 Phase 4:       1 Min   (Grund auswählen)
+Phase 4b:      0–5 Min (NUR für Anlagevermögen; optional WebRecherche)
+               • Option A (keine Recherche): <1 Min (Text eingeben)
+               • Option B (mit Recherche): 3–5 Min (Recherche + Entscheidung)
 Phase 5:       <1 Min  (Preis bestätigen)
 Phase 6:       <1 Min  (Info-Box lesen)
 Phase 7:       1–2 Min (Export + Erfolgsmeldung)
 ────────────────────────
-GESAMT:        ~7–10 Min (ohne Korrigieren)
+GESAMT:        ~8–12 Min (ohne Korrigieren; mit Phase 4b)
+               ~7–10 Min (ohne Phase 4b, falls Umlaufvermögen)
 ```
 
 ---
