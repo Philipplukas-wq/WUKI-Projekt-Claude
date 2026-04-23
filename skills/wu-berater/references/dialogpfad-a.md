@@ -41,6 +41,54 @@ Geben Sie bitte ein:
 (Danke! Ich stelle jetzt Fragen zur Bedarfsforderung …)"
 ```
 
+**Input-Validierung (Punkt 1):**
+```python
+def validate_phase1_input(dienststelle, bearbeiter, kaufbeschreibung, preis):
+    """
+    Prüft die 4 Eingabe-Felder auf Validität vor dem Dialog.
+    """
+    errors = []
+    
+    # CHECK 1: Dienststelle (2–30 Zeichen, alphanumerisch + Leerzeichen)
+    if not dienststelle or len(dienststelle) < 2 or len(dienststelle) > 30:
+        errors.append("❌ Dienststelle: mindestens 2, maximal 30 Zeichen erforderlich")
+    if not re.match(r'^[A-Za-z0-9äöüß\s\-\.]+$', dienststelle):
+        errors.append("❌ Dienststelle: Nur Buchstaben, Zahlen, Umlaute, Leerzeichen erlaubt")
+    
+    # CHECK 2: Bearbeiter (2–50 Zeichen)
+    if not bearbeiter or len(bearbeiter) < 2 or len(bearbeiter) > 50:
+        errors.append("❌ Bearbeiter: mindestens 2, maximal 50 Zeichen erforderlich")
+    
+    # CHECK 3: Kaufbeschreibung (5–100 Zeichen, nicht zu kurz)
+    if not kaufbeschreibung or len(kaufbeschreibung) < 5 or len(kaufbeschreibung) > 100:
+        errors.append("❌ Kaufbeschreibung: mindestens 5, maximal 100 Zeichen erforderlich")
+    if any(word in kaufbeschreibung.lower() for word in ['xxx', 'test', 'asdf', 'keine ahnung']):
+        errors.append("⚠️ Kaufbeschreibung wirkt unvollständig. Bitte konkretisieren.")
+    
+    # CHECK 4: Preis (50–500.000 EUR, realistische Range für unterjährig)
+    try:
+        preis_float = float(preis.replace(',', '.').replace(' EUR', '').strip())
+    except ValueError:
+        errors.append("❌ Preis: Ungültiges Zahlenformat. Bitte verwenden Sie z.B. '2.500' oder '2500'")
+        return errors
+    
+    if preis_float < 50:
+        errors.append(f"⚠️ Preis sehr niedrig ({preis_float:.2f} EUR). Ist das realistisch? (Min. 50 EUR)")
+    elif preis_float > 500000:
+        errors.append(f"⚠️ Preis sehr hoch ({preis_float:.2f} EUR). Sollte das wirklich eine unterjährige WU sein? (Max. 500.000 EUR)")
+    
+    return errors
+
+# Verwendung:
+errors = validate_phase1_input(dienststelle, bearbeiter, kaufbeschreibung, preis)
+if errors:
+    for error in errors:
+        print(error)
+    # User muss erneut eingeben
+else:
+    print("✅ Eingaben validiert, starten Sie A1-Dialog")
+```
+
 **Nach Erfassung der 4 Felder → direkt zu A1-Bedarfsforderung-Dialog (Phase 2)**
 
 ---
@@ -186,27 +234,69 @@ def intelligenter_a2_default(kaufbeschreibung, bedarfsforderung):
     Generiert A2-Text basierend auf Schlüsselwörtern in Kaufbeschreibung.
     """
     
-    # Extrahiere Produkttyp aus Bedarfsforderung für Singular/Plural
+    # Extrahiere Produkttyp aus Bedarfsforderung für Singular/Plural (Punkt 6)
     def extract_product_type(bedarfsforderung):
-        # z.B. "Druckfähigkeit" → "Drucker"
-        # "Transportfähigkeit" → "Transporter"
-        # "Sitzmöbel" → "Sitzmöbel"
-        words = bedarfsforderung.lower().split()
-        for word in ['druck', 'transport', 'sitz', 'rechen']:
-            if word in bedarfsforderung.lower():
-                return word.capitalize() + 'lösung'  # Fallback
-        return 'Ausrüstung'  # Generic Fallback
+        """
+        Explizite Mapping-Tabelle statt fuzzy Regex.
+        
+        Mapping: Funktionswort → Produkttyp
+        """
+        mapping = {
+            'druckfähigkeit': 'Drucker',
+            'druck': 'Drucker',
+            'kopie': 'Drucker',
+            'scan': 'Drucker',
+            
+            'transportfähigkeit': 'Transporter',
+            'transport': 'Transporter',
+            'beförderung': 'Transporter',
+            'fahrzeug': 'Transporter',
+            
+            'rechenkapazität': 'Arbeitsplatzrechner',
+            'computer': 'Arbeitsplatzrechner',
+            'rechner': 'Arbeitsplatzrechner',
+            'laptop': 'Laptop',
+            'notebook': 'Laptop',
+            
+            'sitz': 'Sitzmöbel',
+            'möbel': 'Möbel',
+            
+            'liegenschaft': 'Liegenschaft',
+            'immobilie': 'Immobilie',
+        }
+        
+        bedarfsforderung_lower = bedarfsforderung.lower()
+        
+        # Suche nach längsten Match (z.B. "Druckfähigkeit" vor "Druck")
+        best_match = 'Gerät'  # Fallback
+        best_length = 0
+        
+        for keyword, produkttyp in mapping.items():
+            if keyword in bedarfsforderung_lower and len(keyword) > best_length:
+                best_match = produkttyp
+                best_length = len(keyword)
+        
+        return best_match
     
     produkttyp = extract_product_type(bedarfsforderung)
+    beschreibung_lower = kaufbeschreibung.lower()
     
-    # Logik
-    if any(word in kaufbeschreibung.lower() for word in ['neu', 'neu hinzugekommen', 'neu erforderlich']):
+    # Logik mit Priorisierung + Negations-Handling (Punkt 7)
+    
+    # PRIORITÄT 1: Negationen prüfen (z.B. "nicht neu" sollte nicht als "neu" erkannt werden)
+    if any(word in beschreibung_lower for word in ['nicht neu', 'keine neue', 'ist nicht neu']):
+        # User sagt explizit "nicht neu" → Fall 2/3
+        pass  # Weitermachen zu PRIORITÄT 2
+    # PRIORITÄT 2: Explizit "neu" + keine Negation
+    elif any(word in beschreibung_lower for word in ['neu hinzugekommen', 'neu erforderlich', '^neu']):
         return "Der Bedarf ist neu entstanden und wurde bisher nicht erfüllt."
     
-    elif any(word in kaufbeschreibung.lower() for word in ['alt', 'ersatz', 'austausch', 'zu alt']):
+    # PRIORITÄT 3: Ersatz (höhere Priorität als "zusätzlich" falls beide vorhanden)
+    elif any(word in beschreibung_lower for word in ['alt', 'ersatz', 'austausch', 'zu alt', 'abgelöst']):
         return f"Der Bedarf wurde bisher durch einen älteren {produkttyp} gedeckt, der nicht mehr ausreichend kapazitätsgerecht ist und daher ersetzt werden soll."
     
-    elif any(word in kaufbeschreibung.lower() for word in ['zusätzlich', 'ergänzung', 'erweiterung']):
+    # PRIORITÄT 4: Ergänzung/Erweiterung
+    elif any(word in beschreibung_lower for word in ['zusätzlich', 'ergänzung', 'erweiterung', 'hinzu']):
         return f"Der Bedarf wird zusätzlich zu bestehenden {produkttyp}n erfüllt, da die bisherige Kapazität nicht ausreicht."
     
     else:
@@ -284,47 +374,71 @@ GRUND 4: Spezialisierte Fachkompetenz erforderlich, intern nicht vorhanden
 "
 ```
 
-**Guard Check Logik:**
+**Guard Check Logik (Punkt 3 — Kontextbasiert, mit Negations-Handling):**
 ```python
 def validate_a3_grund(user_choice, datum=None, quellenangabe=None):
     """
-    Prüft A3-Grund gegen verbotene Schlüsselwörter.
+    Prüft A3-Grund gegen unzulässige Gründe.
     KEINE Freitext-Eingaben außer Datum und Quellenangabe.
-    """
-    forbidden_patterns = [
-        r'(?:haushalt|budget|mittel|geld)', 
-        r'(?:personal|dienstposten|stellen)',
-        r'(?:infrastruktur|raum|ressourcen)',
-        r'(?:kosten|ausgaben|teuer)'
-    ]
     
+    Wichtig: user_choice ist ENUM (1–4), keine Freitext. 
+    Kontextbasierte Prüfung nur auf Quellenangabe anwendbar.
+    """
     # user_choice ist ENUM (Grund 1-4), keine Freitext
     if user_choice not in [1, 2, 3, 4]:
         return ❌ FEHLER: „Bitte wähle einen der 4 vorgegebenen Gründe."
     
-    # Grund 3 & 4 erfordern Quellenangabe
-    if user_choice in [3, 4] and not quellenangabe:
-        return ❌ FEHLER: „Quellenangabe erforderlich (z.B. 'Schreiben Personalstelle vom XYZ')"
+    # Grund 3 & 4 erfordern Quellenangabe + Format-Prüfung
+    if user_choice in [3, 4]:
+        if not quellenangabe:
+            return ❌ FEHLER: „Quellenangabe erforderlich"
+        
+        # Prüfe Quellenformat: sollte Stelle + Datum enthalten
+        if not re.search(r'\d{1,2}\.\d{1,2}\.\d{4}', quellenangabe):
+            return ⚠️ WARNUNG: „Quellenangabe sollte ein Datum enthalten (z.B. 15.04.2026)"
     
     return ✅ Grund ist zulässig
 ```
 
-**Guard Check — AUTOMATISCHE PRÜFUNG:**
+**Guard Check — AUTOMATISCHE PRÜFUNG (Punkt 3 — Kontextbasiert):**
 ```python
-def validate_a3_grund(grund_text):
-    forbidden_patterns = [
-        r'(?:haushalt|budget|mittel|geld)', 
-        r'(?:personal|dienstposten|stellen)',
-        r'(?:infrastruktur|raum|ressourcen)',
-        r'(?:kosten|ausgaben|teuer)'
-    ]
+def validate_a3_grund_text(grund_enum, quellenangabe_text=None):
+    """
+    Automatische Prüfung: Grund ist strukturiert (ENUM), daher keine Freitext-Regex nötig.
     
-    for pattern in forbidden_patterns:
-        if re.search(pattern, grund_text, re.IGNORECASE):
-            return ❌ FEHLER: „Dieser Grund ist nicht zulässig. 
-                           Verwende bitte nur die vorgegebenen Optionen."
+    ABER: Wenn User manuell Quellenangabe editiert, dann prüfe ob sie verbotene
+    Gründe verrät (z.B. "weil wir kein Budget haben" statt zeitliche Rahmenbedingung).
+    """
     
-    return ✅ Grund ist zulässig
+    if not quellenangabe_text:
+        return ✅  # Nur strukturierter Input, akzeptiert
+    
+    # Prüfe CONTEXT: Grund 3 sollte zeitlich sein, nicht finanziell
+    if grund_enum == 3:  # Zeitliche Frist
+        forbidden_budget_words = [
+            r'(?:haushalt|budget|geld|kosten|teuer)',
+            r'(?:finanzierung|mittel)',
+        ]
+        for pattern in forbidden_budget_words:
+            if re.search(pattern, quellenangabe_text, re.IGNORECASE):
+                # Aber nur blockieren wenn NICHT als Begründung FÜR zeitliche Frist
+                # z.B. OK: "Beschaffung muss bis 31.12.2026 abgeschlossen sein, 
+                #          da danach Budgetjahr endet"
+                # NICHT OK: "Können nicht kaufen, weil kein Budget"
+                if 'weil' in quellenangabe_text.lower() and 'budget' in quellenangabe_text.lower():
+                    return ❌ FEHLER: „Das ist kein zulässiger Grund. Grund 3 ist ZEITLICH, nicht FINANZIELL."
+    
+    # Grund 4 sollte Fachkompetenz sein, nicht Personal/Budget
+    if grund_enum == 4:  # Spezialisierte Kompetenz
+        forbidden_patterns = [
+            r'(?:haushalt|budget|kosten)',  # nicht finanziell
+            r'(?:personalausstattung|zu wenig mitarbeiter)',  # nicht Personalmangel (→ würde Grund 1 sein)
+        ]
+        for pattern in forbidden_patterns:
+            if re.search(pattern, quellenangabe_text, re.IGNORECASE):
+                return ❌ FEHLER: „Das ist kein zulässiger Grund. Grund 4 ist FACHKOMPETENZ, nicht PERSONAL/BUDGET."
+    
+    return ✅  # Quellenangabe passt zu Grund
 ```
 
 **Belegpflicht bei zeitlichen Rahmenbedingungen:**
@@ -341,15 +455,42 @@ Wenn User „Grund 3" wählt, MUSS User:
 **NICHT vollständig automatisch — WebRecherche ja, aber mit User-Bestätigung der Annahmen:**
 
 ```python
-# SCHRITT 1: WebRecherche Mietpreise
+# SCHRITT 1: WebRecherche Mietpreise mit Plausibilitätsprüfung (Punkt 9)
 kaufpreis = 2500  # aus Feld 4
 produkt = "Drucker"  # aus Feld 3 extrahiert
+
+# Normalwertrange pro Produkttyp (EUR/Tag)
+normal_ranges = {
+    'Drucker': (15, 50),
+    'Laptop': (25, 75),
+    'Transporter': (50, 200),
+    'Sitzmöbel': (10, 30),
+}
 
 try:
     # WebRecherche: Mietpreise für Drucker
     mietpreis_range = webrecherche_mietpreis(f"{produkt} mieten Tagesmiete")
     # Ergebnis z.B.: (15, 35)  # EUR/Tag Range
     mietpreis_mittel = (mietpreis_range[0] + mietpreis_range[1]) / 2  # z.B. 25 EUR/Tag
+    
+    # PLAUSIBILITÄTSPRÜFUNG (Punkt 9)
+    normal_range = normal_ranges.get(produkt, (10, 200))
+    
+    if mietpreis_mittel < normal_range[0]:
+        print(f"⚠️ WARNUNG: Mietpreis {mietpreis_mittel:.2f} EUR/Tag ist ungewöhnlich niedrig.")
+        print(f"   Normal für {produkt}: {normal_range[0]}–{normal_range[1]} EUR/Tag")
+        user_confirm = input("Trotzdem verwenden? [Ja/Nein]: ")
+        if user_confirm.lower() != 'ja':
+            mietpreis_mittel = None  # Fallback zu manueller Eingabe
+    
+    elif mietpreis_mittel > normal_range[1] * 2:  # 2x über Obergrenze = Ausreißer
+        print(f"⚠️ WARNUNG: Mietpreis {mietpreis_mittel:.2f} EUR/Tag ist ungewöhnlich hoch (Ausreißer).")
+        print(f"   Normal für {produkt}: {normal_range[0]}–{normal_range[1]} EUR/Tag")
+        print(f"   Mögliche Ursachen: Spezialgerät, Wochenend-Miete, Verleih statt professionelle Miete")
+        user_confirm = input("Trotzdem verwenden? [Ja/Nein]: ")
+        if user_confirm.lower() != 'ja':
+            mietpreis_mittel = None  # Fallback zu manueller Eingabe
+
 except:
     # Fallback wenn WebRecherche fehlschlägt
     print("⚠️ WebRecherche Mietpreise fehlgeschlagen. Bitte manuell eingeben.")
@@ -398,33 +539,76 @@ DANN: Break-even berechnen und Text generieren
 **Output (nach Bestätigung):**
 > „Eine Anmietung ist wirtschaftlich nicht vorteilhaft. Tagesmiete ca. 25 EUR (Anlage MR, Nr. 2), Kaufpreis ca. 2.500 EUR (Anlage MR, Nr. 1). Amortisations-Break-even: 100 Einsatztage. Da das Gerät täglich eingesetzt wird (220 Tage/Jahr), ist der Kauf deutlich wirtschaftlicher."
 
-**Fallback-Szenario 1: WebRecherche fehlgeschlagen**
+**Wichtig — Punkt 4: Dokumentation der Break-even Annahmen**
+
+Die Break-even-Rechnung ist vereinfacht und basiert auf folgenden Annahmen:
 ```
-SKILL: „⚠️ WebRecherche Mietpreise für [Produkttyp] konnte nicht durchgeführt werden.
-        (Grund: Netzwerkfehler / Keine Ergebnisse / Rate Limiting)
-        
-        Drei Optionen:
-        [ ] A) Mit anderen Suchbegriffen erneut versuchen
-            Suchbegriff: [Eingabe] → [Skill recherchiert erneut]
-        
-        [ ] B) Manuell eingeben
-            Tagesmiete für [Produkttyp]: ___ EUR/Tag
-            [Skill berechnet Break-even mit eingegebener Zahl]
-        
-        [ ] C) A4 überspringen
-            (Dann entfällt die Miete-Ausschlussbegründung im Dokument
-             und nur das Kaufpreis-Angebot wird dokumentiert)"
+Break-even (Tage) = Kaufpreis / Tagesmiete
+
+Beispiel:
+  Kaufpreis: 2.500 EUR
+  Tagesmiete: 25 EUR
+  Break-even: 2.500 / 25 = 100 Tage
 ```
 
-**Fallback-Szenario 2: WebRecherche erfolgreich, aber User zweifelt Ergebnis**
+**ANNAHMEN die NICHT berücksichtigt sind:**
+- ❌ Wartungskosten (Toner, Service, Reparaturen)
+- ❌ Energieverbrauch (Strom für Drucker)
+- ❌ Inflationsraten für Multi-Jahr-Vergleiche
+- ❌ Restwert des Geräts nach Nutzung
+
+**Wirklichkeit (beispielhaft für Drucker):**
 ```
-SKILL (nach Recherche): „⚠️ Recherche zeigt: Tagesmiete ca. 25 EUR/Tag
-        Sie haben Zweifel?
-        
-        [ ] A) Diese Zahl ist zu hoch/niedrig. Korrekt ist: ___ EUR/Tag
-        [ ] B) Mit anderen Suchbegriffen neu recherchieren
-        [ ] C) A4 komplett weglassen (kein Miete-Text im Dokument)"
+Kaufpreis: 2.500 EUR
++ Wartung/Jahr: 500 EUR (Toner, Service)
++ Strom/Jahr: 100 EUR
+= Effektive Kosten/Jahr: 3.100 EUR (Jahr 1), 600 EUR (Jahre 2+)
+
+Miete: 25 EUR/Tag × 220 Tage/Jahr = 5.500 EUR/Jahr
+→ Break-even nach realistischer Rechnung: 2–3 Jahre, nicht 100 Tage
+
+ABER: Für unterjährig (keine Folgeausgaben) ist die vereinfachte Rechnung ausreichend,
+weil Wartungskosten nicht anfallen.
 ```
+
+**Empfehlung für die Dokumentation in A4:**
+Ergänze den Satz um diese Klarstellung:
+> „Eine Anmietung ist wirtschaftlich nicht vorteilhaft. Tagesmiete ca. 25 EUR (Anlage MR, Nr. 2), 
+> Kaufpreis ca. 2.500 EUR (Anlage MR, Nr. 1). Amortisations-Break-even: 100 Einsatztage 
+> (ohne Berücksichtigung von Wartungskosten, da diese nicht anfallen). 
+> Da das Gerät täglich eingesetzt wird (220 Tage/Jahr), ist der Kauf deutlich wirtschaftlicher."
+
+**Fallback-Szenarien (Punkt 5 — Vereinfacht auf 2 Pfade):**
+
+**Szenario A: WebRecherche erfolgreich**
+```
+SKILL: „Recherche ergibt: Tagesmiete für [Produkttyp] ca. 25 EUR/Tag
+       Ihre Einsatztage/Jahr (aus Bedarfsforderung): 220 Tage
+       → Jährliche Mietkosten: 5.500 EUR
+       → Break-even: 100 Einsatztage (vs. Kaufpreis 2.500 EUR)
+
+Passt dieser Mietpreis zu Ihrer Realität?
+[ ] Ja, so ist richtig → weitermachen mit Break-even-Text
+[ ] Nein, Mietpreis ist anders: ___ EUR/Tag → [Skill berechnet neu]
+[ ] A4 komplett überspringen → (kein Miete-Text im Dokument)"
+```
+
+**Szenario B: WebRecherche fehlgeschlagen**
+```
+SKILL: „⚠️ WebRecherche Mietpreise für [Produkttyp] fehlgeschlagen.
+        Zwei Optionen:
+
+[ ] A) Ich gebe den Mietpreis manuell ein
+       Tagesmiete: ___ EUR/Tag
+       [Skill berechnet Break-even mit dieser Zahl]
+
+[ ] B) A4 überspringen (kein Miete-Text im Dokument)"
+```
+
+**Rationale für Vereinfachung:**
+- ❌ "Mit anderen Suchbegriffen erneut versuchen" = zu komplex, User verliert sich
+- ✅ "A-oder-B": Manuell eingeben ODER A4 weglassen = klar und einfach
+- ✅ Nach erfolgreicher Recherche kann User einfach Zahl manuell überschreiben
 
 **Implementierungs-Hinweis:**
 ```python
@@ -501,49 +685,102 @@ else:
 
 ---
 
-## Korrektur-Workflow (Punkt 9 — wenn User Änderungen will)
+## Korrektur-Workflow (Punkt 12 — detailliert)
 
 **Szenario 1: User korrigiert A1 Bedarfsforderung**
 ```
 USER: „Kann ich die Bedarfsforderung noch ändern?"
 SKILL: „Ja, welchen Teil möchtest du anpassen?
-        [ ] Funktionen
-        [ ] Kapazität
-        [ ] Farbe
-        [ ] Netzwerk
-        [ ] Einsatzhäufigkeit
-        [ ] Alles neu machen"
+        [ ] Nur Kapazität (Menge/Zeitspanne)
+        [ ] Nur Funktionen / Ausstattung
+        [ ] Nur Einsatzhäufigkeit / Tage pro Jahr
+        [ ] Mehreres davon
+        [ ] Komplett neu machen"
 
-→ NEUER DIALOG für geänderte Punkte
-→ A1 wird NEU generiert
-→ A2–A6 werden basierend auf neuer A1 NEU berechnet
-→ Keine Neubestätigung der bereits korrekten A2–A3 nötig
+→ NEUER DIALOG NUR für geänderte Fragen (z.B. nur Kapazität)
+→ A1 wird NEU generiert (mit aktualisierten Werten)
+→ AUTOMATISCH berechnet:
+   - A2 wird mit neuer Bedarfsforderung abgeglichen
+   - A4 Break-even wird neu berechnet (falls Einsatztage geändert)
+→ User BESTÄTIGT A1 erneut, A2 und A4 gelten automatisch (kein Re-approval nötig)
 ```
 
-**Szenario 2: User mag A4 WebRecherche-Ergebnis nicht**
+**Szenario 2: User mag A3 Ausschluss-Grund nicht**
+```
+USER: „Der Grund für A3 passt nicht, ich korrigiere"
+SKILL: „Welcher Grund passt besser?
+        [ ] Grund 1: Kein geeignetes Gerät intern
+        [ ] Grund 2: Verbrauchsgut verbraucht
+        [ ] Grund 3: Zeitliche Frist (mit Datum)
+        [ ] Grund 4: Spezialisierte Kompetenz (mit Beleg)"
+
+→ A3 wird mit neuem Grund neu generiert
+→ Guard Check prüft den neuen Grund
+→ Falls Grund 3 oder 4: User gibt neue Quellenangabe ein
+→ A6 Validierung läuft vor Export erneut
+```
+
+**Szenario 3: User mag A4 WebRecherche-Ergebnis nicht**
 ```
 USER: „Der Mietpreis von 25 EUR/Tag passt nicht"
-SKILL: „Okay, drei Optionen:
-        [ ] Mit anderen Suchbegriffen erneut recherchieren
-        [ ] Manuell eingeben (z.B. 35 EUR/Tag)
-        [ ] Punkt A4 komplett überspringen (= kein Miete-Ausschluss-Text)"
+SKILL: „Zwei Optionen:
+        [ ] A) Ich gebe den korrekten Mietpreis ein: ___ EUR/Tag
+        [ ] B) A4 komplett überspringen (= kein Miete-Text im Dokument)"
 
-→ A4 wird ANGEPASST (nicht ganz neu)
-→ Break-even neu berechnet
-→ Text wird neu generiert
+→ A4 wird ANGEPASST (nur Mietpreis / Löschung, nicht ganz neu)
+→ Break-even neu berechnet (falls A gewählt)
+→ Text wird neu generiert oder gelöscht (falls B gewählt)
 ```
 
-**Szenario 3: User möchte Details nach der Generierung ändern**
+**Szenario 4: User korrigiert nach Export (vor Versand)**
 ```
-Allgemein:
-- Jeder Schritt A1–A5 kann nach Generierung noch angepasst werden
-- User kann Freitext editieren (aber Validierung wird erneut durchgeführt)
-- Vor Export werden alle Änderungen nochmal validiert
+USER: (nach erfolgreicher Validierung) „Ich möchte A2 noch ändern"
+SKILL: „Okay, welcher Text passt besser?"
+       [Textfeld] mit aktuellem A2-Text editierbar
+
+→ User editiert A2 manuell
+→ Vor Re-Export: validate_wu_unterjahrig_extended() läuft erneut
+→ Falls Validierung OK: Re-Export oder direkt versenden
+→ Falls Fehler: Hinweis auf Fehlerstelle, erneute Korrektur erforderlich
+```
+
+**Allgemeine Regel:**
+```
+NACH einem Korrektur-Schritt:
+  1. Betroffene Felder A1–A5 werden NEU generiert/angepasst
+  2. Abhängige Felder (A2 hängt von A1, A4 hängt von A1) werden AUTO-AKTUALISIERT
+  3. KEINE Neubestätigung von bereits korrekten Feldern nötig
+  4. Vor Export: ALLE Validierungen laufen erneut (validate_wu_unterjahrig_extended)
+
+VERSIONIERUNG:
+  - Alte Versionen werden nicht gespeichert (nur aktuelle = Version 1)
+  - Falls User mehrfach korrigiert: wird immer Version 1 exportiert
+  - Dateiname ändert sich nicht zwischen Korrekturen (bleibt Version 1)
 ```
 
 ---
 
-## Warum A3 und A4? — Redundanz erklärt (Punkt 11)
+## Satzmuster-Konsistenz (Punkt 13)
+
+**Konsistenz-Check gegen satzmuster-ac.md:**
+
+| Schritt | In dialogpfad-a.md | In satzmuster-ac.md | Status |
+|---------|-------------------|-------------------|--------|
+| A1 | "Die [Dienststelle] benötigt eine Druck- und Kopierfähigkeit..." | "Die [Dienststelle] benötigt [funktionale Beschreibung]..." | ⚠️ Beispiel-Level unterschiedlich |
+| A2 | "Der Bedarf wurde bisher durch..." (intelligenter Default) | "Der Bedarf wurde bisher durch [Kauf vergleichbarer Güter...]" | ✅ Konsistent |
+| A3 | "Eine Eigenleistung scheidet aus, da [Grund]..." | "Eine Eigenleistung scheidet aus, da [zulässiger Grund...]" | ✅ Konsistent |
+| A4 | "Eine Anmietung ist wirtschaftlich nicht vorteilhaft..." | "Eine Anmietung ist wirtschaftlich nicht vorteilhaft..." | ✅ Identisch |
+| A5 | "Für [Produkt] fallen nach Anschaffung keine Folgeausgaben an..." | "Für [Bezeichnung] fallen nach Anschaffung keine Folgeausgaben an..." | ✅ Konsistent |
+
+**Konsistenz-Status:**
+- ✅ A2, A3, A4, A5: Satzmuster in beiden Dateien identisch
+- ⚠️ A1: dialogpfad-a.md zeigt konkrete Beispiele (Drucker, Laptop, Transporter) — satzmuster-ac.md zeigt generisches Satzmuster
+  - Lösung: A1-Beispiele in dialogpfad-a.md sind KONKRETISIERUNG des generischen Satzmusters in satzmuster-ac.md
+  - Keine Inkonsistenz, sondern Detaillierungsgrad unterschiedlich
+
+---
+
+## Warum A3 und A4? — Redundanz erklärt (Punkt 14)
 
 **Frage:** „Die Bedarfsforderung sagt bereits, was gebraucht wird. Warum müssen wir EXTRA dokumentieren, dass Eigenleistung / Miete ausscheidet?"
 
@@ -640,12 +877,13 @@ wu_data = {
         # A5: Unterjährigkeit
         'a5_unterjährigkeit': '[Standard-Text A5]',
         
-        # Häkchen für Validierung
+        # Häkchen für Validierung (Punkt 11)
         'haken': {
-            'kauf_benoetigt':      True,    # immer True in Dialog A
-            'eigenleistung_sonst': True,    # aus A3 bestätigt
-            'miete_sonstiges':     True,    # aus A4 bestätigt
-            'keine_folgeausgaben': True,    # aus A5 bestätigt
+            'kauf_benoetigt':      True,    # immer True in Dialogpfad A (keine andere Option)
+                                            # → kann in Zukunft gelöscht werden
+            'eigenleistung_sonst': True,    # aus A3: User hat Grund angegeben + bestätigt
+            'miete_sonstiges':     True,    # aus A4: User hat Mietpreis bestätigt oder übersprungen
+            'keine_folgeausgaben': True,    # aus A5: User bestätigt keine Folgeausgaben
         },
         
         # Kaufpreis (aus Feld 4)
@@ -726,12 +964,15 @@ def validate_wu_unterjahrig_extended(wu_data):
             )
             break
     
-    # CHECK 4: Miete-Ausschluss — auf verbotene Gründe prüfen
+    # CHECK 4: Miete-Ausschluss — auf verbotene Gründe prüfen (Bug-Fix)
     miete_text = wu_data['inhalt']['miete_begruendung']
-    if ground in miete_text.lower():
-        errors.append(
-            f"❌ A4 (Ausschluss Miete) enthält unzulässigen Grund: '{ground}'. "
-        )
+    for ground in forbidden_grounds:
+        if ground in miete_text.lower():
+            errors.append(
+                f"❌ A4 (Ausschluss Miete) enthält unzulässigen Grund: '{ground}'. "
+                f"A4 sollte NUR wirtschaftliche Break-even-Argumentation enthalten."
+            )
+            break  # nur eine Fehlermeldung pro Check
     
     # CHECK 5: Pflichtfelder — alles vorhanden?
     if not wu_data['inhalt'].get('bedarfsforderung'):
