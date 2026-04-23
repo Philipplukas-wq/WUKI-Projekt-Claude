@@ -292,21 +292,46 @@ def validate_phase4_grund(grund_enum, freitext_sonstiges=None):
 
 **Kontext:** Diese Phase startet NUR, wenn User **Grund 3** (Anlagevermögen) gewählt hat.
 
-### Schritt 1: Entscheidung zur WebRecherche
+### Schritt 1: Entscheidung zur WebRecherche (3 Optionen)
 
 ```
 SKILL: „Für Nichtverbrauchsgüter (wie Drucker, Fahrzeuge, Möbel) ist wichtig zu prüfen,
         ob ein Kauf oder eine Miete/Dienstleistung wirtschaftlicher ist.
 
-Sollen wir das prüfen?
+Bitte wählen Sie:
 
-[ ] ☐ Option A: Ja, bitte Mietpreise recherchieren und vergleichen
-           → Ich suche nach Mietoptionen und vergleiche die Kosten
+[ ] ☐ OPTION A: Ja, bitte Mietpreise recherchieren und vergleichen
+           → Ich suche nach Mietoptionen und vergleiche Kauf vs. Miete/Dienstleistung
 
-[ ] ☐ Option B: Nein, das ist nicht relevant, weil:
-           [Textfeld] z.B. „hierfür gibt es keinen Anbieter" oder „Miete ist nicht üblich"
-           → Wir gehen direkt zum Kauf über"
+[ ] ☐ OPTION B: Nein, einen anderen Grund eingeben
+           [Textfeld] z.B. „Miete ist nicht üblich für diesen Gerätetyp"
+           → Wir gehen direkt zum Kauf über
+
+[ ] ☐ OPTION C: hierfür kein Anbieter gefunden werden konnte
+           → Standard-Text wird verwendet, Wir gehen direkt zum Kauf über"
 ```
+
+**Mapping der Optionen:**
+
+| Option | Aktion | Ergebnis |
+|--------|--------|----------|
+| **A** | WebRecherche durchführen | Vergleich Kauf vs. Miete; ggfs. Wechsel zu Dialogpfad D |
+| **B** | Nutzer tippt Grund | Grund wird dokumentiert, Weitermachen mit AUV-Export |
+| **C** | Vordefinierter Grund | "hierfür kein Anbieter gefunden werden konnte" wird dokumentiert, Weitermachen mit AUV-Export |
+
+### Schritt 2: Ablauf nach Nutzer-Wahl
+
+**Falls OPTION B oder C gewählt (keine WebRecherche):**
+
+```
+Grund wird dokumentiert und in Zeile 18 des Templates eingetragen:
+  • Option B: [User-eingegeben, z.B. „Miete ist nicht üblich für diesen Gerätetyp"]
+  • Option C: „hierfür kein Anbieter gefunden werden konnte"
+
+→ Weitermachen mit Phase 5 (Ausgaben/Kosten)
+```
+
+**Falls OPTION A gewählt (WebRecherche durchführen):**
 
 ### Schritt 2a: WebRecherche & Wirtschaftlichkeits-Vergleich (wenn Option A)
 
