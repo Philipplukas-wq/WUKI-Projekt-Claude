@@ -302,7 +302,13 @@ Bitte wählen Sie:
            → Ich suche nach Mietoptionen und vergleiche Kauf vs. Miete/Dienstleistung
 
 [ ] ☐ OPTION B: Nein, einen anderen Grund eingeben
-           [Textfeld] z.B. „Miete ist nicht üblich für diesen Gerätetyp"
+           Bitte wählen Sie einen vorgefertigten Grund:
+           
+           [ ] Miete ist nicht üblich für diesen Gerätetyp
+           [ ] Werkzeug muss eigenständig verfügbar sein, keine externe Miete
+           [ ] Wartungsarbeiten erfordern sofortige Verfügbarkeit
+           [ ] Sonstiges: [Freitextfeld, falls keiner passt]
+           
            → Wir gehen direkt zum Kauf über
 
 [ ] ☐ OPTION C: hierfür kein Anbieter gefunden werden konnte
