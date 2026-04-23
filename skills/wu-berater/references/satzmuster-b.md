@@ -44,16 +44,20 @@
 
 ## Kap. 1.2 Bedarfsprognose
 
+**→ Siehe detaillierte Referenz: `bedarfsprognose-methode.md`**
+
+Kurzfassung hier:
+
 **WENN BEDARF KONSTANT IST (Standard):**
 > „Der Bedarf wird über den gesamten Betrachtungszeitraum von [X] Jahren als **konstant**
-> eingeschätzt. Es ist nicht mit einer wesentlichen Änderung zu rechnen, da [Begründung].
+> eingeschätzt. Es ist nicht mit einer wesentlichen Änderung zu rechnen, da [Begründung aus Kap. 2].
 > Die Nutzungshäufigkeit beträgt voraussichtlich [X mal/Jahr bzw. kontinuierlich]."
 
 **Konkretbeispiel (konstant):**
 > „Der Bedarf wird über den gesamten Betrachtungszeitraum von 10 Jahren als **konstant**
 > eingeschätzt. Es ist nicht mit einer wesentlichen Änderung zu rechnen, da die 
-> Lagerwirtschaftsprozesse stabilen strukturellen Aufgaben entsprechen. Die Nutzungshäufigkeit 
-> beträgt voraussichtlich 250 bis 280 Arbeitstage pro Jahr = 1.100 bis 1.400 Betriebsstunden jährlich."
+> Lagerwirtschaftsprozesse stabilen strukturellen Aufgaben entsprechen (siehe Kap. 2). 
+> Die Nutzungshäufigkeit beträgt voraussichtlich 250 bis 280 Arbeitstage pro Jahr."
 
 ---
 
@@ -71,15 +75,62 @@ Erstelle **IMMER eine Tabelle** mit den Bedarfen pro Kalenderjahr.
 > „Der Bedarf wird sich über den Betrachtungszeitraum von 10 Jahren verändern. Folgende Bedarfe 
 > werden für die einzelnen Kalenderjahre prognostiziert:"
 
-[Dann Tabelle einfügen mit Jahr und entsprechender Bedarfsmenge]
+[Dann Tabelle]
 
 **Im anschließenden Fließtext:**
-> „Die Bedarfssteigerung in [Jahr] ist begründet durch [Erklärung]. Der Rückgang in [Jahr] 
-> resultiert aus [Erklärung]."
+> „Die Bedarfssteigerung in [Jahr] ist begründet durch [Erklärung, mit Quellenangabe]. 
+> Der Rückgang in [Jahr] resultiert aus [Erklärung]. (vgl. Anlage [X]: [Quelle])"
+
+**Wichtig — Quelle dokumentieren:**
+- Konstant: Verweis auf Kap. 2 (Ausgangslage)
+- Variabel: Schriftliche Quelle (E-Mail, Beschluss, Stellungnahme) mit Datum und Verfasser
+  - **Bevorzugt:** Aussage Fachbereich per E-Mail (z.B. „Gemäß E-Mail Fachbereich XYZ (Name) vom Datum")
 
 ## Kap. 1.3 Rahmenbedingungen
-> „[Rechtlich/Organisatorisch/Zeitlich] scheidet Option [X] aus, da [konkreter Grund].
-> Wenn zeitliche RB als Aussonderungsgrund: Nachweis beifügen (vgl. Anlage [X])."
+
+**STRUKTUR:** Rahmenbedingungen sind **unabdingbare Vorgaben, die Optionen ausschließen können**. 
+Die AR A-2400/62 unterscheidet vier Kategorien mit jeweils konkreten Beispielen:
+
+### 1.3.1 Rechtliche Rahmenbedingungen
+Beispiele: Gesetze, Verwaltungsvorschriften, spezifische Regelungen
+
+**Satzmuster:**
+> „Die Maßnahme unterliegt rechtlichen Rahmenbedingungen. Nach [Gesetz/Regelung, z.B. Arbeitsschutzgesetz § 12 (3) / Bundes-Klimaschutzgesetz / IT-Sicherheitsgesetz] [konkrete Anforderung]."
+
+**Konkretbeispiel:**
+> „Die Maßnahme unterliegt dem Arbeitsschutzgesetz § 12 (3). Demnach müssen regelmäßige Sicherheitsunterweisungen durchgeführt werden, mindestens jährlich. Dies schließt bestimmte Outsourcing-Optionen aus, wenn externe Partner diese Schulungen nicht garantiert erbringen können."
+
+### 1.3.2 Organisatorische Rahmenbedingungen
+Beispiele: BMVg-Erlasse, Kommandoweisungen, Dienstverträge, interne Regelungen
+
+**Satzmuster:**
+> „Organisatorisch ist die Maßnahme durch [Erlass/Befehl/Vereinbarung, z.B. BMVg Erlass 123 – Az 45-67 / Leistungsvertrag xyz / Allgemeine Regelung A-2400/62] gebunden."
+
+**Konkretbeispiel:**
+> „Nach dem Leistungsvertrag zwischen BMVg und BAIUDBw vom 15.03.2024 sind Kernaufgaben der Infrastrukturverwaltung nicht fremdvergebar. Dies schließt eine vollständige Privatisierung aus."
+
+### 1.3.3 Zeitliche Rahmenbedingungen
+Beispiele: Termine, Fristen, Stichtage, an denen Maßnahmen realisiert sein müssen
+
+**Satzmuster:**
+> „Die Maßnahme muss bis zum [Datum] abgeschlossen und nutzbar sein. / Der Wirkbetrieb muss zum [Datum] aufgenommen werden."
+
+**Konkretbeispiel:**
+> „Die Maßnahme muss bis 30. Juni 2026 einsatzbereit sein, um die geplante Mobilisierung unterstützen zu können. **Nachweis erforderlich: vgl. Anlage [X]** (z.B. Stellungnahme Operativer Bereich zur zeitlichen Notwendigkeit)."
+
+### 1.3.4 Sonstige Rahmenbedingungen
+Beispiele: Technische, sicherheitstechnische, logistische oder andere sachliche Vorgaben, die nicht in obige Kategorien passen
+
+**Satzmuster:**
+> „Aus technischen Gründen [Begründung]. / Aufgrund von Sicherheitsaspekten [Begründung]."
+
+**Konkretbeispiel:**
+> „Das System muss mit der bestehenden IT-Infrastruktur kompatibel sein. Nach Stellungnahme des IT-Bereichs vom 12.04.2026 ist eine Integration mit Altsystemen ohne Neuinvestition in Middleware nicht möglich."
+
+---
+
+**WICHTIG — Iterative Ergänzung:**
+Falls beim Schreiben von Kap. 3.2 (Aussonderung) eine neue Rahmenbedingung benötigt wird, die hier noch nicht aufgeführt ist → **Ergänze Kap. 1.3 proaktiv.** Aussonderungen müssen logisch auf dokumentierten Rahmenbedingungen aufbauen.
 
 ## Kap. 2.1 Ablauforganisation
 > „Die Leistung wird derzeit durch [Stelle/Person/externen Auftragnehmer] erbracht.
@@ -382,6 +433,8 @@ Jede verbleibende Option erhält ein vollständiges Unterkapitel mit allen 7 Abs
 
 ## Kap. 8 Nicht-monetäre Faktoren
 
+**→ Falls AVV Klima-Berechnung verwendet wurde: Siehe `nachhaltigkeitskriterien-praktisch.md` für Auto-Dokumentation**
+
 **MUSS ENTHALTEN:**
 1. Fließtext mit qualitativen Faktoren und Bewertung
 2. **Nutzwertanalyse-Tabelle:**
@@ -394,13 +447,22 @@ Jede verbleibende Option erhält ein vollständiges Unterkapitel mit allen 7 Abs
 | Kriterium | Option 1 | Option 2 | Option 4 | Gewicht |
 |---|---|---|---|---|
 | Personenschutz | Sehr gut | Gut | Befriedigend | Hoch |
-| Nachhaltigkeit | Sehr gut | Sehr gut | Gut | Mittel |
+| Energieeffizienz / Nachhaltigkeit | Sehr gut | Sehr gut | Gut | Mittel |
 | Zuverlässigkeit | Sehr gut | Gut | Befriedigend | Hoch |
 | Strategische Unabhängigkeit | Sehr gut | Befriedigend | Sehr gut | Mittel |
 | **Fazit** | Beste Gesamtbewertung | Ausgewogen | Schwächen | — |
 
+**Satzmuster für Nachhaltigkeit-Kriterium (AVV Klima):**
+> „Kriterium 'Energieeffizienz / Nachhaltigkeit': Option 1 erreicht die höchste 
+> Energieeffizienzklasse (KfW 55) und nutzt erneuerbare Energieträger. Option 2 
+> erreicht KfW 70 mit teilweise erneuerbaren Systemen. Option 4 nutzt konventionelle 
+> Energieträger. Gewicht: Mittel (wegen AVV Klima-Anforderungen)."
+
 **Fließtext nach Tabelle:**
-> „Die Nutzwertanalyse zeigt, dass Option [X] bei den höher gewichteten Kriterien [Kriterien] die beste Bewertung erreicht. Dies bestätigt die ökonomische Empfehlung."
+> „Die Nutzwertanalyse zeigt, dass Option [X] bei den höher gewichteten Kriterien 
+> [Kriterien] die beste Bewertung erreicht. Insbesondere bei der Energieeffizienz 
+> und Nachhaltigkeit erfüllt Option [X] die AVV Klima-Anforderungen am besten. 
+> Dies bestätigt die ökonomische Empfehlung unter Berücksichtigung der CO2-Kosten."
 
 ## Kap. 10 Anlagen – Marktrecherche (WICHTIG)
 

@@ -32,8 +32,8 @@ Befolge die Struktur der AR A-2400/62. **Satzmuster** sind in `satzmuster-b.md` 
 | Kapitel | Inhalt | Satzmuster in satzmuster-b.md | Validierung |
 |---------|--------|------|------|
 | 1.1 | Funktionale Bedarfsforderung (qualitativ + quantitativ) | Kap. 1.1 | **Inline-Check** (`validate_step('bedarfsforderung', ...)`) |
-| 1.2 | Bedarfsprognose (Entwicklung über Betrachtungszeitraum) | Kap. 1.2 | — |
-| 1.3 | Rahmenbedingungen (nur optionsausschließend) — **ACHTUNG: Wird iterativ ergänzt bei Aussonderung (Kap. 3.2)** | Kap. 1.3 | — |
+| 1.2 | Bedarfsprognose (Entwicklung über Betrachtungszeitraum) | **bedarfsprognose-methode.md** + satzmuster-b.md Kap. 1.2 | — |
+| 1.3 | Rahmenbedingungen (nur optionsausschließend) — **ACHTUNG: Wird iterativ ergänzt bei Aussonderung (Kap. 3.2)** | **satzmuster-b.md Kap. 1.3 + konkrete Beispiele** | — |
 | 2.1–2.7 | Ausgangslage: Ablauf-, Aufbauorganisation, Personal, Material, Infrastruktur, DL, Einnahmen | Kap. 2.1–2.6 | — |
 | 2.8 | Haushalterische Darstellung (automatisch berechnen) | Python-Snippet | — |
 | 3.1 | Grundsätzlich mögliche Optionen (2–3 Sätze je Option) | Kap. 3.1 | — |
@@ -42,12 +42,67 @@ Befolge die Struktur der AR A-2400/62. **Satzmuster** sind in `satzmuster-b.md` 
 | 4.1–4.2 | Annahmen (alle / bestimmte Optionen) | Kap. 4.1–4.2 | — |
 | 5.2 | Kapitalwertberechnung (Berechnungsskript verwenden) | Kap. 5.2 | — |
 | 5.3 | Kapitalwerte ohne Risiko | Kap. 5.3 | — |
-| 5.4 | Risikobetrachtung (Identifizierung, Verteilung, Monetäre Bewertung) | Kap. 5.4.2 | — |
+| 5.4 | Risikobetrachtung (Identifizierung, Verteilung, Monetäre Bewertung) | **risikobetrachtung-konkret.md** | — |
 | 5.5 | Kapitalwert mit Risiko | Kap. 5.5 | — |
 | 6 | Vergleich der Optionen (Tabelle + Einleitungssatz) | Kap. 6 | — |
 | 7 | Sensitivitätsanalyse (automatisch berechnen) | Python-Snippet | — |
-| 8 | Nichtmonetäre Faktoren / Nutzwertanalyse | SKILL.md | — |
+| 8 | Nichtmonetäre Faktoren / Nutzwertanalyse | satzmuster-b.md Kap. 8 + **nachhaltigkeitskriterien-avv-klima.md** (wenn relevant) | — |
 | 9 | Entscheidungsvorschlag (Empfehlung + Begründung) | Kap. 9 | **Vor Export**: `quick_validate()` + `export_safe()` |
+
+---
+
+## Bedarfsprognose (Kap. 1.2)
+
+Siehe detaillierte Referenz: **`bedarfsprognose-methode.md`**
+
+Dialog-Logik (Standard → Ausnahme):
+1. **FRAGE:** "Bleibt der Bedarf über [Betrachtungszeitraum] konstant?"
+   - **JA (Standard)** → Quelle = Ausgangslage (Kap. 2), einfacher Satz
+   - **NEIN (Ausnahme)** → User nennt jährliche Bedarfe + Quelle → Tabelle erstellen
+2. **Quelle dokumentieren:**
+   - Konstant: Verweis auf Kap. 2
+   - Variabel: Schriftliche Quelle (Mail, Beschluss, Stellungnahme) beifügen
+   - **Fallback:** Wenn User keine Quelle kennt → Vorschlag: Fachbereich-Aussage per Mail
+
+---
+
+## AVV Klima — Nachhaltigkeitskriterien (Praktisches Verfahren)
+
+**NUR RELEVANT FÜR ÜBERJÄHRIGE WU (diesen Dialogpfad).**
+Unterjährige WU: nicht erforderlich.
+
+Siehe: **`nachhaltigkeitskriterien-praktisch.md`**
+
+**Dialog mit User — Nur 2 Fragen (User wählt: ja/nein/später):**
+
+```
+FRAGE 1: "Ist diese Maßnahme energierelevant 
+         (Fahrzeug, Gebäude, Heizung, IT, Dienstleistung mit Fahrtanteil)?"
+         → JA: Frage 2 | NEIN: überspringen
+
+FRAGE 2: "Sollen CO2-Emissionen monetär in der WU berücksichtigt werden? 
+         Ich verwende recherchierte Standard-Werte — Sie bestätigen nur."
+         → JA: Auto-Berechnung | NEIN: nur dokumentieren | SPÄTER: auslassen
+```
+
+**Wenn JA:**
+- Ich recherchiere CO2-Faktoren für **diese Maßnahmenart** (z.B. "Heizung" → Gasheizung 0,20 kg CO2/kWh, Wärmepumpe 0,05 kg CO2/kWh)
+- Schlage konkrete Werte vor mit Quelle (UBA 2024, ADAC, etc.)
+- Berechne CO2-Kosten automatisch (55 EUR/Tonne BEHG 2025)
+- Rechne in Kapitalwertberechnung (Kap. 5.5) ein
+- Dokumentiere in Kap. 4, 5, 8 automatisch
+
+---
+
+## Infrastruktur-Kostenberechnung (Kap. 2.5 + 3.3.5)
+
+Siehe detaillierte Referenz: **`infrastruktur-kostenberechnung.md`**
+
+Kurzzusammenfassung für Dialog:
+- **Bundessicht-Standard:** Kaltmiete NICHT ansetzen
+- **Ansetzen:** Bauunterhalt (15 % Kaltmiete) + BImA-Verwaltung (4 % Kaltmiete) + Medienverbräuche
+- **Medienverbräuche-Pauschal:** ca. 30–53 EUR/m²/Jahr (oder konkret messen)
+- **Rechenweg MUSS dokumentiert werden** in jedem Kapitel (2.5 und 3.3.5)
 
 ---
 

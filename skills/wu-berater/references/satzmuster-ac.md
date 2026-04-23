@@ -1,9 +1,41 @@
 # Satzmuster: Unterjährige WU (A) und Dienstleistungs-WU (C)
 
+---
+
 ## A1 Bedarfsforderung
-> „Die [Dienststelle] benötigt [funktionale Beschreibung, lösungsneutral].
-> Der Bedarf umfasst [Stückzahl/Menge] mit Mindestanforderungen: [Anforderungen].
+
+**WICHTIG:** Siehe `bedarfsforderung-konkret-a.md` für detaillierte Transformation von User-Input in BHO-konforme Anforderungen (ergebnisoffen, lösungsneutral, funktional, messbar).
+
+### Grundstruktur (Satzmuster)
+
+> „Die [Dienststelle] benötigt [funktionale Beschreibung, KEINE Produktnamen]. 
+> Der Bedarf umfasst [Stückzahl/Menge] mit Mindestanforderungen: [messbare qualitative + quantitative Anforderungen]. 
 > Das Gerät/Material ist voraussichtlich [Häufigkeit] einzusetzen."
+
+### Konkrete Beispiele
+
+**Beispiel 1 — Drucker (RICHTIG):**
+> „Die Dienststelle benötigt eine Druckfunktionalität mit Kopierfunktion zur Unterstützung der Büroprozesse. Der Bedarf umfasst eine Kapazität von mindestens 10.000 Seiten pro Monat mit Mindestanforderungen: Farbdruck (CMYK), Netzwerkanbindung (Ethernet), maximale Verarbeitungszeit 5 Sekunden pro Seite. Das Gerät ist voraussichtlich täglich einzusetzen (Mo–Fr, 08:00–17:00 Uhr)."
+
+**Beispiel 2 — Laptop (RICHTIG):**
+> „Die Dienststelle benötigt eine mobile Rechenkapazität zur Unterstützung der Feldbeamten. Der Bedarf umfasst 5 Arbeitsplatzrechner mit Mindestanforderungen: Prozessor mindestens 2,5 GHz (4 Kerne), RAM mindestens 16 GB, SSD-Speicher mindestens 512 GB, Windows 11 Pro, WLAN 802.11ax, Einsatz in Außendiensten 4–5 Tage pro Woche. Das System ist zur Verarbeitung von Dokumenten und Datenbankabfragen vorgesehen."
+
+**Beispiel 3 — Transporter (RICHTIG):**
+> „Die Dienststelle benötigt eine Transportfähigkeit zur Beförderung von Material und Personal. Der Bedarf umfasst ein Nutzfahrzeug mit Mindestanforderungen: Ladefläche mindestens 8 m³ oder 1.200 kg Tragfähigkeit, 2 Sitzplätze, Verbrennungsmotor (max. 8 l/100 km), Jahresfahrleistung 15.000–20.000 km. Das Fahrzeug ist voraussichtlich zweimal pro Woche in Logistikfahrten einzusetzen."
+
+### Was ist NICHT erlaubt (häufige Fehler)
+
+❌ **FALSCH:** „Beschaffung eines Multifunktionsdruckers"
+   - Problem: nennt Produkttyp statt Funktionen
+
+❌ **FALSCH:** „Wir brauchen 5 Laptops"
+   - Problem: zu vage, keine Mindestanforderungen
+
+❌ **FALSCH:** „Beschaffung eines VW T6.1 Transporters"
+   - Problem: nennt spezifisches Produkt, nicht funktionale Anforderung
+
+✅ **RICHTIG:** „…benötigt eine Druckfunktionalität mit Kopierfunktion … mit Mindestanforderungen: Farbdruck, Netzwerkanbindung, 10.000 Seiten/Monat"
+   - Grund: ergebnisoffen, lösungsneutral, funktional, messbar (quantitativ + qualitativ)
 
 ## A2 Bisherige Bedarfsdeckung
 > „Der Bedarf wurde bisher durch [Kauf vergleichbarer Güter / ist neu entstanden /
