@@ -91,18 +91,16 @@ def validate_phase1_auv(dienststelle, bearbeiter, massnahmenbeginn, kaufbeschrei
     if not kaufbeschreibung or len(kaufbeschreibung) < 5 or len(kaufbeschreibung) > 100:
         errors.append("❌ Kaufbeschreibung: mindestens 5, maximal 100 Zeichen erforderlich")
     
-    # CHECK 5: Preis (Zahlenformat validieren, keine Mindestgrenze)
+    # CHECK 5: Preis (Zahlenformat validieren)
     try:
         preis_float = float(preis.replace(',', '.').replace('EUR', '').strip())
     except ValueError:
         errors.append("❌ Preis: Ungültiges Zahlenformat (z.B. '2500' oder '2.500')")
         return errors
     
-    # Keine Mindestgrenze — auch kleine Käufe sind WU-relevant
+    # Keine Wertgrenzen — beliebige Preise zulässig
     if preis_float < 0:
         errors.append(f"❌ Preis kann nicht negativ sein: {preis_float:.2f} EUR")
-    elif preis_float > 500000:
-        errors.append(f"⚠️ Preis sehr hoch ({preis_float:.2f} EUR). Max. 500.000 EUR für unterjährig.")
     
     return errors
 ```
@@ -447,8 +445,7 @@ Kaufpreis (EUR): [Eingabe, vorausgefüllt mit Phase 1 Feld 5]
 
 **Validierung Phase 5:**
 - Zahlenformat: Dezimaltrennzeichen `'.'` oder `','` akzeptabel
-- Keine Mindestgrenze (auch kleine Käufe sind WU-relevant)
-- Optional: Warnung bei sehr hohen Werten (> 500.000 EUR)
+- **Keine Wertgrenzen** — beliebige Preise zulässig (klein oder groß)
 
 **Nach Phase 5 → zu Phase 6 (Hinweis Folgeausgaben)**
 
