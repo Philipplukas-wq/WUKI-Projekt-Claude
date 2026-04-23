@@ -436,22 +436,73 @@ Dokumentation in Vermerk-Template:
 
 ---
 
-## Phase 5: Ausgaben / Kosten (NUMERISCH)
+## Phase 5: Ausgaben / Kosten (mit WebRecherche-Option)
 
-**Eingabe des Kaufpreises nochmal zur Bestätigung (oder Anpassung):**
+**Kaufpreis mit 3 Optionen:**
 
 ```
-SKILL: „Bestätigen Sie den Kaufpreis (oder passen Sie ihn an):
+SKILL: „Bestätigen Sie den Kaufpreis für die Bohrmaschine:
 
-Kaufpreis (EUR): [Eingabe, vorausgefüllt mit Phase 1 Feld 5]
-                  z.B. 2.500 oder 2500
+Ihr geschätzter Preis (Phase 1): 250,00 EUR
 
-→ Validiert… ✅ Preis OK"
+Wie möchten Sie fortfahren?
+
+[ ] ☐ OPTION A: Preis ist korrekt, bestätigen
+              → Kaufpreis: 250,00 EUR
+              → Weitermachen zu Phase 6
+
+[ ] ☐ OPTION B: Preis manuell ändern
+              [Eingabe] z.B. 2.500 oder 2500
+              → Weitermachen zu Phase 6
+
+[ ] ☐ OPTION C: Ich recherchiere den realistischen Kaufpreis für Sie
+              → WebRecherche nach Marktpreisen
+              → Ich zeige dir den Durchschnittspreis + Spannbreite
+              → Du bestätigst oder korrigierst
+              → Weitermachen zu Phase 6
 ```
 
 **Validierung Phase 5:**
 - Zahlenformat: Dezimaltrennzeichen `'.'` oder `','` akzeptabel
 - **Keine Wertgrenzen** — beliebige Preise zulässig (klein oder groß)
+
+**WebRecherche-Logik (Option C):**
+
+```python
+def recherchiere_kaufpreis(produkttyp, kaufbeschreibung):
+    """
+    WebRecherche nach realistischem Kaufpreis.
+    """
+    print(f"🔍 Recherchiere Kaufpreise für: {produkttyp}")
+    
+    # WebSearch nach Marktpreis
+    suchanfrage = f"{produkttyp} kaufen preis 2026"
+    ergebnisse = websearch(suchanfrage)
+    
+    # Preise extrahieren und Spannbreite berechnen
+    preise = [extract_price(r) for r in ergebnisse]
+    min_preis = min(preise)
+    max_preis = max(preise)
+    durchschnitt = sum(preise) / len(preise)
+    
+    print(f"""
+📊 MARKTPREIS-RECHERCHE:
+
+Produkttyp: {produkttyp}
+Recherchiert: {len(preise)} Angebote
+
+Spannbreite: {min_preis:.2f} – {max_preis:.2f} EUR
+Durchschnitt: {durchschnitt:.2f} EUR
+
+Empfehlter Kaufpreis: {durchschnitt:.2f} EUR
+
+Passt dieser Preis zu Ihrer Situation, oder ändern Sie ihn?
+[ ] Ja, {durchschnitt:.2f} EUR bestätigen
+[ ] Nein, anderen Preis eingeben: [Eingabe]
+    """)
+    
+    return durchschnitt
+```
 
 **Nach Phase 5 → zu Phase 6 (Hinweis Folgeausgaben)**
 
