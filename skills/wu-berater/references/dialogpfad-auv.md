@@ -222,10 +222,15 @@ SKILL: „Bitte wählen Sie aus, wie der Bedarf bisher gedeckt wurde:
 
 **Frage:** Warum ist diese Maßnahme EINMALIG und UNTERJÄHRIG?
 
-**WICHTIG — Goods Classification:**
+**WICHTIG — Goods Classification & Konsequenzen:**
 Diese Wahl bestimmt auch die Güterklassifizierung (Anlagevermögen vs. Umlaufvermögen):
-- **Grund 1, 2** → **Umlaufvermögen** (Verbrauchsgüter) → Zeile 18 wird versteckt
-- **Grund 3** → **Anlagevermögen** (Nichtverbrauchsgüter) → Zeilen 14, 17 werden versteckt
+- **Grund 1, 2** → **Umlaufvermögen** (Verbrauchsgüter)
+  * Zeile 18 wird versteckt (Miete/Leasing nicht relevant)
+  * **KEINE Mietpreis-Recherche** (Verbrauchsgüter werden nicht gemietet)
+  
+- **Grund 3** → **Anlagevermögen** (Nichtverbrauchsgüter)
+  * Zeilen 14, 17 werden versteckt (Verbrauchsgut-Hinweise nicht relevant)
+  * **Optional:** Wirtschaftliche Prüfung (Kauf vs. Miete) — aber nicht für Vermerk-Template
 
 ```
 SKILL: „Warum ist dieser Kauf einmalig und unterjährig? Bitte wählen Sie einen Grund:
@@ -333,6 +338,16 @@ Passt das zu Ihrer Situation? [Ja / Abbrechen]
 ---
 
 ## Phase 7: Export zum Vermerk-Template (VOLL-AUTO)
+
+**WICHTIG — Keine WebRecherche in AUV:**
+
+Im Gegensatz zu Dialogpfad A gibt es in Dialogpfad AUV **KEINE WebRecherche nach Mietpreisen**. Gründe:
+
+1. **Umlaufvermögen** (Verbrauchsgüter): Miete ist nicht relevant (z.B. keine Schrauben-Miete, kein Betriebsstoff-Leasing)
+2. **Anlagevermögen**: Vermerk-Template behandelt nur Kauf, keine wirtschaftliche Miete-vs.-Kauf-Analyse
+3. **Vermerk-Template ist simplifiziert**: Nur Bedarfsforderung + Einmaligkeit-Begründung + Kaufpreis, keine Break-even-Berechnung
+
+→ Phase 4 Grund entscheidet direkt, ob Miete relevant ist (→ nein für alle AUV-Fälle)
 
 **Mapping Dialogpfad AUV → Template-Felder:**
 
