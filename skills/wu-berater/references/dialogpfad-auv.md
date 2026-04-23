@@ -42,7 +42,7 @@ Siehe detailliert: **`auv-gueterklassifikation.md`** (5-Fragen-Entscheidungsbaum
 | **Bearbeiter** | Text | 2–50 Zeichen | Schmid, Sandra (E9b) |
 | **Maßnahmenbeginn** | Datum | TT.MM.JJJJ, dieses Kalenderjahr | 15.05.2026 |
 | **Kaufbeschreibung** | Text | 5–100 Zeichen, konkret | 100 Schrauben M8x20 oder Betriebsstoff 50L |
-| **Geschätzter Kaufpreis** | EUR | 50–500.000 EUR | 2.500,00 oder 1.200 |
+| **Geschätzter Kaufpreis** | EUR | Beliebig (keine Mindestgrenze) | 2.500,00 oder 1.200 |
 
 ### Dialog Phase 1: Erfassung der 5 Basis-Felder
 
@@ -91,15 +91,16 @@ def validate_phase1_auv(dienststelle, bearbeiter, massnahmenbeginn, kaufbeschrei
     if not kaufbeschreibung or len(kaufbeschreibung) < 5 or len(kaufbeschreibung) > 100:
         errors.append("❌ Kaufbeschreibung: mindestens 5, maximal 100 Zeichen erforderlich")
     
-    # CHECK 5: Preis (EUR Range 50–500.000)
+    # CHECK 5: Preis (Zahlenformat validieren, keine Mindestgrenze)
     try:
         preis_float = float(preis.replace(',', '.').replace('EUR', '').strip())
     except ValueError:
         errors.append("❌ Preis: Ungültiges Zahlenformat (z.B. '2500' oder '2.500')")
         return errors
     
-    if preis_float < 50:
-        errors.append(f"⚠️ Preis sehr niedrig ({preis_float:.2f} EUR). Ist das wirklich richtig? (Min. 50 EUR)")
+    # Keine Mindestgrenze — auch kleine Käufe sind WU-relevant
+    if preis_float < 0:
+        errors.append(f"❌ Preis kann nicht negativ sein: {preis_float:.2f} EUR")
     elif preis_float > 500000:
         errors.append(f"⚠️ Preis sehr hoch ({preis_float:.2f} EUR). Max. 500.000 EUR für unterjährig.")
     
@@ -445,9 +446,9 @@ Kaufpreis (EUR): [Eingabe, vorausgefüllt mit Phase 1 Feld 5]
 ```
 
 **Validierung Phase 5:**
-- Range: 50–500.000 EUR
 - Zahlenformat: Dezimaltrennzeichen `'.'` oder `','` akzeptabel
-- Optional: Warnung bei extremen Werten
+- Keine Mindestgrenze (auch kleine Käufe sind WU-relevant)
+- Optional: Warnung bei sehr hohen Werten (> 500.000 EUR)
 
 **Nach Phase 5 → zu Phase 6 (Hinweis Folgeausgaben)**
 
