@@ -97,36 +97,67 @@ else:
 
 ### Dialog (Transformation User-Input → BHO-konforme Anforderung)
 
-Siehe detaillierte Referenz: **`bedarfsforderung-konkret-a.md`** (8 konkrete Fragen, KEINE erfundenen Details)
+**Siehe detaillierte Referenzen:**
+- **`a1-fragen-produkttyp.md`** — Produkttyp-abhängige Fragen (Büro, Fahrzeuge, Gartenpflege, Möbel, Liegenschaft, Werkzeuge)
+- **`bedarfsforderung-konkret-a.md`** — Transformation in BHO-konforme Anforderung
 
-**WICHTIG — Fallback-Logik bei vagen Antworten (Punkt 2):**
+**Workflow:**
+1. Aus `Kaufbeschreibung` (Phase 1 Feld 3) → Produkttyp klassifizieren
+2. Passende 8 Fragen aus `a1-fragen-produkttyp.md` laden
+3. Dialog mit Fallback-Annahmen pro Kategorie
+4. Bedarfsforderung kategoriespezifisch generieren
+
+**WICHTIG — Fallback-Logik bei vagen Antworten:**
 
 Wenn User nicht strukturiert antwortet (z.B. nur „Ja" / „Nein" / „Keine Ahnung"), geht der Dialog NICHT sofort zu Auto-Generierung über.
 
 ```
 USER: „Drucker für die Büros"
-SKILL: „1. Welche Funktionen brauchst du? Optionen: [ ] Nur Druck [ ] Druck+Kopie [ ] Druck+Kopie+Scan"
+SKILL: (klassifiziert: Produkttyp = „bürogeräte")
+       „1. Welche Funktionen brauchst du? Optionen: [ ] Nur Druck [ ] Druck+Kopie [ ] Druck+Kopie+Scan"
 USER: „Weiß nicht genau"
 
 → FALLBACK-LOGIK (wenn User unstrukturiert antwortet):
-SKILL: „Okay, basierend auf ‚Büro-Drucker' mache ich folgende Standardannahmen:
+SKILL: „Okay, basierend auf ‚Büro-Drucker' mache ich folgende Standardannahmen (aus a1-fragen-produkttyp.md):
   
-  ✓ Funktionen: Druck + Kopie (üblich bei Bürodruckern)
+  ✓ Funktionen: Druck + Kopie (Standard für Bürodrucksystem)
   ✓ Kapazität: 10.000 Seiten/Monat (Standard für Büroumgebung)
-  ✓ Farbdruck: Ja (oft benötigt)
+  ✓ Farbdruck: Ja (moderner Standard)
   ✓ Netzwerk: Ja (moderner Standard)
-  ✓ Einsatzhäufigkeit: Täglich, Mo–Fr (220 Tage/Jahr)
+  ✓ Einsatzhäufigkeit: Täglich, Mo–Fr
+  ✓ Einsatztage/Jahr: 220 Tage
   
   Passen diese Annahmen zu deiner Situation? 
   [ ] Ja, so ist es richtig → weitermachen mit Bedarfsforderung
-  [ ] Einiges stimmt nicht → welcher Punkt? [Checkboxen für F1-F8]
+  [ ] Einiges stimmt nicht → welcher Punkt? [Checkboxen für F1–F8]
   [ ] Komplett neu durchgehen → alle 8 Fragen strukturiert"
+```
+
+**Vergleich: Fallback für andere Produkttypen**
+
+Rasenmäher:
+```
+✓ Gerätetyp: Rasenmäher mit Motorantrieb
+✓ Fläche: 5.000 qm/Saison
+✓ Saison: April–Oktober (7 Monate, ~20 Tage/Jahr)
+✓ Einsatzhäufigkeit: 1–2x/Woche
+✓ Motortyp: Benzin-Motor
+```
+
+Transporter:
+```
+✓ Fahrzeugtyp: Transporter
+✓ Ladefläche: 8–10 qm
+✓ Jahresfahrleistung: 15.000 km/Jahr
+✓ Einsatzhäufigkeit: 2–3x/Woche
+✓ Einsatztage/Jahr: 100–120 Tage
 ```
 
 **Workflow:**
 - Falls User ✓ „Ja, so ist es richtig" → mit Bedarfsforderung-Generierung weitermachen
 - Falls User korrigiert → nur für geänderte Punkte neue Fragen (F1–F8)
 - Falls User „detailliert" will → alle 8 Fragen im vollen Dialog
+- Fallback-Annahmen werden immer aus **`a1-fragen-produkttyp.md`** geladen (produkttypabhängig)
 
 ---
 
@@ -169,12 +200,13 @@ Folge diese Reihenfolge. **Satzmuster** sind in `satzmuster-ac.md` dokumentiert.
 
 **User-Input verfügbar:** „Drucker für die Büros", Preis: 2.500 EUR
 
-**SKILL führt strukturiertes 8-Fragen-Dialog:**
+**SKILL führt strukturiertes 8-Fragen-Dialog (produkttypabhängig):**
 
-Siehe detailliert: **`bedarfsforderung-konkret-a.md`** (exakte Fragen 1–8 mit Optionen)
+Siehe detailliert: **`a1-fragen-produkttyp.md`** (exakte Fragen 1–8 pro Produktkategorie mit Optionen)
 
+**Beispiel 1: Drucker (Bürogeräte)**
 ```
-SKILL: „Damit ich die Bedarfsforderung BHO-konform formuliere, brauche ich folgende Infos:
+SKILL: „Damit ich die Bedarfsforderung BHO-konform formuliere, brauche ich folgende Infos zu Druckfunktionen:
 
 1. FUNKTIONEN — Welche brauchst du?
    [ ] Nur Druck  [ ] Druck+Kopie  [ ] Druck+Kopie+Scan  [ ] Alle
@@ -186,22 +218,51 @@ SKILL: „Damit ich die Bedarfsforderung BHO-konform formuliere, brauche ich fol
    [Eingabe] Seiten/Monat
 
 4. FARBE — Farbdruck?
-   [ ] Ja, CMYK  [ ] Gelegentlich  [ ] Nein, s/w
+   [ ] Ja, CMYK  [ ] Gelegentlich  [ ] Nein, s/w  [ ] Nicht relevant
 
 5. NETZWERK — Erforderlich?
-   [ ] Ja, erforderlich  [ ] Optional  [ ] Nein
+   [ ] Ja, erforderlich  [ ] Optional  [ ] Nein  [ ] Nicht relevant
 
 6. EINSATZHÄUFIGKEIT — Wie oft?
-   [ ] Täglich  [ ] 3-4x/Woche  [ ] 1-2x/Woche  [ ] Sporadisch
+   [ ] Täglich  [ ] 3–4x/Woche  [ ] 1–2x/Woche  [ ] Sporadisch
 
 7. EINSATZTAGE/JAHR — Ungefähr?
-   [Eingabe] Tage/Jahr
+   [Eingabe] Tage/Jahr (Standard für Büro: 220)
 
 8. ZUSATZ — Besonderheiten?
-   [ ] Duplex  [ ] A3-Format  [ ] Hohe Geschwindigkeit  [ ] Keine
+   [ ] Duplex  [ ] A3-Format  [ ] Hohe Geschwindigkeit  [ ] Keine  [ ] Nicht relevant
 ```
 
-User antwortet strukturiert über Checkboxen + Zahleneingaben
+**Beispiel 2: Rasenmäher (Gartenpflege)**
+```
+SKILL: „Damit ich die Bedarfsforderung BHO-konform formuliere, brauche ich folgende Infos zur Grünflächenpflege:
+
+1. GERÄTETYP & FUNKTIONEN — Welche Funktionen?
+   [ ] Mulchen  [ ] Fangkorb  [ ] Handgerät  [ ] Motorgetrieben
+
+2. FLÄCHE/KAPAZITÄT — Arbeitsumfang?
+   [Eingabe] Quadratmeter/Saison (z.B. 5.000 qm)
+
+3. SAISON/EINSATZZEIT — Wie lange pro Jahr?
+   [Eingabe] Monate (z.B. April–Oktober) ODER Tage/Jahr
+
+4. EINSATZHÄUFIGKEIT — Wie oft pro Woche/Monat?
+   [ ] 1x/Woche  [ ] 2x/Woche  [ ] 1–2x/Monat  [ ] Nach Bedarf
+
+5. EINSATZTAGE/JAHR — Ungefähre Tage?
+   [Eingabe] Tage/Jahr (Standard für Rasenmäher: 20 Tage Saison)
+
+6. MOTORTYP — Handbetrieb oder Motor?
+   [ ] Handbetrieb  [ ] Elektro  [ ] Akku/Batterie  [ ] Benzin-Motor
+
+7. SPEZIALANFORDERUNGEN — Besonderheiten?
+   [ ] Mulch-Funktion  [ ] Selbstfahrer  [ ] Lange Lebensdauer  [ ] Leise  [ ] Keine
+
+8. NICHT RELEVANT — Alles klar?
+   [ ] Ja, fertig  [ ] Noch Fragen
+```
+
+User antwortet strukturiert über Checkboxen + Zahleneingaben (produkttypabhängig)
 
 **SKILL generiert Bedarfsforderung** (nur aus echten Antworten, siehe bedarfsforderung-konkret-a.md)
 
@@ -459,12 +520,32 @@ Wenn User „Grund 3" wählt, MUSS User:
 kaufpreis = 2500  # aus Feld 4
 produkt = "Drucker"  # aus Feld 3 extrahiert
 
-# Normalwertrange pro Produkttyp (EUR/Tag)
+# Normalwertrange pro Produkttyp (EUR/Tag) — erweitert per a1-fragen-produkttyp.md
 normal_ranges = {
+    # Bürogeräte
     'Drucker': (15, 50),
     'Laptop': (25, 75),
+    'Monitor': (5, 20),
+    'Scanner': (10, 30),
+    
+    # Fahrzeuge
     'Transporter': (50, 200),
-    'Sitzmöbel': (10, 30),
+    'PKW': (30, 100),
+    'Bus': (100, 300),
+    
+    # Gartenpflege
+    'Rasenmäher': (20, 40),
+    'Kettensäge': (15, 35),
+    'Laubsauger': (10, 25),
+    'Vertikutierer': (15, 35),
+    
+    # Möbel
+    'Bürostuhl': (5, 15),
+    'Schreibtisch': (10, 25),
+    'Schrank': (10, 30),
+    
+    # Werkzeuge
+    'Bohrmaschine': (5, 15),
 }
 
 try:
@@ -630,8 +711,30 @@ except WebSearchError:
 
 ### A5: Bestätigung Unterjährigkeit (AUTO)
 
+**Definition: "Unterjährig" = keine KAPITAL-Folgeausgaben**
+
+Unterjährigkeit bedeutet: Nur EINMALIGE Anschaffung, KEINE Neuanschaffung in Folgejahren (kein weiterer Kapitalbedarf). 
+
+Betriebsausgaben (Wartung, Strom, Ersatzteile, Toner, Öl, etc.) gehören NICHT zu Folgeausgaben und werden akzeptiert.
+
+**Beispiele:**
+- ✅ Rasenmäher + Wartung (Öl, Zündkerze): Unterjährig (nur einmal kaufen)
+- ✅ Drucker + Toner/Wartung: Unterjährig (nur einmal kaufen)
+- ✅ Laptop + Software-Lizenzen: Unterjährig (nur einmal kaufen)
+- ❌ Server + Hosting-Kosten alle 3 Jahre erneut: Überjährig (wiederholte KAPITAL-Ausgaben)
+
 **Automatischer Text** (wird vom User bestätigt):
-> „Für [Produkt/Bezeichnung] fallen nach Anschaffung keine Folgeausgaben an. Einmalige Ausgabe im Haushaltsjahr [Jahr], kein weiterer Kapitalbedarf in Folgejahren."
+> „Für [Produkt/Bezeichnung] fallen nach Anschaffung keine weiteren KAPITALBEDARF an. Einmalige Ausgabe im Haushaltsjahr [Jahr]. Betriebliche Folgeausgaben (z.B. Wartung, Verbrauchsmaterialien) sind nicht Bestandteil dieser WU."
+
+**Hinweis für User:**
+```
+Falls das Produkt nach [Zeitraum] ersetzt/neuangeschafft werden muss,
+ist das DANN eine separate WU (nicht diese).
+
+Beispiel: 
+- 2026: Rasenmäher kaufen (unterjährig)
+- 2030: Rasenmäher (alt) durch neue Maschine ersetzen (NEUE WU, wenn nötig)
+```
 
 ---
 
