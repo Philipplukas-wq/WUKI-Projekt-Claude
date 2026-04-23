@@ -8,7 +8,7 @@ Verwendung:
 """
 
 import openpyxl
-from openpyxl.styles import Font, Alignment
+from openpyxl.styles import Font, Alignment, PatternFill, Border, Side
 from datetime import date
 import os
 from wu_file_handler import cleanup_lock_files
@@ -38,8 +38,22 @@ def fill_template(wu_data: dict, output_path: str):
     ws['D7'] = _parse_date(meta.get('beginn_massnahme', meta.get('datum', '')))
     ws['F4'] = f"{meta.get('schutz', 'offen')}\nVersion: {meta.get('datum', '')}"
 
+    # Vermögenstyp (A5/D5 mit großer Checkbox)
+    vermögenstyp = inhalt.get('vermögenstyp', '')
+    if vermögenstyp == 'Anlagevermögen':
+        ws['A5'] = 'X'
+        ws['A5'].font = Font(size=24, bold=True)
+    elif vermögenstyp == 'Umlaufvermögen':
+        ws['D5'] = 'X'
+        ws['D5'].font = Font(size=24, bold=True)
+
     # Bedarfsforderung
     ws['B8'] = inhalt.get('bedarfsforderung', '')
+
+    # Zeilenhöhen anpassen
+    ws.row_dimensions[8].height = 80
+    ws.row_dimensions[15].height = 60
+    ws.row_dimensions[19].height = 60
 
     # Häkchen setzen
     checkmark_font = Font(size=11, bold=True, color='1F3864')
@@ -47,33 +61,33 @@ def fill_template(wu_data: dict, output_path: str):
 
     haken = inhalt.get('haken', {})
     haken_map = {
-        'kauf_benoetigt':     'A10',
-        'bedarf_neu':         'A11',
-        'sonstiges_bedarf':   'A12',
-        'eigenleistung':      'A14',
-        'eigenleistung_sonst':'A15',
-        'miete_verbrauch':    'A17',
-        'miete_kein_anbieter':'A18',
-        'miete_sonstiges':    'A19',
-        'keine_folgeausgaben':'A21',
+        'kauf_benoetigt':              'A10',
+        'bedarf_neu':                  'A11',
+        'sonstiges_bedarf':            'A12',
+        'eigenleistung_grund1':        'A14',
+        'eigenleistung_grund2':        'A15',
+        'miete_grund1':                'A17',
+        'miete_grund2':                'A18',
+        'miete_grund3':                'A19',
+        'keine_folgeausgaben':         'A21',
     }
     for key, cell_addr in haken_map.items():
         if haken.get(key, False):
-            ws[cell_addr] = '✓'
+            ws[cell_addr] = 'X'
             ws[cell_addr].font = checkmark_font
             ws[cell_addr].alignment = center_align
 
     # Freitextfelder
     if inhalt.get('eigenleistung_begruendung'):
-        ws['B15'] = inhalt['eigenleistung_begruendung']
+        ws['F15'] = inhalt['eigenleistung_begruendung']
     if inhalt.get('miete_begruendung'):
-        ws['B19'] = inhalt['miete_begruendung']
+        ws['F19'] = inhalt['miete_begruendung']
 
     # Voraussichtliche Ausgaben
     if inhalt.get('ausgaben'):
         ws['F22'] = inhalt['ausgaben']
 
-    # Anlage-Blatt
+    # Anlage-Blatt mit Hyperlinks
     anlage = wu_data.get('anlage', [])
     if anlage:
         _create_anlage_sheet(wb, anlage, meta.get('datum', ''))
@@ -97,56 +111,57 @@ def _parse_date(datum_str: str):
 
 
 def _create_anlage_sheet(wb, anlage: list, datum: str):
-    from openpyxl.styles import PatternFill, Border, Side
     from openpyxl.styles import Font as XFont, Alignment as XAlign
 
-    if 'Anlage - Marktrecherche' in wb.sheetnames:
-        del wb['Anlage - Marktrecherche']
+    if 'Anlagen' in wb.sheetnames:
+        del wb['Anlagen']
 
-    ws = wb.create_sheet('Anlage - Marktrecherche')
-    header_fill = PatternFill(start_color='1F3864', end_color='1F3864', fill_type='solid')
-    thin = Side(style='thin')
-    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+    ws = wb.create_sheet('Anlagen')
+    header_fill = PatternFill(start_color='1F4E78', end_color='1F4E78', fill_type='solid')
+    header_font = XFont(bold=True, color='FFFFFF', size=12)
+    thin_border = Border(left=Side(style='thin'), right=Side(style='thin'),
+                         top=Side(style='thin'), bottom=Side(style='thin'))
 
-    ws['A1'] = f'Anlage: Marktrecherche (Abrufdatum: {datum})'
-    ws['A1'].font = XFont(bold=True, size=12, color='1F3864')
-    ws.merge_cells('A1:E1')
-    ws.row_dimensions[1].height = 22
+    ws['A1'] = 'ANLAGEN: Quellenangaben'
+    ws['A1'].font = header_font
+    ws['A1'].fill = header_fill
+    ws.merge_cells('A1:D1')
 
-    headers = ['Nr.', 'Produkt / Beschreibung', 'Preis (brutto)', 'Quelle (URL)', 'Bemerkung']
-    for col, h in enumerate(headers, 1):
-        c = ws.cell(row=3, column=col, value=h)
-        c.font = XFont(bold=True, color='FFFFFF', size=10)
-        c.fill = header_fill
-        c.alignment = XAlign(horizontal='center', vertical='center', wrap_text=True)
-        c.border = border
-    ws.row_dimensions[3].height = 25
+    ws['A3'] = 'Quelle'
+    ws['B3'] = 'Datum'
+    ws['C3'] = 'Ergebnis'
+    ws['D3'] = 'Bemerkung'
 
-    for i, eintrag in enumerate(anlage, 4):
-        row_vals = [
-            eintrag.get('nr', str(i - 3)),
-            eintrag.get('produkt', ''),
-            eintrag.get('preis', ''),
-            eintrag.get('url', ''),
-            eintrag.get('bemerkung', ''),
-        ]
-        for col, val in enumerate(row_vals, 1):
-            c = ws.cell(row=i, column=col, value=val)
-            c.alignment = XAlign(wrap_text=True, vertical='top')
-            c.border = border
-        ws.row_dimensions[i].height = 55
+    for cell in ['A3', 'B3', 'C3', 'D3']:
+        ws[cell].font = XFont(bold=True)
+        ws[cell].fill = PatternFill(start_color='D9E1F2', end_color='D9E1F2', fill_type='solid')
+        ws[cell].border = thin_border
 
-    ws.column_dimensions['A'].width = 5
-    ws.column_dimensions['B'].width = 38
-    ws.column_dimensions['C'].width = 16
-    ws.column_dimensions['D'].width = 55
-    ws.column_dimensions['E'].width = 30
+    row = 4
+    for quelle in anlage:
+        quelle_text = quelle.get('quelle', quelle.get('produkt', ''))
+        quelle_link = quelle.get('link', quelle.get('url', ''))
 
-    note_row = len(anlage) + 5
-    ws.merge_cells(f'A{note_row}:E{note_row}')
-    ws[f'A{note_row}'] = 'Hinweis: Screenshots der oben genannten Webseiten als Anlage beifügen (Einfügen → Objekt/Bild).'
-    ws[f'A{note_row}'].font = XFont(italic=True, size=9, color='595959')
-    ws[f'A{note_row}'].alignment = XAlign(wrap_text=True)
+        # Quelle mit Hyperlink
+        if quelle_link:
+            ws[f'A{row}'] = quelle_text
+            ws[f'A{row}'].hyperlink = quelle_link
+            ws[f'A{row}'].font = XFont(underline='single', color='0563C1')
+        else:
+            ws[f'A{row}'] = quelle_text
+
+        ws[f'B{row}'] = quelle.get('datum', '')
+        ws[f'C{row}'] = quelle.get('ergebnis', quelle.get('preis', ''))
+        ws[f'D{row}'] = quelle.get('bemerkung', '')
+
+        for col in ['A', 'B', 'C', 'D']:
+            ws[f'{col}{row}'].border = thin_border
+        row += 1
+
+    ws.column_dimensions['A'].width = 40
+    ws.column_dimensions['B'].width = 15
+    ws.column_dimensions['C'].width = 25
+    ws.column_dimensions['D'].width = 35
 
 
 def erstelle_abschlusscheckliste_unterjahrig(wu_data: dict, output_path: str) -> str:
@@ -215,16 +230,17 @@ WU_DATA_SCHEMA = {
         "version":           "1",
     },
     "inhalt": {
+        "vermögenstyp":                "Anlagevermögen|Umlaufvermögen",
         "bedarfsforderung":            "Funktionale, lösungsneutrale Bedarfsbeschreibung ...",
         "haken": {
             "kauf_benoetigt":          True,
             "bedarf_neu":              False,
             "sonstiges_bedarf":        False,
-            "eigenleistung":           False,
-            "eigenleistung_sonst":     True,
-            "miete_verbrauch":         False,
-            "miete_kein_anbieter":     False,
-            "miete_sonstiges":         True,
+            "eigenleistung_grund1":    False,    # A14 — Grund 1
+            "eigenleistung_grund2":    True,     # A15 — Sonstiges/Grund 2 (BUNDESWEHR: immer mindestens eine Grund-Checkbox)
+            "miete_grund1":            False,    # A17 — Grund 1
+            "miete_grund2":            False,    # A18 — Grund 2
+            "miete_grund3":            True,     # A19 — Sonstiges/Grund 3 (wenn Miete ausgeschlossen)
             "keine_folgeausgaben":     True,
         },
         "eigenleistung_begruendung":   "kein geeignetes Gerät im Eigenbestand ...",
@@ -232,6 +248,6 @@ WU_DATA_SCHEMA = {
         "ausgaben":                    205.00,
     },
     "anlage": [
-        {"nr": "1", "produkt": "...", "preis": "...", "url": "https://...", "bemerkung": "..."},
+        {"quelle": "Produkt XYZ", "datum": "TT.MM.JJJJ", "ergebnis": "Preis", "bemerkung": "...", "link": "https://..."},
     ],
 }

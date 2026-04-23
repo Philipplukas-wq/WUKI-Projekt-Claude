@@ -752,12 +752,16 @@ wu_data = {
         'version':          '1',
     },
     'inhalt': {
+        'vermögenstyp':     '[aus Klassifizierung A2-1000]',  # 'Anlagevermögen' oder 'Umlaufvermögen'
         'bedarfsforderung': '[aus A1]',
         'haken': {
-            'kauf_benoetigt':      True,
-            'eigenleistung_sonst': True,
-            'miete_sonstiges':     True,
-            'keine_folgeausgaben': True,
+            'kauf_benoetigt':         True,
+            'eigenleistung_grund1':   True,     # A14 — Mind. eine Grund-Checkbox (BUNDESWEHR-REGEL)
+            'eigenleistung_grund2':   False,    # A15 — Sonstiges
+            'miete_grund1':           False,    # A17 — Grund 1
+            'miete_grund2':           False,    # A18 — Grund 2
+            'miete_grund3':           True,     # A19 — Sonstiges (wenn relevant)
+            'keine_folgeausgaben':    True,
         },
         'eigenleistung_begruendung': '[aus A3]',
         'miete_begruendung':         '[aus A4 – AUTO]',
@@ -765,8 +769,8 @@ wu_data = {
         'ausgaben':                  2500,  # EUR aus Feld 4
     },
     'anlage': [
-        {'nr': '1', 'produkt': 'Drucker XYZ', 'preis': '2.500 EUR', 'url': '[WebRecherche]', 'bemerkung': 'Kaufpreis, 2026-04-23'},
-        {'nr': '2', 'produkt': 'Drucker Tagesmiete', 'preis': '20 EUR/Tag', 'url': '[WebRecherche]', 'bemerkung': 'Mietpreisvergleich, 2026-04-23'},
+        {'quelle': 'Drucker XYZ', 'datum': '2026-04-23', 'ergebnis': '2.500 EUR', 'bemerkung': 'Kaufpreis', 'link': '[WebRecherche]'},
+        {'quelle': 'Drucker Tagesmiete', 'datum': '2026-04-23', 'ergebnis': '20 EUR/Tag', 'bemerkung': 'Mietpreisvergleich', 'link': '[WebRecherche]'},
     ],
 }
 
@@ -980,13 +984,15 @@ wu_data = {
         # A5: Unterjährigkeit
         'a5_unterjährigkeit': '[Standard-Text A5]',
         
-        # Häkchen für Validierung (Punkt 11)
+        # Häkchen für Validierung (Punkt 11) — BUNDESWEHR-REGEL: Mind. eine Eigenleistungs-/Miete-Grund-Checkbox
         'haken': {
-            'kauf_benoetigt':      True,    # immer True in Dialogpfad A (keine andere Option)
-                                            # → kann in Zukunft gelöscht werden
-            'eigenleistung_sonst': True,    # aus A3: User hat Grund angegeben + bestätigt
-            'miete_sonstiges':     True,    # aus A4: User hat Mietpreis bestätigt oder übersprungen
-            'keine_folgeausgaben': True,    # aus A5: User bestätigt keine Folgeausgaben
+            'kauf_benoetigt':         True,      # immer True in Dialogpfad A
+            'eigenleistung_grund1':   True,      # A14 oder A15 muss angehakt sein (mind. eine)
+            'eigenleistung_grund2':   False,     # A15 — optional (falls Grund 2)
+            'miete_grund1':           False,     # A17 — optional (falls Grund 1)
+            'miete_grund2':           False,     # A18 — optional (falls Grund 2)
+            'miete_grund3':           True,      # A19 — optional (falls Grund 3/Sonstiges)
+            'keine_folgeausgaben':    True,      # aus A5: User bestätigt keine Folgeausgaben
         },
         
         # Kaufpreis (aus Feld 4)
