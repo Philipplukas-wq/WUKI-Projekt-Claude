@@ -64,7 +64,10 @@
       "Bash(git config *)",
       "Bash(git add *)",
       "Bash(git commit *)",
-      "Bash(git branch *)"
+      "Bash(git branch *)",
+      "Bash(gh repo *)",
+      "Bash(pdftotext \"P:/WUKI_Projekt/Claude/20260128_Arbeitshilfe_Dokumentation \\(1\\).pdf\" -)",
+      "Bash(git push *)"
     ]
   }
 }

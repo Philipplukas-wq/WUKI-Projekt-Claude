@@ -13,9 +13,11 @@ Für **einmalige Käufe ohne Folgeausgaben** — minimale User-Eingaben, maximal
 
 ---
 
-## Vorbereitung: Die 4 Eingabe-Felder
+## Phase 1: Erfassung der 4 Eingabe-Felder (NACH WU-Typ-Bestimmung)
 
-Bevor die Schritte A1–A6 beginnen, müssen diese 4 Angaben erfasst werden:
+**Hinweis:** Dies ist NICHT der Startdialog. Der Startdialog befindet sich in `SKILL.md` und ist allgemeingültig (vor WU-Typ-Bestimmung).
+
+Sobald die WU als "Dialogpfad A (unterjährig)" klassifiziert wurde, startet Phase 1 mit der Erfassung dieser 4 Angaben:
 
 | Feld | Typ | Beispiel | Verwendung |
 |---|---|---|---|
@@ -24,10 +26,11 @@ Bevor die Schritte A1–A6 beginnen, müssen diese 4 Angaben erfasst werden:
 | **Kaufbeschreibung** | Text | „Drucker für die Büros" | Auslöser für A1-Dialog (siehe unten) |
 | **Geschätzter Preis** | EUR | 2.500,00 | Auslöser für A4-Dialog (Miete-Vergleich?) |
 
-### Dialog zur Erfassung der 4 Felder
+### Dialog Phase 1: Die 4 Eingabe-Felder erfassen
 
 ```
-SKILL: „Willkommen bei Wuki. Ich führe Sie in 5 Minuten durch die WU-Erstellung.
+SKILL (nach WU-Typ-Bestimmung): „Gut, wir machen eine unterjährige WU. 
+Jetzt brauche ich folgende Angaben zur Vorbereitung:
 
 Geben Sie bitte ein:
 1. Dienststelle: [User: BAIUDBw]
@@ -35,10 +38,10 @@ Geben Sie bitte ein:
 3. Was soll gekauft werden? [User: Drucker für die Büros]
 4. Ungefährer Preis? [User: 2.500 EUR]
 
-(Danke! Ich erstelle jetzt die Bedarfsforderung …)"
+(Danke! Ich stelle jetzt Fragen zur Bedarfsforderung …)"
 ```
 
-**Nach Erfassung der 4 Felder → direkt zu A1-Bedarfsforderung-Dialog**
+**Nach Erfassung der 4 Felder → direkt zu A1-Bedarfsforderung-Dialog (Phase 2)**
 
 ---
 
@@ -57,7 +60,7 @@ USER: „Drucker für die Büros"
 SKILL: „1. Welche Funktionen brauchst du? Optionen: [ ] Nur Druck [ ] Druck+Kopie [ ] Druck+Kopie+Scan"
 USER: „Weiß nicht genau"
 
-→ FALLBACK-LOGIK:
+→ FALLBACK-LOGIK (wenn User unstrukturiert antwortet):
 SKILL: „Okay, basierend auf ‚Büro-Drucker' mache ich folgende Standardannahmen:
   
   ✓ Funktionen: Druck + Kopie (üblich bei Bürodruckern)
@@ -67,15 +70,15 @@ SKILL: „Okay, basierend auf ‚Büro-Drucker' mache ich folgende Standardannah
   ✓ Einsatzhäufigkeit: Täglich, Mo–Fr (220 Tage/Jahr)
   
   Passen diese Annahmen zu deiner Situation? 
-  [ ] Ja, so ist es richtig
-  [ ] Nein, hier korrigieren: [Freitext]
-  [ ] Detailliert durchgehen (alle 8 Fragen)"
+  [ ] Ja, so ist es richtig → weitermachen mit Bedarfsforderung
+  [ ] Einiges stimmt nicht → welcher Punkt? [Checkboxen für F1-F8]
+  [ ] Komplett neu durchgehen → alle 8 Fragen strukturiert"
 ```
 
-**Dann:**
-- Falls User bestätigt → mit Standardannahmen weitermachen
-- Falls User korrigiert → Dialog mit neu gestellt Fragen für geänderte Punkte
-- Falls User detailliert durchgehen will → volle 8-Fragen-Dialog
+**Workflow:**
+- Falls User ✓ „Ja, so ist es richtig" → mit Bedarfsforderung-Generierung weitermachen
+- Falls User korrigiert → nur für geänderte Punkte neue Fragen (F1–F8)
+- Falls User „detailliert" will → alle 8 Fragen im vollen Dialog
 
 ---
 
@@ -99,12 +102,12 @@ Folge diese Reihenfolge. **Satzmuster** sind in `satzmuster-ac.md` dokumentiert.
 
 | Schritt | Inhalt | Satzmuster in satzmuster-ac.md | Validierung | Automatisierung |
 |---------|--------|------|------|------|
-| A1 | **Bedarfsforderung konkretisieren** (Auto-Dialog, funktional, lösungsneutral) | A1 | ✅ **Inline-Check** (`validate_step('bedarfsforderung', ...)`) | ⚡ Auto-Dialog + Auto-Generierung |
-| A2 | Bisherige Bedarfsdeckung (kurze Aussage) | A2 | — | Semi-Auto: Vorschlag basierend auf Sachverhalt |
-| A3 | **Ausschluss Eigenleistung** (Pflichtprüfung: keine Haushaltsmittel/Personal/Infrastruktur als Grund) | A3 | ✅ **Guard Check** (`validate_step('aussonderung', ...)`) | Semi-Auto: Standard-Begründung mit Option zur Anpassung |
-| A4 | **Ausschluss Miete/Leasing** (Auto-Webrecherche + Break-even Berechnung) | A4 | ✅ **Guard Check** | ⚡ Vollständig automatisch: Webrecherche, Mietpreise recherchieren, Break-even berechnen |
-| A5 | Bestätigung Unterjährigkeit (keine Folgeausgaben) | A5 | — | Auto: Standard-Text |
-| A6 | **Kostenermittlung & Export zu Excel** | Python-Snippet | ✅ **Vor Export**: `quick_validate()` + `export_safe()` | ⚡ Vollständig automatisch |
+| A1 | **Bedarfsforderung konkretisieren** (8 Fragen strukturiert, keine erfundenen Details) | A1 | ✅ **Inline-Check** (`validate_step('bedarfsforderung', ...)`) | ⚡ Auto-Dialog + Auto-Generierung |
+| A2 | Bisherige Bedarfsdeckung (intelligenter Default) | A2 | — | Semi-Auto: Vorschlag basierend auf Sachverhalt (User bestätigt oder editiert) |
+| A3 | **Ausschluss Eigenleistung** (Structured Choices, Guard Check) | A3 | ✅ **Guard Check** (`validate_step('aussonderung', ...)`) | Semi-Auto: Checkboxen (4 Optionen), Guard prüft automatisch |
+| A4 | **Ausschluss Miete/Leasing** (WebRecherche + User-Bestätigung der Annahmen) | A4 | ✅ **Guard Check** | Semi-Auto: Recherche ja, aber User bestätigt Einsatztage + Mietpreis; Fallback bei Fehler |
+| A5 | Bestätigung Unterjährigkeit (keine Folgeausgaben) | A5 | — | Auto: Standard-Text (User bestätigt) |
+| A6 | **Kostenermittlung & Export zu Excel** (erweiterte Validierung) | Python-Snippet | ✅ **Vor Export**: 6 Auto-Checks (`validate_wu_unterjahrig_extended()`) | ⚡ Auto: Sanitizing + Excel-Export |
 
 **Pflichtprüfung bei A3 & A4 (Guard Checks):**
 - Fehlendes Personal, Dienstposten, Haushaltsmittel, Infrastruktur sind **KEINE zulässigen Ausschlussgründe**
@@ -118,21 +121,41 @@ Folge diese Reihenfolge. **Satzmuster** sind in `satzmuster-ac.md` dokumentiert.
 
 **User-Input verfügbar:** „Drucker für die Büros", Preis: 2.500 EUR
 
-**SKILL führt Auto-Dialog:**
+**SKILL führt strukturiertes 8-Fragen-Dialog:**
+
+Siehe detailliert: **`bedarfsforderung-konkret-a.md`** (exakte Fragen 1–8 mit Optionen)
+
 ```
-SKILL: „Verstanden. Damit ich die Bedarfsforderung BHO-konform formuliere, 
-        ein paar Schnellfragen zum Drucker:
-        
-1. Welche Funktionen brauchst du? (Drucken, Kopieren, Scannen, Fax?)
-2. Wie viele Seiten/Kopien pro Monat? (z.B. 10.000)
-3. Farbdruck? (ja/nein)
-4. Netzwerkanbindung? (ja/nein)
-5. Wo/wann eingesetzt? (z.B. Büroräume, täglich 08–17 Uhr)
+SKILL: „Damit ich die Bedarfsforderung BHO-konform formuliere, brauche ich folgende Infos:
+
+1. FUNKTIONEN — Welche brauchst du?
+   [ ] Nur Druck  [ ] Druck+Kopie  [ ] Druck+Kopie+Scan  [ ] Alle
+
+2. KAPAZITÄT ZEITSPANNE — Pro Monat oder Jahr?
+   [ ] Monat  [ ] Jahr
+
+3. KAPAZITÄT MENGE — Wie viel?
+   [Eingabe] Seiten/Monat
+
+4. FARBE — Farbdruck?
+   [ ] Ja, CMYK  [ ] Gelegentlich  [ ] Nein, s/w
+
+5. NETZWERK — Erforderlich?
+   [ ] Ja, erforderlich  [ ] Optional  [ ] Nein
+
+6. EINSATZHÄUFIGKEIT — Wie oft?
+   [ ] Täglich  [ ] 3-4x/Woche  [ ] 1-2x/Woche  [ ] Sporadisch
+
+7. EINSATZTAGE/JAHR — Ungefähr?
+   [Eingabe] Tage/Jahr
+
+8. ZUSATZ — Besonderheiten?
+   [ ] Duplex  [ ] A3-Format  [ ] Hohe Geschwindigkeit  [ ] Keine
 ```
 
-User antwortet kurz (2–3 Wörter pro Antwort typisch)
+User antwortet strukturiert über Checkboxen + Zahleneingaben
 
-**SKILL generiert Bedarfsforderung** (vollständiger Fließtext, siehe bedarfsforderung-konkret-a.md)
+**SKILL generiert Bedarfsforderung** (nur aus echten Antworten, siehe bedarfsforderung-konkret-a.md)
 
 **Inline-Validierung:**
 ```
@@ -153,25 +176,46 @@ Passt das so? [Ja / Nein / Korrigieren]"
 
 ---
 
-### A2: Bisherige Bedarfsdeckung (SEMI-AUTO mit intelligentem Default — Punkt 5)
+### A2: Bisherige Bedarfsdeckung (SEMI-AUTO mit intelligentem Default)
 
 **Intelligenter Default basierend auf Sachverhalt:**
 
 ```python
-if "neu" in kaufbeschreibung.lower() or "neu hinzugekommen" in sachverhalt:
-    default = "Der Bedarf ist neu entstanden und wurde bisher nicht erfüllt."
+def intelligenter_a2_default(kaufbeschreibung, bedarfsforderung):
+    """
+    Generiert A2-Text basierend auf Schlüsselwörtern in Kaufbeschreibung.
+    """
     
-elif "alt" in kaufbeschreibung.lower() or "ersatz" in kaufbeschreibung.lower():
-    # Extrahiere Produkttyp aus Bedarfsforderung
-    produkttyp = extract_product_type(bedarfsforderung)  # z.B. "Drucker"
-    default = f"Der Bedarf wurde bisher durch einen älteren {produkttyp} gedeckt, der nicht mehr ausreichend kapazitätsgerecht ist und daher ersetzt werden soll."
+    # Extrahiere Produkttyp aus Bedarfsforderung für Singular/Plural
+    def extract_product_type(bedarfsforderung):
+        # z.B. "Druckfähigkeit" → "Drucker"
+        # "Transportfähigkeit" → "Transporter"
+        # "Sitzmöbel" → "Sitzmöbel"
+        words = bedarfsforderung.lower().split()
+        for word in ['druck', 'transport', 'sitz', 'rechen']:
+            if word in bedarfsforderung.lower():
+                return word.capitalize() + 'lösung'  # Fallback
+        return 'Ausrüstung'  # Generic Fallback
     
-elif "zusätzlich" in kaufbeschreibung.lower():
     produkttyp = extract_product_type(bedarfsforderung)
-    default = f"Der Bedarf wird zusätzlich zu bestehenden {produkttyp}n erfüllt, da die bisherige Kapazität nicht ausreicht."
     
-else:
-    default = "Der Bedarf wurde bisher durch vergleichbare Beschaffungen erfüllt und wird kontinuierlich neu bewertet."
+    # Logik
+    if any(word in kaufbeschreibung.lower() for word in ['neu', 'neu hinzugekommen', 'neu erforderlich']):
+        return "Der Bedarf ist neu entstanden und wurde bisher nicht erfüllt."
+    
+    elif any(word in kaufbeschreibung.lower() for word in ['alt', 'ersatz', 'austausch', 'zu alt']):
+        return f"Der Bedarf wurde bisher durch einen älteren {produkttyp} gedeckt, der nicht mehr ausreichend kapazitätsgerecht ist und daher ersetzt werden soll."
+    
+    elif any(word in kaufbeschreibung.lower() for word in ['zusätzlich', 'ergänzung', 'erweiterung']):
+        return f"Der Bedarf wird zusätzlich zu bestehenden {produkttyp}n erfüllt, da die bisherige Kapazität nicht ausreicht."
+    
+    else:
+        # Fallback: Generic
+        return f"Der Bedarf wurde bisher durch vergleichbare Beschaffungen gedeckt und wird durch die geplante {produkttyp} ersetzt/ergänzt."
+
+# Beispiel
+default_text = intelligenter_a2_default("Drucker für die Büros", bedarfsforderung_aus_a1)
+# Output: "Der Bedarf wurde bisher durch einen älteren Drucker gedeckt, ..."
 ```
 
 **USER SIEHT:**
@@ -190,33 +234,79 @@ Passt das?
 
 ---
 
-### A3: Ausschluss Eigenleistung (SEMI-AUTO mit striktem Guard Check — Punkt 4)
+### A3: Ausschluss Eigenleistung (SEMI-AUTO mit striktem Guard Check)
 
-**Keine Freitext-Eingaben — nur Structured Choices:**
+**Keine Freitext-Eingaben — nur Structured Choices mit Auto-Generierung:**
 
 ```
 SKILL: „Warum scheidet Eigenleistung aus? Bitte wähle EINEN Grund:
 
-[ ] Grund 1: Kein geeignetes Gerät/Material intern vorhanden
-    → Satz: „Eine Eigenleistung scheidet aus, da kein geeignetes Gerät intern vorhanden ist."
+GRUND 1: Kein geeignetes Gerät/Material intern vorhanden
+┌─────────────────────────────────────────────────────────┐
+│ [ ] Grund 1                                              │
+│     → Generierter Satz:                                  │
+│     „Eine Eigenleistung scheidet aus, da kein geeignetes│
+│      Gerät intern vorhanden ist."                        │
+└─────────────────────────────────────────────────────────┘
 
-[ ] Grund 2: Verbrauchsgut/Material ist verbraucht
-    → Satz: „Eine Eigenleistung scheidet aus, da das bisherige Verbrauchsgut verbraucht ist und durch Neubeschaffung ersetzt werden muss."
+GRUND 2: Verbrauchsgut/Material ist verbraucht
+┌─────────────────────────────────────────────────────────┐
+│ [ ] Grund 2                                              │
+│     → Generierter Satz:                                  │
+│     „Eine Eigenleistung scheidet aus, da das bisherige   │
+│      Verbrauchsgut verbraucht ist und durch Neubeschaffung
+│      ersetzt werden muss."                               │
+└─────────────────────────────────────────────────────────┘
 
-[ ] Grund 3: Zeitliche Frist — Maßnahme muss bis [DATUM] abgeschlossen sein
-    → Satz: „Eine Eigenleistung scheidet aus, da die Beschaffung bis [DATUM] abgeschlossen sein muss und eine Eigenleistungs-Vorbereitung in diesem Zeitraum nicht möglich ist (vgl. Anlage [X]: [Quellenangabe])."
-    [User gibt Datum + Quellenangabe ein]
+GRUND 3: Zeitliche Frist — Maßnahme muss bis [DATUM] abgeschlossen sein
+┌─────────────────────────────────────────────────────────┐
+│ [ ] Grund 3 [DATUM eingeben: __________]                │
+│             [Quellenangabe: __________]                 │
+│     → Generierter Satz:                                  │
+│     „Eine Eigenleistung scheidet aus, da die Beschaffung│
+│      bis [DATUM] abgeschlossen sein muss. Eine Eigenleis-
+│      tungs-Vorbereitung ist in diesem Zeitraum nicht    │
+│      möglich (vgl. Anlage [X]: [Quellenangabe])."      │
+└─────────────────────────────────────────────────────────┘
 
-[ ] Grund 4: Fehlendes Fachpersonal — spezialisierte Kompetenz erforderlich
-    → Satz: „Eine Eigenleistung scheidet aus, da die erforderliche Fachkompetenz intern nicht vorhanden ist (vgl. Anlage [X]: [Quellenangabe])."
-    [User gibt Quellenangabe ein]
+GRUND 4: Spezialisierte Fachkompetenz erforderlich, intern nicht vorhanden
+┌─────────────────────────────────────────────────────────┐
+│ [ ] Grund 4 [Quellenangabe: __________]                 │
+│     → Generierter Satz:                                  │
+│     „Eine Eigenleistung scheidet aus, da die erforderliche
+│      Fachkompetenz intern nicht vorhanden ist (vgl. Anlage
+│      [X]: [Quellenangabe])."                            │
+└─────────────────────────────────────────────────────────┘
 
-⚠️ NICHT erlaubt (automatisch blockiert):
-    ❌ „Fehlende Haushaltsmittel"
-    ❌ „Nicht genug Personal"
-    ❌ „Fehlende Infrastruktur"
-    ❌ „Budgetgründe"
+⚠️ AUTOMATISCH BLOCKIERT (Guard Check):
+    ❌ Freitext mit Worten: „Haushalt", „Personal", „Dienstposten", „Infrastruktur"
+    ❌ Fehlertext: „Dieser Grund ist nicht zulässig. Verwende eine der 4 Optionen oben."
 "
+```
+
+**Guard Check Logik:**
+```python
+def validate_a3_grund(user_choice, datum=None, quellenangabe=None):
+    """
+    Prüft A3-Grund gegen verbotene Schlüsselwörter.
+    KEINE Freitext-Eingaben außer Datum und Quellenangabe.
+    """
+    forbidden_patterns = [
+        r'(?:haushalt|budget|mittel|geld)', 
+        r'(?:personal|dienstposten|stellen)',
+        r'(?:infrastruktur|raum|ressourcen)',
+        r'(?:kosten|ausgaben|teuer)'
+    ]
+    
+    # user_choice ist ENUM (Grund 1-4), keine Freitext
+    if user_choice not in [1, 2, 3, 4]:
+        return ❌ FEHLER: „Bitte wähle einen der 4 vorgegebenen Gründe."
+    
+    # Grund 3 & 4 erfordern Quellenangabe
+    if user_choice in [3, 4] and not quellenangabe:
+        return ❌ FEHLER: „Quellenangabe erforderlich (z.B. 'Schreiben Personalstelle vom XYZ')"
+    
+    return ✅ Grund ist zulässig
 ```
 
 **Guard Check — AUTOMATISCHE PRÜFUNG:**
@@ -308,14 +398,48 @@ DANN: Break-even berechnen und Text generieren
 **Output (nach Bestätigung):**
 > „Eine Anmietung ist wirtschaftlich nicht vorteilhaft. Tagesmiete ca. 25 EUR (Anlage MR, Nr. 2), Kaufpreis ca. 2.500 EUR (Anlage MR, Nr. 1). Amortisations-Break-even: 100 Einsatztage. Da das Gerät täglich eingesetzt wird (220 Tage/Jahr), ist der Kauf deutlich wirtschaftlicher."
 
-**Fallback — Wenn WebRecherche fehlschlägt:**
+**Fallback-Szenario 1: WebRecherche fehlgeschlagen**
 ```
-SKILL: „WebRecherche Mietpreise konnte nicht durchgeführt werden. 
-        Bitte geben Sie manuell ein:
+SKILL: „⚠️ WebRecherche Mietpreise für [Produkttyp] konnte nicht durchgeführt werden.
+        (Grund: Netzwerkfehler / Keine Ergebnisse / Rate Limiting)
         
-        Tagesmiete für [Produkttyp]: ___ EUR/Tag
-        (Falls unbekannt: Sie können A4 auch überspringen — dann wird 
-         die Miete-Ausschlussbegründung nicht ins Dokument übernommen)"
+        Drei Optionen:
+        [ ] A) Mit anderen Suchbegriffen erneut versuchen
+            Suchbegriff: [Eingabe] → [Skill recherchiert erneut]
+        
+        [ ] B) Manuell eingeben
+            Tagesmiete für [Produkttyp]: ___ EUR/Tag
+            [Skill berechnet Break-even mit eingegebener Zahl]
+        
+        [ ] C) A4 überspringen
+            (Dann entfällt die Miete-Ausschlussbegründung im Dokument
+             und nur das Kaufpreis-Angebot wird dokumentiert)"
+```
+
+**Fallback-Szenario 2: WebRecherche erfolgreich, aber User zweifelt Ergebnis**
+```
+SKILL (nach Recherche): „⚠️ Recherche zeigt: Tagesmiete ca. 25 EUR/Tag
+        Sie haben Zweifel?
+        
+        [ ] A) Diese Zahl ist zu hoch/niedrig. Korrekt ist: ___ EUR/Tag
+        [ ] B) Mit anderen Suchbegriffen neu recherchieren
+        [ ] C) A4 komplett weglassen (kein Miete-Text im Dokument)"
+```
+
+**Implementierungs-Hinweis:**
+```python
+try:
+    mietpreis_range = webrecherche_mietpreis(produkt)
+    # Erfolgreich → User-Bestätigung Dialog
+except WebSearchError:
+    # Fallback: Optionen A/B/C anzeigen
+    user_choice = ask_user(fallback_optionen)
+    if user_choice == 'A':
+        mietpreis = user_input("Tagesmiete eingeben")
+    elif user_choice == 'B':
+        # Erneut mit neuem Suchbegriff
+    elif user_choice == 'C':
+        # A4 komplett überspringen → a4_begruendung = None
 ```
 
 ---
@@ -455,11 +579,16 @@ Resultat: Nur Option KAUF bleibt übrig → dokumentiert und begründet
 
 ---
 
-## Workflow-Übersicht: Schritte A1–A6 mit Fallback & Validierung
+## Workflow-Übersicht: Dialogpfad A (nach Startdialog + WU-Typ-Bestimmung)
 
-| Schritt | Nutzer-Input | System-Verarbeitung |
-|---------|--------|--------|
-| **Phase 1** | Gibt 4 Felder ein (Dienststelle, Bearbeiter, Kaufbeschreibung, Preis) | Speichert Eingaben |
+**Kontext:** Dieser Workflow startet nach:
+1. ✅ Startdialog (SKILL.md) beantwortet
+2. ✅ WU als "Dialogpfad A (unterjährig)" klassifiziert
+3. ✅ User wählt "Geführter Dialog" oder "Schnelldurchlauf"
+
+| Phase | Nutzer-Input | System-Verarbeitung |
+|-------|--------|--------|
+| **Phase 1: Eingabe** | Gibt 4 Felder ein (Dienststelle, Bearbeiter, Kaufbeschreibung, Preis) | Speichert Eingaben |
 | **A1** | Beantwortet 8 Fragen zu Bedarfsforderung (oder bestätigt Standardannahmen) | Auto-generiert Bedarfsforderung aus echten Daten (KEINE erfundenen Details) |
 | **A1-Check** | Prüft + bestätigt A1 Bedarfsforderung oder korrigiert | Validierung: keine Produktnamen, lösungsneutral |
 | **A2** | Bestätigt/korrigiert A2 (intelligenter Default) | Generiert A2-Vorschlag basierend auf Sachverhalt |

@@ -11,7 +11,17 @@ interface Message {
 }
 
 export default function ChatWindow() {
-  const [messages, setMessages] = useState<Message[]>([]);
+  const [messages, setMessages] = useState<Message[]>([
+    {
+      role: "assistant",
+      content: `Willkommen bei Wuki, Ihrem digitalen Assistenten für Wirtschaftlichkeitsuntersuchungen gemäß § 7 BHO und AR A-2400/62.
+
+Ich führe Sie strukturiert durch die Erstellung einer vollständigen WU.
+
+Wie lautet Ihr vollständiger Name?
+(Sie können diesen auch später manuell im Dokument anpassen.)`,
+    },
+  ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
