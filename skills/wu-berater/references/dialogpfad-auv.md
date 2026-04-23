@@ -222,17 +222,25 @@ SKILL: „Bitte wählen Sie aus, wie der Bedarf bisher gedeckt wurde:
 
 **Frage:** Warum ist diese Maßnahme EINMALIG und UNTERJÄHRIG?
 
+**WICHTIG — Goods Classification:**
+Diese Wahl bestimmt auch die Güterklassifizierung (Anlagevermögen vs. Umlaufvermögen):
+- **Grund 1, 2** → **Umlaufvermögen** (Verbrauchsgüter) → Zeile 18 wird versteckt
+- **Grund 3** → **Anlagevermögen** (Nichtverbrauchsgüter) → Zeilen 14, 17 werden versteckt
+
 ```
 SKILL: „Warum ist dieser Kauf einmalig und unterjährig? Bitte wählen Sie einen Grund:
 
 [ ] ☐ GRUND 1: Verbrauchsgut (wird nach Verbrauch nicht ersetzt)
     → Text: ‚Der Bedarf ist einmalig. Das Verbrauchsgut wird nach Aufbrauch nicht erneut beschafft.'
+    → Klassifizierung: Umlaufvermögen
 
 [ ] ☐ GRUND 2: Verbrauchsgut (wird ggfs. in Folgejahren neu beschafft, aber nicht dieses Jahr)
     → Text: ‚Der Bedarf ist für dieses Jahr einmalig. Folgebedarfe werden in kommenden WU-Jahren separat betrachtet.'
+    → Klassifizierung: Umlaufvermögen
 
 [ ] ☐ GRUND 3: Nichtverbrauchsgut (Anschaffung ohne Folgekosten)
     → Text: ‚Der Bedarf ist einmalig. Nach der Anschaffung fallen keine Folgeausgaben an.'
+    → Klassifizierung: Anlagevermögen
 
 [ ] ☐ GRUND 4 (Sonstiges): [Freitextfeld, max. 100 Zeichen]"
 ```
@@ -334,9 +342,24 @@ from openpyxl.utils import get_column_letter
 from datetime import datetime
 import re
 
-def export_auv_to_vermerk(auv_data, output_path):
+def export_auv_to_vermerk(auv_data, output_path, gueterklassifizierung='anlagevermogen'):
     """
     Befüllt das Vermerk-Template mit Daten aus Dialogpfad AUV.
+    
+    Parameter:
+      auv_data: Alle Phasendaten (Phase 1–5)
+      output_path: Pfad zum Output-Datei
+      gueterklassifizierung: 'anlagevermogen' oder 'umlaufvermogen'
+                             → steuert Conditional Hiding von Zeilen 14, 17, 18
+    
+    Conditional Row Hiding:
+      - Wenn ANLAGEVERMÖGEN (Nichtverbrauchsgüter):
+        * Zeile 14, 17 ausblenden (beziehen sich auf Verbrauchsgüter)
+        * Zeile 14, 17 NICHT befüllen
+      
+      - Wenn UMLAUFVERMÖGEN (Verbrauchsgüter):
+        * Zeile 18 ausblenden (Miete/Leasing nicht relevant)
+        * Zeile 18 NICHT befüllen
     
     Mapping:
       Phase 1: Metadaten → Template-Kopf (Dienststelle, Bearbeiter, Datum)
@@ -344,27 +367,47 @@ def export_auv_to_vermerk(auv_data, output_path):
       Phase 3: Bisherige Bedarfsdeckung → Blatt "Sachverhalt" Feld "Bisherige Deckung"
       Phase 4: Grund Einmaligkeit → Blatt "Sachverhalt" Feld "Unterjährigkeit"
       Phase 5: Kaufpreis → Blatt "Kosten" Feld "Ausgaben"
-      Phase 6-7: Export
     """
     
     wb = load_workbook('Template_WU_unterjährig_Vermerk.xlsm')
-    ws = wb['Sachverhalt']  # Annahme: Blatt heißt 'Sachverhalt'
+    ws = wb['Sachverhalt']  # Blatt heißt 'Sachverhalt'
+    
+    # SCHRITT 0: Conditional Row Hiding basierend auf Güterklassifizierung
+    is_anlagevermogen = gueterklassifizierung.lower() == 'anlagevermogen'
+    is_umlaufvermogen = gueterklassifizierung.lower() == 'umlaufvermogen'
+    
+    # Zeile 14, 17: nur relevant für Umlaufvermögen (Verbrauchsgüter)
+    if is_anlagevermogen:
+        ws.row_dimensions[14].hidden = True
+        ws.row_dimensions[17].hidden = True
+    
+    # Zeile 18: nur relevant für Anlagevermögen (Miete/Leasing-Option)
+    if is_umlaufvermogen:
+        ws.row_dimensions[18].hidden = True
     
     # SCHRITT 1: Metadaten befüllen (Phase 1)
-    ws['B2'] = auv_data['phase1']['dienststelle']  # Annahme: Feld B2
-    ws['B3'] = auv_data['phase1']['bearbeiter']    # Annahme: Feld B3
+    ws['B2'] = auv_data['phase1']['dienststelle']
+    ws['B3'] = auv_data['phase1']['bearbeiter']
     ws['B4'] = auv_data['phase1']['massnahmenbeginn']  # TT.MM.JJJJ Format
     
     # SCHRITT 2: Bedarfsforderung (Phase 2)
-    ws['B10'] = auv_data['phase2']['bedarfsforderung']  # Text-Feld
+    ws['B10'] = auv_data['phase2']['bedarfsforderung']
     
     # SCHRITT 3: Bisherige Bedarfsdeckung (Phase 3)
     phase3_text = generate_phase3_text(auv_data['phase3'])
     ws['B12'] = phase3_text
     
     # SCHRITT 4: Unterjährigkeit-Begründung (Phase 4)
-    phase4_text = generate_phase4_text(auv_data['phase4'])
-    ws['B14'] = phase4_text
+    # → NUR befüllen, wenn die entsprechende Zeile nicht versteckt ist
+    phase4_text = generate_phase4_text(auv_data['phase4'], is_anlagevermogen, is_umlaufvermogen)
+    
+    if is_anlagevermogen:
+        # Zeile 14, 17 versteckt → Phase 4 Text nicht in diese Zeilen schreiben
+        # Phase 4 würde in Zeile 16+ gehen (nach Verbrauchsgut-Zeilen)
+        pass  # TODO: Klärung erforderlich, wo Phase 4 Text stattdessen hin
+    else:
+        # Zeile 14, 17 sichtbar → Phase 4 Text wie normal
+        ws['B14'] = phase4_text  # oder andere Zeile, je nach Grund
     
     # SCHRITT 5: Kaufpreis (Phase 5)
     ws['B16'] = float(auv_data['phase5']['ausgaben'])
@@ -380,23 +423,33 @@ def generate_phase3_text(phase3_data):
     elif phase3_data['option'] == 2:
         return "Der Bedarf ist neu entstanden und wurde bisher nicht erfüllt."
     elif phase3_data['option'] == 3:
-        return phase3_data['sonstiges_text']
+        return phase3_data.get('sonstiges_text', '')
     return ""
 
-def generate_phase4_text(phase4_data):
-    """Phase 4 Grund in Text konvertieren."""
-    texts = {
-        1: "Der Bedarf ist einmalig. Das Verbrauchsgut wird nach Aufbrauch nicht erneut beschafft.",
-        2: "Der Bedarf ist für dieses Jahr einmalig. Folgebedarfe werden in kommenden Jahren separat betrachtet.",
-        3: "Der Bedarf ist einmalig. Nach der Anschaffung fallen keine Folgeausgaben an."
-    }
-    if phase4_data['grund'] in texts:
-        return texts[phase4_data['grund']]
+def generate_phase4_text(phase4_data, is_anlagevermogen=False, is_umlaufvermogen=False):
+    """
+    Phase 4 Grund in Text konvertieren.
+    
+    Hinweis: Je nach Güterklassifizierung werden unterschiedliche Texte verwendet.
+    """
+    if is_anlagevermogen:
+        # Für Anlagevermögen: Grund 3 (keine Folgeausgaben)
+        return "Der Bedarf ist einmalig. Nach der Anschaffung fallen keine Folgeausgaben an."
     else:
-        return phase4_data['sonstiges_text']
+        # Für Umlaufvermögen: Grund 1 oder 2
+        texts = {
+            1: "Der Bedarf ist einmalig. Das Verbrauchsgut wird nach Aufbrauch nicht erneut beschafft.",
+            2: "Der Bedarf ist für dieses Jahr einmalig. Folgebedarfe werden in kommenden Jahren separat betrachtet.",
+            3: "Der Bedarf ist einmalig. Nach der Anschaffung fallen keine Folgeausgaben an."
+        }
+        grund = phase4_data.get('grund', 1)
+        if grund in texts:
+            return texts[grund]
+        else:
+            return phase4_data.get('sonstiges_text', '')
 ```
 
-**Vor dem Export: 3-Punkt Validierung (Phase 7):**
+**Vor dem Export: 4-Punkt Validierung (Phase 7):**
 
 ```python
 def validate_auv_before_export(auv_data):
@@ -435,8 +488,37 @@ def validate_auv_before_export(auv_data):
             errors.append(f"❌ Bedarfsforderung enthält Markenname '{brand}'. Lösungsneutral formulieren.")
             break
     
+    # CHECK 4: Güterklassifizierung ermitteln (für Conditional Row Hiding)
+    # Phase 4 Grund → Güterklassifizierung ableiten:
+    #   Grund 1, 2 → Umlaufvermögen (Verbrauchsgüter)
+    #   Grund 3 → Anlagevermögen (Nichtverbrauchsgüter)
+    grund = auv_data.get('phase4', {}).get('grund')
+    if grund in [1, 2]:
+        auv_data['_gueterklassifizierung'] = 'umlaufvermogen'
+    elif grund == 3:
+        auv_data['_gueterklassifizierung'] = 'anlagevermogen'
+    else:
+        errors.append(f"❌ Phase 4 Grund nicht erkannt: {grund}")
+    
     return errors, warnings
 ```
+
+**Wichtig — Güterklassifizierung-Logik:**
+
+Die Klassifizierung wird aus Phase 4 (Grund für Einmaligkeit) hergeleitet:
+
+```
+Phase 4 Grund 1: "Verbrauchsgut wird nach Aufbrauch nicht erneut beschafft"
+→ Umlaufvermögen (Verbrauchsgut)
+
+Phase 4 Grund 2: "Bedarf ist für dieses Jahr einmalig"
+→ Umlaufvermögen (Verbrauchsgut)
+
+Phase 4 Grund 3: "Nach Anschaffung fallen keine Folgeausgaben an"
+→ Anlagevermögen (Nichtverbrauchsgut)
+```
+
+Diese Information wird an `export_auv_to_vermerk()` übergeben zur Steuerung des Conditional Row Hiding.
 
 **Erfolgreiche Export-Meldung:**
 
