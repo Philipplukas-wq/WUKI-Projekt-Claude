@@ -20,12 +20,11 @@
 SKILL-Startdialog (alle Pfade):
   1. "Ist diese Maßnahme EINMALIG (nicht regelmäßig/wiederholend)?" → JA/NEIN
   2. "Liegt die Maßnahme INNERHALB eines Kalenderjahres?" → JA/NEIN
-  3. "Ist es ein KAUF (nicht Miete, Leasing, Dienstleistung)?" → JA/NEIN
-  4. "Werden GÜTER gekauft (nicht Infrastruktur/Dienstleistung)?" → JA/NEIN
-  5. "Nach A2-1000/0-0-13: Anlagevermögen oder Umlaufvermögen?" → JA/NEIN
+  3. "Ist es ein Kauf von Gütern (keine Miete, Dienstleistung, Infrastruktur)?" → JA/NEIN
+  4. "Nach A2-1000/0-0-13: Anlagevermögen oder Umlaufvermögen?" → ANLAGE/UMLAUF
 
 ERGEBNIS:
-  ✅ Alle 5 JA? → Dialogpfad AUV (dieses Dokument)
+  ✅ Alle 4 JA + Klassifizierung klar? → Dialogpfad AUV (dieses Dokument)
   ❌ Mindestens 1 NEIN? → Dialogpfad A (unterjährig), B (überjährig), oder C (andere)
 ```
 
