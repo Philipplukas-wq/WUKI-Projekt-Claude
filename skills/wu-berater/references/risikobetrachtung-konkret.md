@@ -80,6 +80,50 @@ Schadenshöhe: Differenz zu zweitbesten Angebot = 15.000 EUR
 
 **Hinweis:** Die Eintrittswahrscheinlichkeit **stellt eine Annahme dar** und muss unter Gliederungspunkt 4 („Annahmen") dokumentiert werden.
 
+### Eintrittswahrscheinlichkeit — Konstant vs. Variabel pro Jahr
+
+**Standard (Konstant):** Die Eintrittswahrscheinlichkeit ist **gleich für alle Jahre** des Betrachtungszeitraums.
+
+**Beispiel:**
+> „Das Risiko ‚Ausfall des wirtschaftlichsten Anbieters' wird mit einer konstanten Eintrittswahrscheinlichkeit von 20 % über den gesamten Betrachtungszeitraum von 10 Jahren angenommen."
+
+---
+
+**Ausnahme (Variabel pro Jahr):** Die Eintrittswahrscheinlichkeit **unterscheidet sich je Betrachtungsjahr**.
+
+**Typische Szenarien:**
+- Aufbaurisiken nur im Beschaffungs-/Aufbaujahr
+- Technische Ausfallrisiken steigen mit Alter (z.B. 5% Jahr 1, 10% Jahr 2–5, 15% Jahr 6–10)
+- Lieferantenausfall nur während Vertragsphase
+
+**Beispiel aus Excel-Template:**
+```
+Risiko: Bauverzögerung (tritt nur in Aufbauphase auf)
+  Schadenshöhe Referenzjahr: -100.000 EUR
+  
+  Eintrittswahrscheinlichkeit pro Jahr:
+    2025 (Aufbau): 30%       ← Hohes Risiko während Bau
+    2026 (Start): 10%        ← Nachlauf-Risiko
+    2027–2035: 0%            ← Risiko beendet nach Fertigstellung
+```
+
+**Im Skill implementiert:** Bei Dialog für Risikoerfassung (Kap. 5.4):
+- STANDARD-Frage: „Eintrittswahrscheinlichkeit? (z.B. 15%)"
+- OPTION für Nutzer: „Variiert die EW pro Jahr?" → JA: Eingabe pro Jahr / NEIN: Konstant
+
+**Auswirkung auf Berechnung:**
+```
+Risikowert_Jahr = Schadenshöhe × EW_dieses_Jahr × (1+PSR)^Periode
+
+Bei konstanter EW:
+  Risikowert_Jahr = Schadenshöhe × 0,20 × ...
+
+Bei variabler EW:
+  2025: Schadenshöhe × 0,30 × ...
+  2026: Schadenshöhe × 0,10 × ...
+  2027–2035: 0 (nicht berechnet)
+```
+
 **Sonderfall — Grenzwert 50 %:**
 > Bei einer Eintrittswahrscheinlichkeit von **> 50 %** ist im Einzelfall zu prüfen, ob das „Risiko" nicht bereits als **feste Annahme in der Berechnung** berücksichtigt werden sollte (statt als Risiko mit Wahrscheinlichkeit).
 

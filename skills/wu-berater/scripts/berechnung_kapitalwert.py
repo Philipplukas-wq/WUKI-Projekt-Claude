@@ -22,31 +22,59 @@ from typing import List, Optional
 
 # ── Standardwerte (aktuell, BMF April 2026) ────────────────────────────────────
 ZINSSATZ_DEFAULT          = 0.012   # 1,2 %
+
+# Hauptkategorien (aus Parameter-Blatt der KapWert-Excel)
 PSR_PERSONAL              = 0.026   # 2,6 %
+PSR_MATERIAL              = 0.025   # 2,5 %
+PSR_INFRASTRUKTUR         = 0.038   # 3,8 %
 PSR_DIENSTLEISTUNGEN      = 0.024   # 2,4 %
+
+# Detaillierte Kategorien (für Feinunterscheidungen)
 PSR_GEBRAUCHSGUETER_HOCH  = 0.024   # 2,4 % (hohe Lebensdauer)
 PSR_GEBRAUCHSGUETER_MITTEL = 0.027  # 2,7 %
-PSR_VERBRAUCHSGUETER      = 0.025   # 2,5 %
+PSR_VERBRAUCHSGUETER      = 0.025   # 2,5 % (gleich PSR_MATERIAL)
 PSR_ENERGIE               = 0.022   # 2,2 %
 PSR_BAULEISTUNGEN         = 0.054   # 5,4 %
 
 
 @dataclass
 class Kostenposition:
-    """Eine jährliche Kostenposition mit Preissteigerung."""
+    """Eine jährliche Kostenposition (Ausgabe) mit Preissteigerung."""
     bezeichnung: str
-    jahresbetrag: float          # Betrag im ersten Jahr (Basisjahr)
+    jahresbetrag: float          # Betrag im ersten Jahr (Basisjahr), negativ für Ausgabe
     preissteigerung: float       # z.B. 0.026 für 2,6 %
-    kategorie: str = ''          # z.B. 'Personal', 'Wartung', 'Leasing', 'Dienstleistung'
+    kategorie: str = ''          # z.B. 'Personal', 'Material', 'Infrastruktur', 'Dienstleistung'
+
+
+@dataclass
+class Einnahmeposition:
+    """Eine jährliche Einnahmeposition mit Preissteigerung."""
+    bezeichnung: str
+    jahresbetrag: float          # Betrag im ersten Jahr (Basisjahr), positiv für Einnahme
+    preissteigerung: float       # z.B. 0.024 für 2,4 %
+    kategorie: str = ''          # z.B. 'Drittgeschäft', 'Restwert', 'Dienstleistung'
+
+
+@dataclass
+class Risiko:
+    """Ein Risiko mit Schadenshöhe und Eintrittswahrscheinlichkeit (optional pro Jahr)."""
+    bezeichnung: str
+    schadenshoehe: float         # Schadenshöhe im Referenzjahr (negativer Wert)
+    eintrittswahrscheinlichkeit: float  # z.B. 0.10 für 10%, konstant für alle Jahre
+    preissteigerung: float       # z.B. 0.024 für 2,4 %
+    kategorie: str = ''          # z.B. 'Personal', 'Material', 'Infrastruktur', 'Dienstleistung'
+    eintrittswahrscheinlichkeit_pro_jahr: dict = field(default_factory=dict)  # Optional: {2025: 0.10, 2026: 0.0, ...}
 
 
 @dataclass
 class Option:
-    """Eine Bedarfsdeckungsoption mit ihren Kosten."""
+    """Eine Bedarfsdeckungsoption mit Ausgaben, Einnahmen und Risiken."""
     name: str
-    investition: float = 0.0            # Einmalige Ausgabe in Jahr 0
-    kostenpositionen: List[Kostenposition] = field(default_factory=list)
-    residualwert: float = 0.0           # Restwert am Ende (als Einnahme, positiv)
+    investition: float = 0.0                                    # Einmalige Ausgabe in Jahr 0
+    kostenpositionen: List[Kostenposition] = field(default_factory=list)  # Jährliche Ausgaben
+    einnahmen: List[Einnahmeposition] = field(default_factory=list)       # Jährliche Einnahmen
+    risiken: List[Risiko] = field(default_factory=list)                   # Identifizierte Risiken
+    residualwert: float = 0.0                                   # Restwert am Ende (als Einnahme, positiv)
 
 
 def barwert_wachsende_annuitaet(
@@ -81,29 +109,103 @@ def barwert_wachsende_annuitaet(
     return round(jahresbetrag * summe, 0)
 
 
+def berechne_risikowert(
+    risiken: List[Risiko],
+    zinssatz: float = ZINSSATZ_DEFAULT,
+    jahre: int = 10
+) -> dict:
+    """
+    Berechnet die Barwerte aller Risiken mit Eintrittswahrscheinlichkeit.
+
+    Pro Risiko:
+      - Wenn eintrittswahrscheinlichkeit_pro_jahr vorhanden: pro Jahr individuell nutzen
+      - Sonst: konstante eintrittswahrscheinlichkeit für alle Jahre
+
+    Formel: Risikowert_Jahr = Schadenshöhe × EW_Jahr × (1+PSR)^t → diskontiert
+
+    :param risiken:    Liste von Risiko-Objekten
+    :param zinssatz:   Kalkulationszinssatz
+    :param jahre:      Betrachtungszeitraum
+    :return:           Dict mit Einzelbarwerten pro Risiko + Gesamt-Risikowert
+    """
+    ergebnis = {
+        'risiken': [],
+        'gesamt_barwert': 0.0,
+    }
+
+    if not risiken:
+        return ergebnis
+
+    gesamt_bw = 0.0
+
+    for risiko in risiken:
+        # Barwert für dieses Risiko über alle Jahre berechnen
+        risiko_bw = 0.0
+
+        for t in range(1, jahre + 1):
+            # Eintrittswahrscheinlichkeit für dieses Jahr
+            if risiko.eintrittswahrscheinlichkeit_pro_jahr and t in risiko.eintrittswahrscheinlichkeit_pro_jahr:
+                ew = risiko.eintrittswahrscheinlichkeit_pro_jahr[t]
+            else:
+                ew = risiko.eintrittswahrscheinlichkeit
+
+            if ew == 0:
+                continue
+
+            # Schadenshöhe mit Preissteigerung und EW
+            schaden_mit_steigerung = risiko.schadenshoehe * ((1 + risiko.preissteigerung) ** t) * ew
+
+            # Diskontieren
+            barwert_jahr = schaden_mit_steigerung / ((1 + zinssatz) ** t)
+            risiko_bw += barwert_jahr
+
+        risiko_bw = round(risiko_bw, 0)
+        ergebnis['risiken'].append({
+            'bezeichnung': risiko.bezeichnung,
+            'kategorie': risiko.kategorie,
+            'schadenshoehe': risiko.schadenshoehe,
+            'eintrittswahrscheinlichkeit': risiko.eintrittswahrscheinlichkeit,
+            'barwert': risiko_bw,
+        })
+        gesamt_bw += risiko_bw
+
+    ergebnis['gesamt_barwert'] = round(gesamt_bw, 0)
+    return ergebnis
+
+
 def berechne_kapitalwert(
     option: Option,
     zinssatz: float = ZINSSATZ_DEFAULT,
     jahre: int = 10
 ) -> dict:
     """
-    Berechnet den Kapitalwert einer Option.
+    Berechnet den Kapitalwert einer Option mit Ausgaben, Einnahmen und Risiken.
 
-    :param option:   Option-Objekt mit Investition und Kostenpositionen
+    KW ohne Risiko = Investition + Ausgaben-Barwerte − Einnahmen-Barwerte − Residualwert
+    KW mit Risiko = KW ohne Risiko + Risiko-Barwerte (negativ bei Schaden)
+
+    :param option:   Option-Objekt mit Investition, Kostenpositionen, Einnahmen, Risiken
     :param zinssatz: Kalkulationszinssatz
     :param jahre:    Betrachtungszeitraum
-    :return:         Dict mit Einzelbarwerten und Gesamtkapitalwert
+    :return:         Dict mit Barwerten und Kapitalwerten (ohne/mit Risiko)
     """
     ergebnis = {
         'name':        option.name,
         'investition': option.investition,
-        'positionen':  [],
-        'summe_bw':    0.0,
-        'kapitalwert': 0.0,
+        'ausgaben':    [],
+        'einnahmen':   [],
+        'risiken':     [],
+        'summe_ausgaben_bw':  0.0,
+        'summe_einnahmen_bw': 0.0,
+        'summe_risiken_bw':   0.0,
+        'kapitalwert_ohne_risiko': 0.0,
+        'kapitalwert_mit_risiko':  0.0,
     }
 
-    gesamt_bw = 0.0
+    gesamt_ausgaben_bw = 0.0
+    gesamt_einnahmen_bw = 0.0
 
+    # AUSGABEN
     for pos in option.kostenpositionen:
         bw = barwert_wachsende_annuitaet(
             pos.jahresbetrag,
@@ -111,23 +213,57 @@ def berechne_kapitalwert(
             zinssatz,
             jahre
         )
-        ergebnis['positionen'].append({
+        ergebnis['ausgaben'].append({
             'bezeichnung':    pos.bezeichnung,
             'kategorie':      pos.kategorie,
             'jahresbetrag':   pos.jahresbetrag,
             'preissteigerung': pos.preissteigerung,
             'barwert':        bw,
         })
-        gesamt_bw += bw
+        gesamt_ausgaben_bw += bw
 
-    # Residualwert abziehen (als Barwert diskontiert)
+    # EINNAHMEN
+    for pos in option.einnahmen:
+        bw = barwert_wachsende_annuitaet(
+            pos.jahresbetrag,
+            pos.preissteigerung,
+            zinssatz,
+            jahre
+        )
+        ergebnis['einnahmen'].append({
+            'bezeichnung':    pos.bezeichnung,
+            'kategorie':      pos.kategorie,
+            'jahresbetrag':   pos.jahresbetrag,
+            'preissteigerung': pos.preissteigerung,
+            'barwert':        bw,
+        })
+        gesamt_einnahmen_bw += bw
+
+    # RISIKEN
+    risikowert_dict = berechne_risikowert(option.risiken, zinssatz, jahre)
+    ergebnis['risiken'] = risikowert_dict['risiken']
+    gesamt_risiken_bw = risikowert_dict['gesamt_barwert']
+
+    # RESIDUALWERT (Einnahme am Ende)
     residual_bw = 0.0
     if option.residualwert != 0:
         residual_bw = round(option.residualwert / (1 + zinssatz) ** jahre, 0)
         ergebnis['residualwert_bw'] = residual_bw
+        gesamt_einnahmen_bw += residual_bw
 
-    ergebnis['summe_bw']    = round(gesamt_bw, 0)
-    ergebnis['kapitalwert'] = round(option.investition + gesamt_bw - residual_bw, 0)
+    # KAPITALWERT OHNE RISIKO
+    ergebnis['summe_ausgaben_bw']  = round(gesamt_ausgaben_bw, 0)
+    ergebnis['summe_einnahmen_bw'] = round(gesamt_einnahmen_bw, 0)
+    kw_ohne_risiko = option.investition + gesamt_ausgaben_bw - gesamt_einnahmen_bw
+    ergebnis['kapitalwert_ohne_risiko'] = round(kw_ohne_risiko, 0)
+
+    # KAPITALWERT MIT RISIKO
+    ergebnis['summe_risiken_bw'] = round(gesamt_risiken_bw, 0)
+    kw_mit_risiko = kw_ohne_risiko + gesamt_risiken_bw
+    ergebnis['kapitalwert_mit_risiko'] = round(kw_mit_risiko, 0)
+
+    # Rückwärtskompatibilität: 'kapitalwert' ist das KW ohne Risiko
+    ergebnis['kapitalwert'] = ergebnis['kapitalwert_ohne_risiko']
 
     return ergebnis
 
@@ -140,10 +276,15 @@ def berechne_alle_optionen(
     """
     Berechnet die Kapitalwerte aller Optionen und gibt sie sortiert aus.
 
+    Sortierung: Nach Kapitalwert mit Risiko (wenn Risiken vorhanden), sonst ohne Risiko.
+    Aufsteigend = beste (niedrigste Kosten) Option zuerst.
+
     :return: Liste von Ergebnis-Dicts, sortiert nach Kapitalwert (aufsteigend)
     """
     ergebnisse = [berechne_kapitalwert(opt, zinssatz, jahre) for opt in optionen]
-    ergebnisse.sort(key=lambda x: x['kapitalwert'])
+
+    # Sortiere nach KW mit Risiko (wenn vorhanden), sonst ohne Risiko
+    ergebnisse.sort(key=lambda x: x.get('kapitalwert_mit_risiko', x.get('kapitalwert_ohne_risiko', x.get('kapitalwert', 0))))
     return ergebnisse
 
 
@@ -206,8 +347,12 @@ def erstelle_kw_uebersicht(ergebnisse: List[dict], risikowerte: dict = None) -> 
     """
     Erzeugt die Übersichtstabelle (Entscheidungsvorschlag) für kap6_9.
 
+    Nutzt die neuen 'kapitalwert_ohne_risiko' / 'kapitalwert_mit_risiko' Felder.
+    Falls vorhanden, werden die bereits im Ergebnis enthalten.
+    Falls nicht (Rückwärtskompatibilität): risikowerte-Dict wird interpretiert.
+
     :param ergebnisse:  Ergebnisliste aus berechne_alle_optionen()
-    :param risikowerte: Dict {option_name: risikowert_eur} (optional)
+    :param risikowerte: Dict {option_name: risikowert_eur} (optional, für Rückwärtskompatibilität)
     :return: Liste für wu_data['kap6_9']['optionen_uebersicht']
     """
     if risikowerte is None:
@@ -215,13 +360,15 @@ def erstelle_kw_uebersicht(ergebnisse: List[dict], risikowerte: dict = None) -> 
 
     uebersicht = []
     for i, e in enumerate(ergebnisse):
-        rv = risikowerte.get(e['name'], 0)
-        kw_mit = e['kapitalwert'] + rv
+        # Neue Struktur: kapitalwert_ohne_risiko / kapitalwert_mit_risiko
+        kw_ohne = e.get('kapitalwert_ohne_risiko', e.get('kapitalwert', 0))
+        kw_mit = e.get('kapitalwert_mit_risiko', e.get('kapitalwert', 0) + risikowerte.get(e['name'], 0))
+
         uebersicht.append({
             'name':           e['name'],
-            'kw_ohne_risiko': formatiere_eur(e['kapitalwert']),
+            'kw_ohne_risiko': formatiere_eur(kw_ohne),
             'kw_mit_risiko':  formatiere_eur(kw_mit),
-            'empfohlen':      (i == 0),   # günstigste Option
+            'empfohlen':      (i == 0),   # günstigste Option (beste=erste nach Sortierung)
         })
     return uebersicht
 
@@ -450,6 +597,18 @@ if __name__ == '__main__':
             kostenpositionen=[
                 Kostenposition('Personal', 10800, PSR_PERSONAL, 'Personal'),
                 Kostenposition('Wartung',   1200, PSR_DIENSTLEISTUNGEN, 'Wartung'),
+            ],
+            einnahmen=[
+                Einnahmeposition('Restwert', 15000, 0.0, 'Restwert'),  # In Jahr 10
+            ],
+            risiken=[
+                Risiko(
+                    'Ausfall Lieferant',
+                    schadenshoehe=-10000,
+                    eintrittswahrscheinlichkeit=0.15,
+                    preissteigerung=PSR_MATERIAL,
+                    kategorie='Material'
+                ),
             ]
         ),
         Option(
@@ -457,6 +616,15 @@ if __name__ == '__main__':
             kostenpositionen=[
                 Kostenposition('Personal', 10800, PSR_PERSONAL, 'Personal'),
                 Kostenposition('Leasing',   5500, PSR_DIENSTLEISTUNGEN, 'Leasing'),
+            ],
+            risiken=[
+                Risiko(
+                    'Vertragsausstieg',
+                    schadenshoehe=-5000,
+                    eintrittswahrscheinlichkeit=0.05,
+                    preissteigerung=PSR_DIENSTLEISTUNGEN,
+                    kategorie='Dienstleistungen'
+                ),
             ]
         ),
         Option(
@@ -464,27 +632,42 @@ if __name__ == '__main__':
             kostenpositionen=[
                 Kostenposition('Personal',       3600, PSR_PERSONAL, 'Personal'),
                 Kostenposition('Dienstleistung', 45000, PSR_DIENSTLEISTUNGEN, 'Dienstleistung'),
+            ],
+            risiken=[
+                Risiko(
+                    'Erbringer-Insolvenz',
+                    schadenshoehe=-50000,
+                    eintrittswahrscheinlichkeit=0.25,
+                    preissteigerung=PSR_DIENSTLEISTUNGEN,
+                    kategorie='Dienstleistungen'
+                ),
             ]
         ),
     ]
 
     ergebnisse = berechne_alle_optionen(optionen, zinssatz=0.012, jahre=10)
 
-    print('\n=== Kapitalwertberechnung ===')
+    print('\n=== Kapitalwertberechnung (mit Ausgaben, Einnahmen, Risiken) ===')
     for e in ergebnisse:
         print(f"\n{e['name']}")
-        print(f"  Investition:   {formatiere_eur(e['investition'])}")
-        for pos in e['positionen']:
-            print(f"  BW {pos['bezeichnung']:20s}: {formatiere_eur(pos['barwert'])}")
-        print(f"  Kapitalwert:   {formatiere_eur(e['kapitalwert'])}")
+        print(f"  Investition:                {formatiere_eur(e['investition'])}")
+        if e['ausgaben']:
+            print(f"  Ausgaben:")
+            for pos in e['ausgaben']:
+                print(f"    {pos['bezeichnung']:30s} BW: {formatiere_eur(pos['barwert'])}")
+        if e['einnahmen']:
+            print(f"  Einnahmen:")
+            for pos in e['einnahmen']:
+                print(f"    {pos['bezeichnung']:30s} BW: {formatiere_eur(pos['barwert'])}")
+        if e['risiken']:
+            print(f"  Risiken:")
+            for pos in e['risiken']:
+                print(f"    {pos['bezeichnung']:30s} BW: {formatiere_eur(pos['barwert'])}")
+        print(f"  Kapitalwert ohne Risiko:   {formatiere_eur(e['kapitalwert_ohne_risiko'])}")
+        print(f"  Kapitalwert mit Risiko:    {formatiere_eur(e['kapitalwert_mit_risiko'])}")
 
-    risikowerte = {
-        'Option 1: Kauf':          1800,
-        'Option 2: Leasing':       1000,
-        'Option 3: Dienstleistung': 20250,
-    }
-    uebersicht = erstelle_kw_uebersicht(ergebnisse, risikowerte)
-    print('\n=== Kapitalwertübersicht (mit Risiko) ===')
+    uebersicht = erstelle_kw_uebersicht(ergebnisse)
+    print('\n=== Kapitalwertübersicht ===')
     for u in uebersicht:
-        stern = ' ← EMPFOHLEN' if u['empfohlen'] else ''
+        stern = ' [EMPFOHLEN]' if u['empfohlen'] else ''
         print(f"  {u['name']:40s}  ohne Risiko: {u['kw_ohne_risiko']:>12}  mit Risiko: {u['kw_mit_risiko']:>12}{stern}")

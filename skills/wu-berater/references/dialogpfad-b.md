@@ -256,21 +256,125 @@ else:
 
 ---
 
-## Kapitalwertberechnung (5.2)
+## Kapitalwertberechnung (5.2) — Strukturierter Dialog
+
+**Ziel:** Pro verbleibender Option (nach Aussonderung in Kap. 3.2) alle Kostenpositionen, Einnahmen und Risiken erfassen.
+
+**Kategorie-Standard-Preissteigerungsraten** (aus Kap. 4.1-4.2 / Parameter-Blatt):
+| Kategorie | Standard PSR |
+|---|---|
+| Personal | 2,6% |
+| Material | 2,5% |
+| Infrastruktur | 3,8% |
+| Dienstleistungen | 2,4% |
+
+### Dialog-Ablauf pro Option:
+
+**AUSGABEN:**
+```
+FRAGE: "Welche Ausgabenpositionen hat Option [X]?
+        (Person, Material, Infrastruktur, Dienstleistungen — mehrere möglich)"
+
+PRO KATEGORIE:
+  ├─ FRAGE: "Bezeichnung der Ausgabe? z.B. 'Personal' oder 'Wartungsleistung'"
+  │  INPUT: [Bezeichnung]
+  │
+  ├─ FRAGE: "Höhe im Referenzjahr (EUR/Jahr)?"
+  │  INPUT: [Betrag, z.B. 50.000]
+  │
+  ├─ FRAGE: "Preissteigerungsrate? (Standard für [Kategorie]: [PSR]%)"
+  │  OPTION: ✓ Standard nutzen / Abweichung eingeben
+  │  INPUT: [PSR % oder ENTER für Standard]
+  │
+  └─ FRAGE: "Weitere Ausgaben in [Kategorie]?"
+     ├─ JA → zurück zu "Bezeichnung"
+     └─ NEIN → nächste Kategorie
+```
+
+**EINNAHMEN (falls vorhanden):**
+```
+FRAGE: "Hat Option [X] Einnahmen?
+        (z.B. Drittgeschäft, Restwert, Erlöse — oder NEIN)"
+
+WENN JA:
+  → Gleiche Struktur wie Ausgaben
+  → Bezeichnungen typisch: "Restwert", "Drittgeschäft", "Verkaufserlöse"
+  → Beträge positiv (Einnahmen)
+```
+
+**RISIKEN (falls identifiziert in Kap. 5.4):**
+```
+FRAGE: "Welche Risiken sind für Option [X] relevant?"
+       (aus Risikoidentifizierung Kap. 5.4)
+
+PRO RISIKO:
+  ├─ Bezeichnung: [aus Kap. 5.4]
+  ├─ FRAGE: "Schadenshöhe im Referenzjahr (EUR)?"
+  │  INPUT: [Betrag]
+  │
+  ├─ FRAGE: "Risiko-Kategorie? (Personal / Material / Infrastruktur / DL)"
+  │  INPUT: [Kategorie → nutze Standard-PSR dieser Kategorie]
+  │
+  └─ FRAGE: "Eintrittswahrscheinlichkeit? (z.B. 15% = 0,15)"
+     OPTION: ✓ Konstant für alle Jahre / Variabel pro Jahr
+     INPUT: [EW % oder {2025: 15%, 2026: 0%, ...}]
+```
+
+### Implementierung im Skill:
 
 ```python
 import sys
 sys.path.insert(0, 'P:/WUKI_Projekt/Claude/skills/wu-berater/scripts')
-from berechnung_kapitalwert import berechne_alle_optionen, erstelle_kw_uebersicht
+from berechnung_kapitalwert import (
+    berechne_alle_optionen, erstelle_kw_uebersicht,
+    Option, Kostenposition, Einnahmeposition, Risiko,
+    PSR_PERSONAL, PSR_MATERIAL, PSR_INFRASTRUKTUR, PSR_DIENSTLEISTUNGEN
+)
 
-optionen = [
-    Option('Option 1', investition=..., kostenpositionen=[
-        Kostenposition('Personal', ..., PSR_PERSONAL),
-        ...
-    ]),
-]
-ergebnisse = berechne_alle_optionen(optionen, zinssatz=0.012, jahre=...)
+# Für jede geeignete Option aus Kap. 3.2:
+optionen = []
+
+for option_name in suitable_options:
+    # Dialog durchführen für diese Option
+    # (siehe Ablauf oben)
+    
+    # Dann Option-Objekt erstellen:
+    opt = Option(
+        name=option_name,
+        investition=investition_jahr0,  # falls vorhanden
+        kostenpositionen=[
+            Kostenposition('Personal', 50000, PSR_PERSONAL, 'Personal'),
+            Kostenposition('Wartung', 5000, PSR_DIENSTLEISTUNGEN, 'Dienstleistungen'),
+            # ... weitere Positionen
+        ],
+        einnahmen=[
+            Einnahmeposition('Restwert', 15000, 0.0, 'Restwert'),  # Einnahmen sind positiv
+            # ... weitere Einnahmen
+        ],
+        risiken=[
+            Risiko('Ausfall Lieferant', -10000, 0.15, PSR_MATERIAL, 'Material'),
+            # ... weitere Risiken
+        ]
+    )
+    optionen.append(opt)
+
+# Berechnung
+ergebnisse = berechne_alle_optionen(
+    optionen,
+    zinssatz=float(wu_data['kap4']['diskontierungszinssatz']),  # z.B. 0.012
+    jahre=betrachtungsjahre
+)
+
+# Ergebnisse in wu_data speichern
+wu_data['kap5_2'] = {
+    'optionen': ergebnisse,
+}
 ```
+
+**Wichtig:**
+- Einnahmen sind positive Beträge (Restwert, Drittgeschäft)
+- Risiken sind negative Schadenshöhen
+- Die Sortierung erfolgt automatisch nach KW mit Risiko (beste Option = niedrigste Kosten incl. Risiko)
 
 ---
 
