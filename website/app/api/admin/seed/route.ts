@@ -1,10 +1,9 @@
-import { prisma } from "@/lib/prisma";
+
+  import { prisma } from "@/lib/prisma";
   import * as bcrypt from "bcryptjs";
   import { NextResponse } from "next/server";
 
   export async function POST() {
-    // Seed erlaubt im Development oder mit SEED_PASSWORD
-
     try {
       const adminEmail = process.env.ADMIN_EMAIL || "philipp.lukas@outlook.de";
       const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
