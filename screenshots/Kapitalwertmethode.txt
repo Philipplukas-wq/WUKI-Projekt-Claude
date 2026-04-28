@@ -1,0 +1,23 @@
+Zur monetären Vergleichbarkeit sind die zulässigen Optionen mit den Einnahmen und
+Ausgaben in den bereits bekannten Kategorien zu beschreiben.
+Personal, Material, Infrastruktur, Sach- und Dienstleistungen.
+Die Methoden zur Berechnung der Optionen in einer WU im Geschäftsbereich des BMVg:
+Maßgebend zur Festlegung der Berechnungsmethode sind die Art der Maßnahme, der
+Betrachtungszeitraum und die zu betrachtenden Optionen, sowie ihre finanziellen
+Auswirkungen.
+Die Kapitalwertmethode ist als dynamisches Verfahren die gebräuchlichste Methode zur
+monetären Beurteilung von finanzwirksamen Maßnahmen und wird Pflicht bei überjährigen
+finanzwirksamen Maßnahmen. Im Rahmen der Kapitalwertmethode werden bei allen
+miteinander konkurrierenden Optionen der Bedarfsdeckung sämtliche künftig anfallende
+Einnahmen und Ausgaben auf den gleichen Bezugszeitpunkt (Entscheidungszeitpunkt)
+abgezinst und damit als Kapitalwert vergleichbar gemacht. Ziel: Monetäre Vergleichbarkeit der
+Optionen zu Beginn der Maßnahme.
+Mit ihr werden Zahlungsströme (Einnahmen und Ausgaben) in unterschiedlichen Höhen und
+zu unterschiedlichen Zeitpunkten im mehrjährigen Betrachtungszeitraum anfallend zum
+Entscheidungszeitpunkt der WU vergleichbar gemacht.
+Der Einnahmen-Ausgaben-Vergleich bzw. die Kostenvergleichsrechnung kommt in Frage,
+wenn:
+alle Einnahmen und Ausgaben der Optionen über den (kurzen) Betrachtungszeitraum
+unverändert bleiben, nur einmalig finanzielle Auswirkung verursachen,
+die finanzielle Bedeutung der Maßnahme eher gering ist.
+=> daher ungeeignet bei komplexen WU.

@@ -67,7 +67,17 @@
       "Bash(git branch *)",
       "Bash(gh repo *)",
       "Bash(pdftotext \"P:/WUKI_Projekt/Claude/20260128_Arbeitshilfe_Dokumentation \\(1\\).pdf\" -)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(unzip -l \"Template Dokumentation WU unterjährig Vermerk.xlsm\")",
+      "Bash(unzip -p \"Template Dokumentation WU unterjährig Vermerk.xlsm\" xl/worksheets/sheet1.xml)",
+      "Bash(unzip -p \"Template Dokumentation WU unterjährig Vermerk.xlsm\" xl/sharedStrings.xml)",
+      "Bash(unzip -p \"Template Dokumentation WU unterjährig Vermerk.xlsm\" xl/worksheets/sheet2.xml)",
+      "Bash(unzip -p \"Template Dokumentation WU unterjährig Vermerk.xlsm\" xl/worksheets/sheet3.xml)",
+      "Bash(cd /tmp)",
+      "Bash(unzip -q \"/p/WUKI_Projekt/Claude/Template Dokumentation WU unterjährig Vermerk.xlsm\" -d vermerk_extract)",
+      "Bash(git checkout *)",
+      "Bash(cp \"P:/WUKI_Projekt/Claude/wu-berater.skill\" /tmp/wu-berater.zip)",
+      "Bash(unzip -l /tmp/wu-berater.zip)"
     ]
   }
 }

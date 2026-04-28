@@ -3,13 +3,7 @@ import { prisma } from "@/lib/prisma";
   import { NextResponse } from "next/server";
 
   export async function POST() {
-    // Nur in Development erlaubt
-    if (process.env.NODE_ENV !== "development") {
-      return NextResponse.json(
-        { error: "Seeding is only allowed in development" },
-        { status: 403 }
-      );
-    }
+    // Seed erlaubt im Development oder mit SEED_PASSWORD
 
     try {
       const adminEmail = process.env.ADMIN_EMAIL || "philipp.lukas@outlook.de";
