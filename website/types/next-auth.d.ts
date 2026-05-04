@@ -5,31 +5,51 @@ declare module "next-auth" {
   interface Session {
     user: {
       id: string;
+      keycloakId: string;
+      name: string;
       email: string;
-      plan: string;
+      status: "PENDING" | "ACTIVE" | "SUSPENDED";
       isAdmin: boolean;
-      wuSessionsThisMonth: number;
-      departmentId: string | null;
+      orgMemberships: Array<{
+        orgId: string;
+        orgName: string;
+        role: string;
+      }>;
+      deptMemberships: Array<{
+        deptId: string;
+        deptName: string;
+        role: string;
+      }>;
     } & DefaultSession["user"];
   }
 
   interface User {
     id: string;
+    keycloakId: string;
+    name?: string;
     email: string;
-    plan: string;
+    status: "PENDING" | "ACTIVE" | "SUSPENDED";
     isAdmin: boolean;
-    wuSessionsThisMonth: number;
-    departmentId: string | null;
   }
 }
 
 declare module "next-auth/jwt" {
   interface JWT {
     id: string;
+    keycloakId: string;
+    name: string;
     email: string;
-    plan: string;
+    status: "PENDING" | "ACTIVE" | "SUSPENDED";
     isAdmin: boolean;
-    wuSessionsThisMonth: number;
-    departmentId: string | null;
+    orgMemberships: Array<{
+      orgId: string;
+      orgName: string;
+      role: string;
+    }>;
+    deptMemberships: Array<{
+      deptId: string;
+      deptName: string;
+      role: string;
+    }>;
   }
 }

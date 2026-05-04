@@ -62,6 +62,9 @@ export const authOptions: NextAuthOptions = {
             id: user.id,
             email: credentials.email,
             name: credentials.email.split("@")[0],
+            keycloakId: `test-${credentials.email}`,
+            status: "ACTIVE" as const,
+            isAdmin: true,
           };
         } catch (error) {
           console.error("Auth DB Error:", error);
@@ -83,7 +86,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email;
-        token.name = user.name;
+        token.name = user.name || user.email.split("@")[0];
         token.status = "ACTIVE";
         token.isAdmin = true;
       }
