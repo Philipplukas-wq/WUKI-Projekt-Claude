@@ -18,7 +18,7 @@ function getPrismaClient() {
       const adapter = new PrismaBetterSqlite3(db);
       globalForPrisma.prisma = new PrismaClient({
         adapter,
-        log: ["query", "warn", "error"],
+        log: process.env.NODE_ENV !== "production" ? ["query", "warn", "error"] : ["warn", "error"],
       });
     } catch (e) {
       console.error("Failed to initialize PrismaClient:", e);

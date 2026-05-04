@@ -1,35 +1,43 @@
 import { prisma } from "@/lib/prisma";
-import * as bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
+import type { NextRequest } from "next/server";
 
-export async function POST() {
+export const dynamic = "force-dynamic";
+
+export async function POST(req: NextRequest) {
+  const token = await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+  });
+
+  if (!token || !token.isAdmin) {
+    return NextResponse.json(
+      { error: "Unauthorized" },
+      { status: 401 }
+    );
+  }
+
   try {
-   const adminEmail = process.env.ADMIN_EMAIL || "philipp.lukas@outlook.de";
-   const adminPassword = process.env.ADMIN_PASSWORD || "admin123";
+    const org = await prisma.organization.upsert({
+      where: { slug: "test-org" },
+      update: {},
+      create: {
+        name: "Test Organization",
+        slug: "test-org",
+      },
+    });
 
-      const salt = await bcrypt.genSalt(10);
-     const passwordHash = await bcrypt.hash(adminPassword, salt);
-      const admin = await prisma.user.upsert({
-       where: { email: adminEmail },
-       update: { passwordHash },
-       create: {
-         email: adminEmail,
-         passwordHash,
-         name: "Admin",
-         plan: "PRO",
-         isAdmin: true,
-       },
-     });
-      return NextResponse.json({
-       success: true,
-       message: `Admin user created/updated: ${admin.email}`,
-       user: { email: admin.email, id: admin.id },
-     });
-   } catch (error) {
-     console.error("Seed error:", error);
-     return NextResponse.json(
-       { error: "Seed failed", details: String(error) },
-       { status: 500 }
-     );
-   }
- }
+    return NextResponse.json({
+      success: true,
+      message: "Seed data created",
+      organization: { id: org.id, name: org.name },
+    });
+  } catch (error) {
+    console.error("Seed error:", error);
+    return NextResponse.json(
+      { error: "Seed failed" },
+      { status: 500 }
+    );
+  }
+}
