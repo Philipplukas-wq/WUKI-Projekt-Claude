@@ -1,5 +1,6 @@
 import { getToken } from "next-auth/jwt";
 import { anthropic, WU_SYSTEM_PROMPT } from "@/lib/claude";
+import { checkRateLimit } from "@/lib/rateLimit";
 import type { NextRequest } from "next/server";
 
 export async function POST(req: NextRequest) {
@@ -11,6 +12,14 @@ export async function POST(req: NextRequest) {
 
   if (!token) {
     return Response.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  // Rate limiting
+  if (!checkRateLimit(token.id as string)) {
+    return Response.json(
+      { error: "Rate limit exceeded. Max 10 requests per minute." },
+      { status: 429 }
+    );
   }
 
   const body = await req.json();
