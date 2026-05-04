@@ -130,8 +130,8 @@ export default function WukiHero() {
 
           <p className="text-white/45 text-sm sm:text-base leading-relaxed max-w-lg mb-8">
             Ihr KI-gestützter Assistent für rechtssichere Wirtschaftlichkeitsuntersuchungen
-            gemäß&nbsp;§&nbsp;7&nbsp;BHO und AR&nbsp;A-2400/62. Strukturiert, geführt und
-            vollständig dokumentiert – vom Bedarf bis zur Abschlusscheckliste.
+            gemäß&nbsp;§&nbsp;7&nbsp;BHO. Strukturiert, geführt und
+            vollständig dokumentiert – vom Bedarf bis zur Erfolgskontrolle.
           </p>
 
           <div className="flex gap-3 flex-wrap">
