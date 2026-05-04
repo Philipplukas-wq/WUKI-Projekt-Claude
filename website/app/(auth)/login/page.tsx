@@ -117,7 +117,7 @@ function LoginPageContent() {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Wirtschaftlichkeitsuntersuchung.2026/Wuki"
+                    placeholder="Passwort eingeben"
                     className="w-full px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-[#5BA654]"
                     disabled={isLoading}
                   />
@@ -131,12 +131,6 @@ function LoginPageContent() {
                   {isLoading ? "Wird angemeldet..." : "Anmelden"}
                 </button>
               </form>
-
-              <div className="text-center text-xs text-gray-600 bg-gray-50 p-3 rounded">
-                <strong>Test-Credentials:</strong>
-                <div>Email: philipp.lukas@outlook.de</div>
-                <div>Passwort: Wirtschaftlichkeitsuntersuchung.2026/Wuki</div>
-              </div>
             </div>
           </div>
 
