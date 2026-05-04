@@ -1,43 +1,137 @@
 generator client {
-  provider = "prisma-client"
-  output   = "./generated"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "sqlite"
+}
+
+enum UserStatus {
+  PENDING
+  ACTIVE
+  SUSPENDED
+}
+
+enum OrgRole {
+  ORG_ADMIN
+  ORG_MEMBER
+}
+
+enum DeptRole {
+  DEPT_ADMIN
+  DEPT_MEMBER
+  DEPT_VIEWER
 }
 
 model User {
-  id                  String      @id @default(cuid())
-  email               String      @unique
-  passwordHash        String
-  name                String?
-  plan                Plan        @default(FREE)
-  wuSessionsThisMonth Int         @default(0)
-  monthResetDate      DateTime    @default(now())
-  departmentId        String?
-  department          Department? @relation(fields: [departmentId], references: [id])
-  isAdmin             Boolean     @default(false)
-  createdAt           DateTime    @default(now())
-  updatedAt           DateTime    @updatedAt
+  id              String          @id @default(cuid())
+  keycloakId      String          @unique
+  email           String          @unique
+  name            String?
+  status          UserStatus      @default(PENDING)
+  isAdmin         Boolean         @default(false)
+  orgMemberships  OrgMembership[]
+  deptMemberships DeptMembership[]
+  uploadedDocs    Document[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
 
   @@index([email])
-  @@index([departmentId])
+  @@index([keycloakId])
+  @@index([status])
+}
+
+model Organization {
+  id          String          @id @default(cuid())
+  name        String
+  slug        String          @unique
+  memberships OrgMembership[]
+  departments Department[]
+  documents   Document[]
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
 }
 
 model Department {
-  id        String   @id @default(cuid())
-  name      String
-  inviteCode String  @unique
-  seats     Int
-  users     User[]
-  active    Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id             String          @id @default(cuid())
+  name           String
+  organizationId String
+  organization   Organization    @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  inviteCode     String          @unique
+  seats          Int
+  active         Boolean         @default(true)
+  memberships    DeptMembership[]
+  documents      Document[]
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([organizationId])
 }
 
-enum Plan {
-  FREE
-  PRO
-  DEPARTMENT
+model OrgMembership {
+  id             String       @id @default(cuid())
+  userId         String
+  organizationId String
+  role           OrgRole      @default(ORG_MEMBER)
+  user           User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  organization   Organization @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  createdAt      DateTime     @default(now())
+
+  @@unique([userId, organizationId])
+  @@index([userId])
+  @@index([organizationId])
+}
+
+model DeptMembership {
+  id           String     @id @default(cuid())
+  userId       String
+  departmentId String
+  role         DeptRole   @default(DEPT_MEMBER)
+  user         User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  department   Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+
+  @@unique([userId, departmentId])
+  @@index([userId])
+  @@index([departmentId])
+}
+
+model Document {
+  id             String        @id @default(cuid())
+  name           String
+  storageKey     String
+  mimeType       String
+  sizeBytes      Int
+  uploadedById   String
+  organizationId String?
+  departmentId   String?
+  isPrivate      Boolean       @default(false)
+  uploadedBy     User          @relation(fields: [uploadedById], references: [id], onDelete: Cascade)
+  organization   Organization? @relation(fields: [organizationId], references: [id], onDelete: Cascade)
+  department     Department?   @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+  acls           DocumentACL[]
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  @@index([uploadedById])
+  @@index([organizationId])
+  @@index([departmentId])
+}
+
+model DocumentACL {
+  id           String   @id @default(cuid())
+  documentId   String
+  userId       String?
+  departmentId String?
+  orgId        String?
+  canView      Boolean  @default(true)
+  canDownload  Boolean  @default(true)
+  canDelete    Boolean  @default(false)
+  document     Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  createdAt    DateTime @default(now())
+
+  @@index([documentId])
+  @@index([userId])
+  @@index([departmentId])
+  @@index([orgId])
 }

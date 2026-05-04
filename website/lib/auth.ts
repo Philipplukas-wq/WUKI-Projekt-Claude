@@ -1,41 +1,72 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { prisma } from "./prisma";
-import * as bcrypt from "bcryptjs";
+import Database from "better-sqlite3";
+import { randomUUID } from "crypto";
+
+const getDb = () => new Database("dev.db");
 
 export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
-      name: "Zugangsdaten",
+      name: "Test Credentials",
       credentials: {
-        email: { label: "E-Mail", type: "email", placeholder: "name@example.de" },
-        password: { label: "Passwort", type: "password" },
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
 
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+        const ADMIN_USERS = process.env.ADMIN_USERS || "philipp.lukas@outlook.de:Wirtschaftlichkeitsuntersuchung.2026/Wuki";
+        const adminPairs = ADMIN_USERS.split(",").map((pair) => {
+          const [email, pwd] = pair.split(":");
+          return { email: email.trim(), password: pwd.trim() };
         });
 
-        if (!user) return null;
-
-        const isPasswordValid = await bcrypt.compare(
-          credentials.password,
-          user.passwordHash
+        const adminMatch = adminPairs.find(
+          (pair) =>
+            pair.email === credentials.email &&
+            pair.password === credentials.password
         );
 
-        if (!isPasswordValid) return null;
+        if (!adminMatch) return null;
 
-        return {
-          id: user.id,
-          email: user.email,
-          name: user.name,
-          plan: user.plan,
-          isAdmin: user.isAdmin,
-          wuSessionsThisMonth: user.wuSessionsThisMonth,
-          departmentId: user.departmentId,
-        };
+        try {
+          const db = getDb();
+
+          // Check if user exists
+          const stmt = db.prepare("SELECT id FROM User WHERE email = ?");
+          let user = stmt.get(credentials.email) as { id: string } | undefined;
+
+          // Create user if doesn't exist
+          if (!user) {
+            const userId = randomUUID();
+            const insertStmt = db.prepare(
+              "INSERT INTO User (id, keycloakId, email, name, status, isAdmin, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)"
+            );
+            insertStmt.run(
+              userId,
+              `test-${credentials.email}`,
+              credentials.email,
+              credentials.email.split("@")[0],
+              "ACTIVE",
+              1,
+              new Date().toISOString(),
+              new Date().toISOString()
+            );
+            user = { id: userId };
+          }
+
+          db.close();
+
+          return {
+            id: user.id,
+            email: credentials.email,
+            name: credentials.email.split("@")[0],
+          };
+        } catch (error) {
+          console.error("Auth DB Error:", error);
+          return null;
+        }
       },
     }),
   ],
@@ -52,23 +83,22 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email;
-        token.plan = user.plan;
-        token.isAdmin = user.isAdmin;
-        token.wuSessionsThisMonth = user.wuSessionsThisMonth;
-        token.departmentId = user.departmentId;
+        token.name = user.name;
+        token.status = "ACTIVE";
+        token.isAdmin = true;
       }
       return token;
     },
     async session({ session, token }) {
-      if (token) {
+      if (token && session.user) {
         session.user = {
           ...session.user,
-          email: token.email as string,
           id: token.id as string,
-          plan: token.plan as string,
-          isAdmin: token.isAdmin as boolean,
-          wuSessionsThisMonth: token.wuSessionsThisMonth as number,
-          departmentId: token.departmentId as string | null,
+          email: token.email as string,
+          status: "ACTIVE",
+          isAdmin: true,
+          orgMemberships: [],
+          deptMemberships: [],
         };
       }
       return session;
